@@ -1,13 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 //import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
 import { getVertexAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js";
-// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyDHudbFMugPXPvSzRBEkWfeIZw8fx2WyFg",
     authDomain: "skycast-97dbd.firebaseapp.com",
@@ -20,6 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+//prevents the api kets from being used from an unauthorized source
 const appCheck = initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider('6LcRuF0qAAAAAEU5Edy5HY7onJBeEEJ1GV5yBsej'),
     isTokenAutoRefreshEnabled: true
@@ -52,9 +48,7 @@ const model = getGenerativeModel(vertexAI, {
     },
 });
 
-
-async function run() {
-    /*TODO: Read from current weather to build prompt*/
+async function runVertex() {
     const prompt = "Cloudy, 55 degrees, strong wind";
 
     //waits for a response
@@ -63,11 +57,51 @@ async function run() {
     const response = result.response;
     //gets the prompt response
     const text = response.text();
-
-    /*TODO: Store output in local storage*/
+    const dateTime = new Date();
+    const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
+    localStorage.setItem("vertexAI", timestamp + "|" + text);
 
     //prints the output to the console
-    console.log(text);
+    console.log("New gen: " + text);
+
+    //displays output on the webpage
+    document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
 }
-//the autogeneration has been disabled for now to limit unnecessary API calls and therefore costs.
-//run();
+
+function localStorageDataChecks() {
+    if (!checkLocalStorage()) {
+        runVertex();
+    } else if (checkDate()) {
+        runVertex();
+    }
+    document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
+}
+
+function checkLocalStorage() {
+    if (localStorage.getItem("vertexAI") == null) {
+        console.log("No data found");
+        return false;
+    }
+    return true;
+}
+
+function checkDate() {
+    const dateTime = new Date();
+    const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
+    const getVertexDate = localStorage.getItem("vertexAI").split("|")[0];
+
+    if (getVertexDate != timestamp) {
+        const vertexOldDate = getVertexDate.split("-");
+        if (vertexOldDate[3] + 1 <= dateTime.getHours() && vertexOldDate[4] <= dateTime.getMinutes()) {
+            console.log("Data more than one hour old -- minute check");
+            return true;
+        } else if (vertexOldDate[0] != dateTime.getDate() || vertexOldDate[1] != dateTime.getMonth() || vertexOldDate[2] != dateTime.getFullYear()) {
+            console.log("Data more than one hour old - date check");
+            return true;
+        }
+    }
+    console.log("Data is recent");
+    return false;
+}
+
+localStorageDataChecks();
