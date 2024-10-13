@@ -65,7 +65,7 @@ async function runVertex() {
     console.log("New gen: " + text);
 
     //displays output on the webpage
-    document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
+    //document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
 }
 
 function localStorageDataChecks() {
@@ -74,7 +74,6 @@ function localStorageDataChecks() {
     } else if (checkDate()) {
         runVertex();
     }
-    document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
 }
 
 function checkLocalStorage() {
@@ -105,3 +104,4 @@ function checkDate() {
 }
 
 localStorageDataChecks();
+document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
