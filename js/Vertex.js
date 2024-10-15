@@ -48,7 +48,7 @@ const model = getGenerativeModel(vertexAI, {
     },
 });
 
-async function runVertex() {
+async function sendVertexPrompt() {
     const prompt = "Cloudy, 55 degrees, strong wind";
 
     //waits for a response
@@ -69,14 +69,14 @@ async function runVertex() {
 }
 
 function localStorageDataChecks() {
-    if (!checkLocalStorage()) {
-        runVertex();
-    } else if (checkDate()) {
-        runVertex();
+    if (!checkVertexLocalStorage()) {
+        sendVertexPrompt();
+    } else if (checkVertexAge()) {
+        sendVertexPrompt();
     }
 }
 
-function checkLocalStorage() {
+function checkVertexLocalStorage() {
     if (localStorage.getItem("vertexAI") == null) {
         console.log("No data found");
         return false;
@@ -84,7 +84,7 @@ function checkLocalStorage() {
     return true;
 }
 
-function checkDate() {
+function checkVertexAge() {
     const dateTime = new Date();
     const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
     const getVertexDate = localStorage.getItem("vertexAI").split("|")[0];
