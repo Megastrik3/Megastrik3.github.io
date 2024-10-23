@@ -1,6 +1,44 @@
-<html5>
-  <body>
-    <p>Hello world!</p>  
-    <script type="module" src="js/Vertex.js"></script> 
- </body>
-</html5>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+
+    <link rel="stylesheet" href="CurrentAndHourly.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="weather-icon" id="current-weather-icon">☀️</div>
+            <div class="current-weather">
+                <h1 id="current-temperature">--°F</h1>
+                <p id="current-description">Weather description</p>
+            </div>
+            <div class="location">
+                <h2 id="location">Location: --</h2>
+                <p id="date">Date</p>
+                <a href="#">Select Location</a>
+            </div>
+            <div class="advice" id="advice">
+                <p>It looks like a great day to cut the grass!</p>
+            </div>
+        </div>
+
+        <div class="hourly-forecast" id="hourly-forecast">
+
+        </div>
+
+        <div class="highlights">
+            <h3>Weather Highlights</h3>
+            <ul>
+                <li>Have a picnic</li>
+                <li>Go for a walk</li>
+                <li>Relax at park</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="CurrentAndHourly.js"></script>
+</body>
+</html>
