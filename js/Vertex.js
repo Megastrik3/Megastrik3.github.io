@@ -104,4 +104,4 @@ function checkVertexAge() {
 }
 
 localStorageDataChecks();
-document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
+document.getElementById("advice").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
