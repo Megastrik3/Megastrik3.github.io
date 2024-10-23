@@ -1,0 +1,98 @@
+
+body{ 
+    background-color: rgb(113, 179, 236);
+}
+ 
+
+.title-container  {
+    display: flex;
+    margin-left: 15vw;
+    font-family: 'Brush Script Mt', cursive;
+    font-size: 4vw;
+    color: hwb(0 100% 0%) 
+    
+}
+
+.logo {
+    width: 15%;
+    height: 15%;
+    margin-top: 4vw;
+    margin-left: 1vw;
+   
+}
+
+.box {
+    width: 60vw;                           
+    height: 20vw;                          
+    padding: 1vw;                         
+    margin: 1% auto;                      
+    background-color: hsla(29, 88%, 61%, 0.837);              
+    border: 2px solid #cbcbd4;
+    border-radius: 3.5vw;                    
+    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);           
+    text-align: center;                     
+    font-size: 2.3vw;
+    font-family:  cursive;
+    color: rgb(245, 244, 244) 
+    
+}
+
+#currentLocationBtn {
+    font-size: 2vw;
+    height: 3vw ;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255); 
+    background-color: rgb(135, 195, 241);
+    border:  rgb(125, 46, 46);
+    border-radius: .4vw;
+    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+   
+
+}
+
+#currentLocationBtn:hover {
+    background-color: rgb(40, 130, 166);
+}
+
+#otherBtn {
+    font-size: 1vw;
+    height: 2vw ;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255); 
+    background-color: rgb(135, 195, 241);
+    border:  rgb(125, 46, 46);
+    border-radius: .4vw;
+    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+   
+}
+
+#otherBtn:hover {
+    background-color: #2882a6;
+}
+
+
+#locationDD {
+    display: none;
+}
+
+#locationSelect {
+    font-size: 1vw;
+    height: 2vw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255); 
+    background-color: rgb(135, 195, 241);
+    border:  rgb(202, 174, 174);
+    border-radius: .4vw;
+    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
+    
+    
+}
+
+::placeholder {
+    color: rgb(255, 255, 255); 
+    font-style: italic; 
+}
