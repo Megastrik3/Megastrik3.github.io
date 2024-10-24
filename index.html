@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<script type="module" src="js/Vertex.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-
     <link rel="stylesheet" href="CurrentAndHourly.css">
+    <script type="module" src="js/Vertex.js"></script>
 </head>
 <body>
     <div class="container">
@@ -14,7 +13,16 @@
             <div class="weather-icon" id="current-weather-icon">☀️</div>
             <div class="current-weather">
                 <h1 id="current-temperature">--°F</h1>
+                <button id="toggleButton">Switch to Celsius</button> 
                 <p id="current-description">Weather description</p>
+                <div class="sun-times">
+                    <div class="sun-time-box">
+                        <p id="sunrise-time">Sunrise: 7:15 AM</p>
+                    </div>
+                    <div class="sun-time-box">
+                        <p id="sunset-time">Sunset: 6:45 PM</p>
+                    </div>
+                </div>
             </div>
             <div class="location">
                 <h2 id="location">Location: --</h2>
@@ -26,7 +34,6 @@
         </div>
 
         <div class="hourly-forecast" id="hourly-forecast">
-
         </div>
 
         <div class="highlights">
