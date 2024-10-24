@@ -40,22 +40,30 @@ body {
 }
 
 #toggleButton {
-    font-size: 1rem;
-    height: 2.5rem;
-    padding: 0 1rem;
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
     font-family: Arial, sans-serif;
     color: #fff;
-    background-color: #87ceeb;
+    background: linear-gradient(135deg, #87ceeb, #00bfff);
     border: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
-    margin-top: 10px; /* Adds space above the button */
+    margin-top: 10px;
 }
 
 #toggleButton:hover {
-    background-color: #2882a6;
+    background: linear-gradient(135deg, #00bfff, #1e90ff);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+#toggleButton:active {
+    background: linear-gradient(135deg, #1e90ff, #87ceeb);
+    transform: translateY(0px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .location h2 {
