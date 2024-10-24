@@ -12,7 +12,6 @@ const firebaseConfig = {
     appId: "1:163656577596:web:6fb4a5a1e1c666ac28c939",
     measurementId: "G-9DTNJQNTKN"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //prevents the api kets from being used from an unauthorized source
@@ -22,7 +21,7 @@ const appCheck = initializeAppCheck(app, {
 });
 //const analytics = getAnalytics(app);
 const vertexAI = getVertexAI(app);
-const model = getGenerativeModel(vertexAI, {
+const primaryModel = getGenerativeModel(vertexAI, {
     model: "gemini-1.5-flash", systemInstruction: {
         parts: [
             //This tells the model who it is and what it is supposed to do
@@ -48,18 +47,53 @@ const model = getGenerativeModel(vertexAI, {
     },
 });
 
+const secondaryModel = getGenerativeModel(vertexAI, {
+    model: "gemini-1.5-flash", systemInstruction: {
+        parts: [
+            //This tells the model who it is and what it is supposed to do
+            { text: 'You are a weather forecast assistant.' },
+            { text: 'Your mission is to a give single activity that can be done in the provided weather conditions. For example, take a walk, or go ice skating, or relax at the beach. No commentary, no punctuation.' },
+        ],
+    }, safetySettings: {
+        //This tells the model to block any harmful content
+        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+        threshold: "BLOCK_ONLY_HIGH",
+    }, generationConfig: {
+        //defines the randomness and size of the output.
+        // 1 token is 4 characters
+        maxOutputTokens: "8",
+        //the degree of randomness in the output
+        temperature: "2.0",
+        //the degree to which the model will be random in its output
+        topP: "1.0",
+        //discourages the model from using tokens that already appear in the output
+        presencePenalty: "1.5",
+        //discourages the model from using tokens that have appear previously in the output
+        frequencyPenalty: "1.99",
+    },
+});
 async function sendVertexPrompt() {
-    const prompt = "Cloudy, 55 degrees, strong wind";
+    const mainPrompt = "Cloudy, 55 degrees, strong wind";
 
     //waits for a response
-    const result = await model.generateContent(prompt);
+    const mainResult = await primaryModel.generateContent(mainPrompt);
     //stores response in a variable
-    const response = result.response;
+    let response = mainResult.response;
     //gets the prompt response
-    const text = response.text();
+   let text = response.text();
     const dateTime = new Date();
     const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
-    localStorage.setItem("vertexAI", timestamp + "|" + text);
+    // let secondaryText ="";
+    // for (let i = 0; i < 2; i++) {
+    //     const secondaryResult = await secondaryModel.generateContent(mainPrompt);
+    //     //stores response in a variable
+    //     response = secondaryResult.response;
+    //     //gets the prompt response
+    //     secondaryText = secondaryText + response.text() + "|";
+    // }
+    // text = text.replace(/(\r\n|\n|\r)/gm, "");
+    // secondaryText = secondaryText.replace(/(\r\n|\n|\r)/gm, "");
+    localStorage.setItem("vertexAI", timestamp + "|" + text + "|" + secondaryText);
 
     //prints the output to the console
     console.log("New gen: " + text);
@@ -67,15 +101,14 @@ async function sendVertexPrompt() {
     //displays output on the webpage
     //document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
 }
-
-function localStorageDataChecks() {
-    if (!checkVertexLocalStorage()) {
-        sendVertexPrompt();
-    } else if (checkVertexAge()) {
-        sendVertexPrompt();
+async function localStorageDataChecks() {
+    if (!checkVertexLocalStorage() || checkVertexAge()) {
+        await sendVertexPrompt();
     }
+    document.getElementById("advice").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
+    // document.getElementById("activity1").innerHTML = localStorage.getItem("vertexAI").split("|")[2];
+    // document.getElementById("activity2").innerHTML = localStorage.getItem("vertexAI").split("|")[3];
 }
-
 function checkVertexLocalStorage() {
     if (localStorage.getItem("vertexAI") == null) {
         console.log("No data found");
@@ -83,7 +116,6 @@ function checkVertexLocalStorage() {
     }
     return true;
 }
-
 function checkVertexAge() {
     const dateTime = new Date();
     const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
@@ -102,6 +134,4 @@ function checkVertexAge() {
     console.log("Data is recent");
     return false;
 }
-
 localStorageDataChecks();
-document.getElementById("advice").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
