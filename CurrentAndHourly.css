@@ -113,8 +113,18 @@ body {
 }
 
 .sun-times {
-    margin-top: 20px;
+    margin-top: 10px; /* Adjust space above the sunrise and sunset section */
     font-size: 1.1rem;
-    color: #333;
+    color: #666;
     text-align: left;
+}
+
+#sunrise-time, #sunset-time {
+    font-size: 1rem; /* Consistent font size */
+    color: #666;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly different background for visibility */
+    padding: 5px 10px;
+    border-radius: 8px; /* Rounded corners for consistency */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
