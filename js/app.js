@@ -134,7 +134,6 @@ function checkVertexAge() {
     console.log("Data is recent");
     return false;
 }
-
 function getMoonPhaseImage() {
     let date = new Date();
     let moonDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
