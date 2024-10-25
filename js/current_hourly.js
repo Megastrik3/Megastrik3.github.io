@@ -35,10 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
             toggleButton.textContent = 'Switch to Fahrenheit';
         }
 
-        // Update sunrise and sunset times
-        document.getElementById("sunrise-time").innerText = `Sunrise: ${currentWeather.sunrise}`;
-        document.getElementById("sunset-time").innerText = `Sunset: ${currentWeather.sunset}`;
-
         // Update the hourly forecast with the current unit
         const hourlyForecastContainer = document.getElementById("hourly-forecast");
         hourlyForecastContainer.innerHTML = ''; // Clear existing hourly forecast
@@ -77,7 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
             currentWeather.sunrise = convertToLocalTime(data.results.sunrise);
             currentWeather.sunset = convertToLocalTime(data.results.sunset);
 
-            updateTemperatureDisplay();
+            // Update sunrise and sunset times
+            document.getElementById("sunrise-time").innerText = `Sunrise: ${currentWeather.sunrise}`;
+            document.getElementById("sunset-time").innerText = `Sunset: ${currentWeather.sunset}`;
         } catch (error) {
             console.error("Error fetching sunrise and sunset times:", error);
         }
@@ -97,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listener to the toggle button
     document.getElementById("toggleButton").addEventListener('click', toggleTemperature);
 
-    // Fetch sunrise and sunset times when the page loads
+    // Fetch sunrise and sunset times when the page loads and update the temperature display
     fetchSunriseSunset();
+    updateTemperatureDisplay();
 });
