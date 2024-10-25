@@ -1,0 +1,28 @@
+{
+  "name": "skycast.megastrik3.github.io",
+  "version": "0.1.0",
+  "description": "SkyCast, the weather app to make cloudy days fun again!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Megastrik3/Megastrik3.github.io.git"
+  },
+  "keywords": [
+    "weather",
+    "forecast",
+    "AI"
+  ],
+  "author": "Hudson, Ryan, Lisa, Andrew, Adam",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Megastrik3/Megastrik3.github.io/issues"
+  },
+  "homepage": "https://github.com/Megastrik3/Megastrik3.github.io#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
