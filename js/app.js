@@ -82,7 +82,7 @@ async function sendVertexPrompt() {
    let text = response.text();
     const dateTime = new Date();
     const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
-    // let secondaryText ="";
+    // let secondaryText = "";
     // for (let i = 0; i < 2; i++) {
     //     const secondaryResult = await secondaryModel.generateContent(mainPrompt);
     //     //stores response in a variable
@@ -92,7 +92,7 @@ async function sendVertexPrompt() {
     // }
     // text = text.replace(/(\r\n|\n|\r)/gm, "");
     // secondaryText = secondaryText.replace(/(\r\n|\n|\r)/gm, "");
-    localStorage.setItem("vertexAI", timestamp + "|" + text );
+    localStorage.setItem("vertexAI", timestamp + "|" + text);
 
     //prints the output to the console
     console.log("New gen: " + text);
@@ -122,10 +122,10 @@ function checkVertexAge() {
 
     if (getVertexDate != timestamp) {
         const vertexOldDate = getVertexDate.split("-");
-        if (vertexOldDate[3] + 1 <= dateTime.getHours() && vertexOldDate[4] <= dateTime.getMinutes()) {
+        if (parseInt(vertexOldDate[3], 10) + 1 <= dateTime.getHours() || parseInt(vertexOldDate[4], 10) <= dateTime.getMinutes()) {
             console.log("Data more than one hour old -- minute check");
             return true;
-        } else if (vertexOldDate[0] != dateTime.getDate() || vertexOldDate[1] != dateTime.getMonth() || vertexOldDate[2] != dateTime.getFullYear()) {
+        } else if (parseInt(vertexOldDate[0], 10) != dateTime.getDate() || parseInt(vertexOldDate[1], 10) != dateTime.getMonth() || parseInt(vertexOldDate[2], 10) != dateTime.getFullYear()) {
             console.log("Data more than one hour old - date check");
             return true;
         }
