@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-//import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
 import { getVertexAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -93,7 +92,7 @@ async function sendVertexPrompt() {
     // }
     // text = text.replace(/(\r\n|\n|\r)/gm, "");
     // secondaryText = secondaryText.replace(/(\r\n|\n|\r)/gm, "");
-    localStorage.setItem("vertexAI", timestamp + "|" + text + "|" + secondaryText);
+    localStorage.setItem("vertexAI", timestamp + "|" + text );
 
     //prints the output to the console
     console.log("New gen: " + text);
