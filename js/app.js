@@ -133,24 +133,4 @@ function checkVertexAge() {
     console.log("Data is recent");
     return false;
 }
-function getMoonPhaseImage() {
-    let date = new Date();
-    let moonDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-    const data = `{\"style\":{\"moonStyle\":\"default\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#000000\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":43.778467,\"longitude\":-74.39033,\"date\":\"${moonDate}\"},\"view\":{\"type\":\"portrait-simple\",\"parameters\":{}}}`;
-
-    const xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === this.DONE) {
-        console.log(this.responseText);
-      }
-    });
-    
-    xhr.open("POST", "https://api.astronomyapi.com/api/v2/studio/moon-phase");
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`809b1cfe-8b23-410b-b437-4774f5831104:832f9f8d461c99c999d0a3f9a6f91d7e3a7271cc2a0aea7547351ba64de5d5a7606f2ed9c3bc04d7d27ff151695a8a94841ff233fee9733b588fd93c527187ba779f5655b0efc2951aa7b56f73bf247f9b817f622fafc0398bf41f8b06d114abeaa160def0678e7efb4ac3cbba238cde`));
-
-    xhr.send();
-}
 localStorageDataChecks();
-getMoonPhaseImage();
