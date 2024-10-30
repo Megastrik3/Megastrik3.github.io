@@ -5,4 +5,8 @@ document.getElementById("otherBtn").addEventListener("click", function() {
     } else {
         inputBox.style.display = "none";
     }
+}); 
+
+document.getElementById("currentLocationBtn").addEventListener("click", function() {
+    window.location.href = "index.html";
 });
