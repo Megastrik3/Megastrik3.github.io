@@ -46,7 +46,6 @@ const primaryModel = getGenerativeModel(vertexAI, {
         frequencyPenalty: "0.75",
     },
 });
-
 const secondaryModel = getGenerativeModel(vertexAI, {
     model: "gemini-1.5-flash", systemInstruction: {
         parts: [
@@ -81,8 +80,7 @@ async function sendVertexPrompt() {
     let response = mainResult.response;
     //gets the prompt response
    let text = response.text();
-    const dateTime = new Date();
-    const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
+    const timestamp = getCurrentDate(true);
     // let secondaryText = "";
     // for (let i = 0; i < 2; i++) {
     //     const secondaryResult = await secondaryModel.generateContent(mainPrompt);
@@ -97,61 +95,58 @@ async function sendVertexPrompt() {
 
     //prints the output to the console
     console.log("New gen: " + text);
-
-    //displays output on the webpage
-    //document.getElementById("vertex").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
 }
 async function localStorageDataChecks() {
     if (!checkVertexLocalStorage() || checkVertexAge()) {
         await sendVertexPrompt();
+        displayData("advice", "vertexAI", 1);
     }
-    document.getElementById("advice").innerHTML = localStorage.getItem("vertexAI").split("|")[1];
-    // document.getElementById("activity1").innerHTML = localStorage.getItem("vertexAI").split("|")[2];
-    // document.getElementById("activity2").innerHTML = localStorage.getItem("vertexAI").split("|")[3];
 }
 function checkVertexLocalStorage() {
     if (localStorage.getItem("vertexAI") == null) {
-        console.log("No data found");
+        console.log("No vertexAI data found");
         return false;
     }
     return true;
 }
 function checkVertexAge() {
     const dateTime = new Date();
-    const timestamp = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getFullYear() + "-" + dateTime.getHours() + "-" + dateTime.getMinutes();
     const getVertexDate = localStorage.getItem("vertexAI").split("|")[0];
 
-    if (getVertexDate != timestamp) {
+    if (getVertexDate != getCurrentDate(true)) {
         const vertexOldDate = getVertexDate.split("-");
-        if (parseInt(vertexOldDate[3], 10) + 1 <= dateTime.getHours() || parseInt(vertexOldDate[4], 10) <= dateTime.getMinutes()) {
-            console.log("Data more than one hour old -- minute check");
+        if (parseInt(vertexOldDate[3], 10) + 1 <= dateTime.getHours() && parseInt(vertexOldDate[4], 10) <= dateTime.getMinutes()) {
+            console.log("Data more than one hour old -- time check");
             return true;
-        } else if (parseInt(vertexOldDate[0], 10) != dateTime.getDate() || parseInt(vertexOldDate[1], 10) != dateTime.getMonth() || parseInt(vertexOldDate[2], 10) != dateTime.getFullYear()) {
+        } else if (parseInt(vertexOldDate[2], 10) != dateTime.getDate() || parseInt(vertexOldDate[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(vertexOldDate[0], 10) != dateTime.getFullYear()) {
             console.log("Data more than one hour old - date check");
             return true;
         }
     }
-    console.log("Data is recent");
+    console.log("Data is less than one hour old");
     return false;
 }
-function getMoonPhaseImage() {
+
+
+function getCurrentDate(getTime) {
     let date = new Date();
-    let moonDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-    const data = `{\"style\":{\"moonStyle\":\"default\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#000000\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":43.778467,\"longitude\":-74.39033,\"date\":\"${moonDate}\"},\"view\":{\"type\":\"portrait-simple\",\"parameters\":{}}}`;
+    let moonDate = "";
+    if (parseInt(date.getMonth() + 1) < 10) {
+        moonDate = moonDate + date.getFullYear() + "-0" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
+    } else {
+        moonDate = moonDate + date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
+    }
+    if (getTime == true) {
+        moonDate = moonDate + "-" + date.getHours() + "-" + date.getMinutes();
+    }
+    console.log(moonDate);
+    return moonDate;
+}
 
-    const xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === this.DONE) {
-        console.log(this.responseText);
-      }
-    });
-    
-    xhr.open("POST", "https://api.astronomyapi.com/api/v2/studio/moon-phase");
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`809b1cfe-8b23-410b-b437-4774f5831104:832f9f8d461c99c999d0a3f9a6f91d7e3a7271cc2a0aea7547351ba64de5d5a7606f2ed9c3bc04d7d27ff151695a8a94841ff233fee9733b588fd93c527187ba779f5655b0efc2951aa7b56f73bf247f9b817f622fafc0398bf41f8b06d114abeaa160def0678e7efb4ac3cbba238cde`));
-
-    xhr.send();
+function displayData(elementName, storageName, index) {
+    if (index == 0) {
+        throw "Index cannot be 0";
+    }
+    document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
 localStorageDataChecks();
-getMoonPhaseImage();
