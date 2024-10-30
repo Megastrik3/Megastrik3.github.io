@@ -39,6 +39,7 @@ body {
     color: #333;
 }
 
+
 #toggleButton {
     display: inline-block;
     font-size: 1.2rem;
@@ -79,7 +80,9 @@ body {
 .hourly-forecast {
     display: flex;
     justify-content: space-between;
+
     gap: 10px; 
+
     padding: 20px 0;
 }
 
@@ -133,3 +136,4 @@ body {
     font-size: 1rem; 
     color: #666;
 }
+
