@@ -115,7 +115,7 @@ function checkVertexAge() {
 
     if (getVertexDate != getCurrentDate(true)) {
         const vertexOldDate = getVertexDate.split("-");
-        if (parseInt(vertexOldDate[3], 10) + 1 <= dateTime.getHours() && parseInt(vertexOldDate[4], 10) <= dateTime.getMinutes()) {
+        if (parseInt(vertexOldDate[3], 10) + 1 <= dateTime.getHours() || parseInt(vertexOldDate[4], 10) >= dateTime.getMinutes() && parseInt(vertexOldDate[3], 10) + 1 == dateTime.getHours()) {
             console.log("Data more than one hour old -- time check");
             return true;
         } else if (parseInt(vertexOldDate[2], 10) != dateTime.getDate() || parseInt(vertexOldDate[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(vertexOldDate[0], 10) != dateTime.getFullYear()) {
@@ -126,7 +126,6 @@ function checkVertexAge() {
     console.log("Data is less than one hour old");
     return false;
 }
-
 
 function getCurrentDate(getTime) {
     let date = new Date();
@@ -149,4 +148,22 @@ function displayData(elementName, storageName, index) {
     }
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
+
+function getMoonPhase() {
+    const data = "{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#000000\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":33.775867,\"longitude\":-84.39733,\"date\":\"2024-10-30\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}";
+    const xhr = new XMLHttpRequest();
+    
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        console.log(this.responseText);
+      }
+    });
+    
+    xhr.open("POST", "https://api.astronomyapi.com/api/v2/studio/moon-phase");
+    xhr.setRequestHeader("Authorization", "Basic OTQ4NmY2ZjgtNTIxMC00MWQ4LWI4OWMtMjBlNDM0MzUzNjcxOjgzMmY5ZjhkNDYxYzk5Yzk5OWQwYTNmOWE2ZjkxZDdlM2E3MjcxY2MyYTBhZWE3NTQ3MzUxYmE2NGRlNWQ1YTc2MDZmMmVkOWMzYmMwNGQ3ZDI3ZmYxNTE2OTVhOGE5NDg0MWZmMjMzZmVlOTczM2I1ODhmZDkzYzUyNzE4N2JhNzc5ZjU2NTViMGVmYzI5NTFhYTdiNTZmNzNiZjI0N2Y5YjgxN2Y2MjJmYWZjMDM5OGJmNDFmOGIwNmQxMTRhYmVhYTE2MGRlZjA2NzhlN2VmYjRhYzNjYmJhMjM4Y2Rl");
+    
+    xhr.send(data);
+}
+
 localStorageDataChecks();
+getMoonPhase();
