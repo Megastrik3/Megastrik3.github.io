@@ -25,7 +25,7 @@ const primaryModel = getGenerativeModel(vertexAI, {
         parts: [
             //This tells the model who it is and what it is supposed to do
             { text: 'You are a weather forecast assistant.' },
-            { text: 'Your mission is to a give simple one sentence suggestion for good activities to be done in the provided weather conditions.' },
+            { text: 'Your mission is to a give simple one sentence suggestion for good activities to be done in the provided weather conditions and location.' },
         ],
     }, safetySettings: {
         //This tells the model to block any harmful content
@@ -45,33 +45,8 @@ const primaryModel = getGenerativeModel(vertexAI, {
         frequencyPenalty: "0.75",
     },
 });
-const secondaryModel = getGenerativeModel(vertexAI, {
-    model: "gemini-1.5-flash", systemInstruction: {
-        parts: [
-            //This tells the model who it is and what it is supposed to do
-            { text: 'You are a weather forecast assistant.' },
-            { text: 'Your mission is to a give single activity that can be done in the provided weather conditions. For example, take a walk, or go ice skating, or relax at the beach. No commentary, no punctuation.' },
-        ],
-    }, safetySettings: {
-        //This tells the model to block any harmful content
-        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-        threshold: "BLOCK_ONLY_HIGH",
-    }, generationConfig: {
-        //defines the randomness and size of the output.
-        // 1 token is 4 characters
-        maxOutputTokens: "8",
-        //the degree of randomness in the output
-        temperature: "2.0",
-        //the degree to which the model will be random in its output
-        topP: "1.0",
-        //discourages the model from using tokens that already appear in the output
-        presencePenalty: "1.5",
-        //discourages the model from using tokens that have appear previously in the output
-        frequencyPenalty: "1.99",
-    },
-});
 async function sendVertexPrompt() {
-    const mainPrompt = "Cloudy, 55 degrees, strong wind";
+    const mainPrompt = "Cloudy, 55 degrees, strong wind in " + localStorage.getItem("currentLocation").split(",")[2];
 
     //waits for a response
     const mainResult = await primaryModel.generateContent(mainPrompt);
@@ -80,16 +55,6 @@ async function sendVertexPrompt() {
     //gets the prompt response
    let text = response.text();
     const timestamp = getCurrentDate(true);
-    // let secondaryText = "";
-    // for (let i = 0; i < 2; i++) {
-    //     const secondaryResult = await secondaryModel.generateContent(mainPrompt);
-    //     //stores response in a variable
-    //     response = secondaryResult.response;
-    //     //gets the prompt response
-    //     secondaryText = secondaryText + response.text() + "|";
-    // }
-    // text = text.replace(/(\r\n|\n|\r)/gm, "");
-    // secondaryText = secondaryText.replace(/(\r\n|\n|\r)/gm, "");
     localStorage.setItem("vertexAI", timestamp + "|" + text);
 
     //prints the output to the console
