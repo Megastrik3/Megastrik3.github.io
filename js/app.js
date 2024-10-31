@@ -99,8 +99,8 @@ async function sendVertexPrompt() {
 async function localStorageDataChecks() {
     if (!checkVertexLocalStorage() || checkVertexAge()) {
         await sendVertexPrompt();
-        displayData("advice", "vertexAI", 1);
     }
+    displayData("advice", "vertexAI", 1);
 }
 function checkVertexLocalStorage() {
     if (localStorage.getItem("vertexAI") == null) {
