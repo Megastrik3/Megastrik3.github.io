@@ -60,5 +60,28 @@ function getMoonPhase(_callback) {
     xhr.send(data);
 }
 
+async function getMoonPhaseCalendar(){
+    const url = `https://aa.usno.navy.mil/api/moon/phases/date?date=${getCurrentDate(false)}&nump=5`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        document.getElementById("moon-phase-text-1").innerHTML = data.phasedata[0].phase + " - " + new Date(data.phasedata[0].year, data.phasedata[0].month -1).toLocaleString('default', { month: 'long' }) + " " + data.phasedata[0].day;
+        document.getElementById("moon-phase-text-2").innerHTML = data.phasedata[1].phase + " - " + new Date(data.phasedata[1].year, data.phasedata[1].month -1).toLocaleString('default', { month: 'long' }) + " " + data.phasedata[1].day;
+        document.getElementById("moon-phase-text-3").innerHTML = data.phasedata[2].phase + " - " + new Date(data.phasedata[2].year, data.phasedata[2].month -1).toLocaleString('default', { month: 'long' }) + " " + data.phasedata[2].day;
+        document.getElementById("moon-phase-text-4").innerHTML = data.phasedata[3].phase + " - " + new Date(data.phasedata[3].year, data.phasedata[3].month -1).toLocaleString('default', { month: 'long' }) + " " + data.phasedata[3].day;
+        document.getElementById("moon-phase-text-5").innerHTML = data.phasedata[4].phase + " - " + new Date(data.phasedata[4].year, data.phasedata[4].month -1).toLocaleString('default', { month: 'long' }) + " " + data.phasedata[4].day;
+        document.getElementById("first-moon-phase-image").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg";
+        document.getElementById("second-moon-phase-image").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg";
+        document.getElementById("third-moon-phase-image").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg";
+        document.getElementById("fourth-moon-phase-image").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg";
+        document.getElementById("fifth-moon-phase-image").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg";
+
+    } catch (error) {
+        console.error('Error fetching moon phases:', error);
+    }
+}
 
 localStorageDataChecks();
+getMoonPhaseCalendar();
