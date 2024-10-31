@@ -11,10 +11,11 @@ document.getElementById("otherBtn").addEventListener("click", function() {
 document.getElementById("currentLocationBtn").addEventListener("click", function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            (position) => {
+            async (position) => {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
-                city = getCityFromCoordinates(latitude, longitude);
+                city = await getCityFromCoordinates(latitude, longitude);
+                localStorage.setItem("currentLocation", latitude + "," + longitude + "," + city);
                 //TODO: here send city to logic to get other data and display on UI
             },
             (error) => {
@@ -40,11 +41,14 @@ async function getCityFromCoordinates(latitude, longitude) {
         const data = await response.json();
 
         if (data && data.address && data.address.city) {
-            return data.address.city;
+            console.log('City found:', data.address.city);
+            return JSON.stringify(data.address.city);
         } else if (data && data.address && data.address.town) {
-            return data.address.town;
+            console.log('Town found:', data.address.town);
+            return JSON.stringify(data.address.town);
         } else if (data && data.address && data.address.village) {
-            return data.address.village;
+            console.log('Village found:', data.address.village);
+            return JSON.stringify(data.address.village);
         } else {
             console.log('City not found for the given location.');
         }
