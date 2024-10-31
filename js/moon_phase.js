@@ -43,7 +43,7 @@ function checkDataAge() {
 
 function getMoonPhase(_callback) {
     const coordinates = localStorage.getItem("currentLocation").split(",");
-    const data = `{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#000000\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":${coordinates[0]},\"longitude\":${coordinates[1]},\"date\":\"2024-10-30\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}`;
+    const data = `{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#ffffff\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":${coordinates[0]},\"longitude\":${coordinates[1]},\"date\":\"2024-10-30\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}`;
     const xhr = new XMLHttpRequest();
     
     xhr.addEventListener("readystatechange", function () {
@@ -59,5 +59,6 @@ function getMoonPhase(_callback) {
     
     xhr.send(data);
 }
+
 
 localStorageDataChecks();
