@@ -11,7 +11,6 @@ const firebaseConfig = {
     appId: "1:163656577596:web:6fb4a5a1e1c666ac28c939",
     measurementId: "G-9DTNJQNTKN"
 };
-const moonPhaseAuthString = btoa(`84323f10-96d1-4383-92d6-4a0603c0ff03:832f9f8d461c99c999d0a3f9a6f91d7e3a7271cc2a0aea7547351ba64de5d5a7606f2ed9c3bc04d7d27ff151695a8a94841ff233fee9733b588fd93c527187baefbd14d2221d6f659a238399a57fd766e24d1885c337f5fc0ea856b8d9f53a974e1b0db77088c79127a0a91050746736`);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //prevents the api kets from being used from an unauthorized source
@@ -149,21 +148,4 @@ function displayData(elementName, storageName, index) {
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
 
-function getMoonPhase() {
-    const data = "{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#000000\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":33.775867,\"longitude\":-84.39733,\"date\":\"2024-10-30\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}";
-    const xhr = new XMLHttpRequest();
-    
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === this.DONE) {
-        console.log(this.responseText);
-      }
-    });
-    
-    xhr.open("POST", "https://api.astronomyapi.com/api/v2/studio/moon-phase");
-    xhr.setRequestHeader("Authorization", "Basic OTQ4NmY2ZjgtNTIxMC00MWQ4LWI4OWMtMjBlNDM0MzUzNjcxOjgzMmY5ZjhkNDYxYzk5Yzk5OWQwYTNmOWE2ZjkxZDdlM2E3MjcxY2MyYTBhZWE3NTQ3MzUxYmE2NGRlNWQ1YTc2MDZmMmVkOWMzYmMwNGQ3ZDI3ZmYxNTE2OTVhOGE5NDg0MWZmMjMzZmVlOTczM2I1ODhmZDkzYzUyNzE4N2JhNzc5ZjU2NTViMGVmYzI5NTFhYTdiNTZmNzNiZjI0N2Y5YjgxN2Y2MjJmYWZjMDM5OGJmNDFmOGIwNmQxMTRhYmVhYTE2MGRlZjA2NzhlN2VmYjRhYzNjYmJhMjM4Y2Rl");
-    
-    xhr.send(data);
-}
-
 localStorageDataChecks();
-getMoonPhase();
