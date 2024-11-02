@@ -6,10 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
         temperature: 75,
         description: "Mostly sunny",
         icon: "☀️",
-        location: "Detroit, MI",
-        date: "Wednesday 25, September",
-        latitude: 42.3314, // Latitude for Detroit
-        longitude: -83.0458 // Longitude for Detroit
+        location: localStorage.getItem("currentLocation").split(",")[2] + ", " + localStorage.getItem("currentLocation").split(",")[3],
+        date: new Date().toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }),
     };
 
     const hourlyWeather = [
