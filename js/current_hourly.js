@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to fetch sunrise and sunset times
     async function fetchSunriseSunset() {
-        const { latitude, longitude } = currentWeather;
+        //const { latitude, longitude } = currentWeather;
+        let latitude = localStorage.getItem("currentLocation").split(",")[0];
+        let longitude = localStorage.getItem("currentLocation").split(",")[1];
         const url = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
 
         try {
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Convert sunrise and sunset from UTC to local time
             currentWeather.sunrise = convertToLocalTime(data.results.sunrise);
             currentWeather.sunset = convertToLocalTime(data.results.sunset);
-
+            localStorage.setItem("sunData", currentWeather.sunrise);
             // Update sunrise and sunset times
             document.getElementById("sunrise-time").innerText = `Sunrise: ${currentWeather.sunrise}`;
             document.getElementById("sunset-time").innerText = `Sunset: ${currentWeather.sunset}`;
