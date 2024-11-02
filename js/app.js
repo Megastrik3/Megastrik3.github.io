@@ -73,7 +73,7 @@ export function checkLocalStorage(storageKey) {
     }
     return true;
 }
-export function checkAge(localStorageKey) {
+export function checkAge(frequency, localStorageKey) {
     const dateTime = new Date();
     const getData = localStorage.getItem(localStorageKey).split("|")[0];
     if (getData == getCurrentDate(true)) {
@@ -81,7 +81,7 @@ export function checkAge(localStorageKey) {
         return false;
     }
     const localStorageTimestamp = getData.split("-");
-    if (localStorageKey == "vertexAI") {
+    if (frequency == "hourly") {
             if (parseInt(localStorageTimestamp[3], 10) + 1 <= dateTime.getHours() || parseInt(localStorageTimestamp[4], 10) >= dateTime.getMinutes() && parseInt(localStorageTimestamp[3], 10) + 1 == dateTime.getHours()) {
                 console.log("Data more than one hour old -- time check");
                 return true;
@@ -89,12 +89,12 @@ export function checkAge(localStorageKey) {
                 console.log("Data more than one hour old - date check");
                 return true;
             }
-    } else if (localStorageKey == "currentMoonPhase") {
+    } else if (frequency == "daily") {
          if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
                 console.log("Data more than one day old - date check");
                 return true;
             }
-    } else if (localStorageKey == "moonPhaseCalendar") {
+    } else if (frequency == "monthly") {
          if (parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
                 console.log("Data more than one month old - date check");
                 return true;
@@ -104,17 +104,16 @@ export function checkAge(localStorageKey) {
 
 export function getCurrentDate(getTime) {
     let date = new Date();
-    let moonDate = "";
+    let currentDate = "";
     if (parseInt(date.getMonth() + 1) < 10) {
-        moonDate = moonDate + date.getFullYear() + "-0" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
+        currentDate = currentDate + date.getFullYear() + "-0" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
     } else {
-        moonDate = moonDate + date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
+        currentDate = currentDate + date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
     }
     if (getTime == true) {
-        moonDate = moonDate + "-" + date.getHours() + "-" + date.getMinutes();
+        currentDate = currentDate + "-" + date.getHours() + "-" + date.getMinutes();
     }
-    console.log(moonDate);
-    return moonDate;
+    return currentDate;
 }
 
 function displayData(elementName, storageName, index) {
@@ -123,5 +122,3 @@ function displayData(elementName, storageName, index) {
     }
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
-
-//localStorageDataChecks();
