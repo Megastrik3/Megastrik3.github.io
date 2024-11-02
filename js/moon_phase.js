@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorageDataChecks(() => displayMoonPhaseData());
 });
 async function localStorageDataChecks(_callback) {
-    if (!checkLocalStorage("currentMoonPhase") || checkAge("currentMoonPhase")) {
+    if (!checkLocalStorage("daily","currentMoonPhase") || checkAge("currentMoonPhase")) {
         await getCurrentMoonPhase();
     }
-    if (!checkLocalStorage("moonPhaseCalendar") || checkAge("moonPhaseCalendar")) {
+    if (!checkLocalStorage("monthly", "moonPhaseCalendar") || checkAge("moonPhaseCalendar")) {
         await getMonthlyMoonPhases();
     }
     _callback();
