@@ -96,37 +96,48 @@ async function sendVertexPrompt() {
     console.log("New gen: " + text);
 }
 async function localStorageDataChecks() {
-    if (!checkVertexLocalStorage() || checkVertexAge()) {
+    if (!checkLocalStorage("vertexAI") || checkAge()) {
         await sendVertexPrompt();
     }
     displayData("advice", "vertexAI", 1);
 }
-function checkVertexLocalStorage() {
-    if (localStorage.getItem("vertexAI") == null) {
-        console.log("No vertexAI data found");
+export function checkLocalStorage(storageKey) {
+    if (localStorage.getItem(storageKey) == null) {
+        console.log(`No ${storageKey} data found`);
         return false;
     }
     return true;
 }
-function checkVertexAge() {
+export function checkAge(localStorageKey) {
     const dateTime = new Date();
-    const getVertexDate = localStorage.getItem("vertexAI").split("|")[0];
-
-    if (getVertexDate != getCurrentDate(true)) {
-        const vertexOldDate = getVertexDate.split("-");
-        if (parseInt(vertexOldDate[3], 10) + 1 <= dateTime.getHours() || parseInt(vertexOldDate[4], 10) >= dateTime.getMinutes() && parseInt(vertexOldDate[3], 10) + 1 == dateTime.getHours()) {
-            console.log("Data more than one hour old -- time check");
-            return true;
-        } else if (parseInt(vertexOldDate[2], 10) != dateTime.getDate() || parseInt(vertexOldDate[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(vertexOldDate[0], 10) != dateTime.getFullYear()) {
-            console.log("Data more than one hour old - date check");
-            return true;
-        }
+    const getData = localStorage.getItem(localStorageKey).split("|")[0];
+    if (getData == getCurrentDate(true)) {
+        console.log("Data is less than one hour old");
+        return false;
     }
-    console.log("Data is less than one hour old");
-    return false;
+    const localStorageTimestamp = getData.split("-");
+    if (localStorageKey == "vertexAI") {
+            if (parseInt(localStorageTimestamp[3], 10) + 1 <= dateTime.getHours() || parseInt(localStorageTimestamp[4], 10) >= dateTime.getMinutes() && parseInt(localStorageTimestamp[3], 10) + 1 == dateTime.getHours()) {
+                console.log("Data more than one hour old -- time check");
+                return true;
+            } else if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
+                console.log("Data more than one hour old - date check");
+                return true;
+            }
+    } else if (localStorageKey == "currentMoonPhase") {
+         if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
+                console.log("Data more than one day old - date check");
+                return true;
+            }
+    } else if (localStorageKey == "moonPhaseCalendar") {
+         if (parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
+                console.log("Data more than one month old - date check");
+                return true;
+            }
+    }
 }
 
-function getCurrentDate(getTime) {
+export function getCurrentDate(getTime) {
     let date = new Date();
     let moonDate = "";
     if (parseInt(date.getMonth() + 1) < 10) {
@@ -148,4 +159,4 @@ function displayData(elementName, storageName, index) {
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
 
-localStorageDataChecks();
+//localStorageDataChecks();
