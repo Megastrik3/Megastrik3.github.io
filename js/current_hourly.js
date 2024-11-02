@@ -1,3 +1,4 @@
+import { getCurrentDate, checkLocalStorage, checkAge } from "./app.js";
 document.addEventListener("DOMContentLoaded", function () {
     let currentUnit = 'F'; // Default unit is Fahrenheit
 
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Convert sunrise and sunset from UTC to local time
             currentWeather.sunrise = convertToLocalTime(data.results.sunrise);
             currentWeather.sunset = convertToLocalTime(data.results.sunset);
-            localStorage.setItem("sunData", currentWeather.sunrise);
+            localStorage.setItem("sunData", getCurrentDate() + "|" + currentWeather.sunrise + "|" + currentWeather.sunset);
             // Update sunrise and sunset times
             document.getElementById("sunrise-time").innerText = `Sunrise: ${currentWeather.sunrise}`;
             document.getElementById("sunset-time").innerText = `Sunset: ${currentWeather.sunset}`;
@@ -98,6 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("toggleButton").addEventListener('click', toggleTemperature);
 
     // Fetch sunrise and sunset times when the page loads and update the temperature display
-    fetchSunriseSunset();
+    async function localStorageDataChecks() {
+        if (!checkLocalStorage("daily","sunData") || checkAge("sunData")) {
+            fetchSunriseSunset();
+        }
+    }
+    localStorageDataChecks();
     updateTemperatureDisplay();
 });
