@@ -6,7 +6,10 @@
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="CurrentAndHourly.css">
 </head>
-<script type="module" src="js/app.js"></script>
+<script type="module">
+    import { localStorageDataChecks } from "./js/app.js";
+    localStorageDataChecks();
+</script>
 <body>
     <div class="container">
         <div class="header">

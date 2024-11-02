@@ -60,8 +60,8 @@ async function sendVertexPrompt() {
     //prints the output to the console
     console.log("New gen: " + text);
 }
-async function localStorageDataChecks() {
-    if (!checkLocalStorage("vertexAI") || checkAge()) {
+export async function localStorageDataChecks() {
+    if (!checkLocalStorage("vertexAI") || checkAge("vertexAI")) {
         await sendVertexPrompt();
     }
     displayData("advice", "vertexAI", 1);
