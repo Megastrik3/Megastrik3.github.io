@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         description: "Mostly sunny",
         icon: "☀️",
         location: localStorage.getItem("currentLocation").split(",")[2] + ", " + localStorage.getItem("currentLocation").split(",")[3],
-        date: new Date().toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }),
+        date: new Date().toLocaleDateString([en-US], { weekday: 'long', month: 'long', day: 'numeric' }),
     };
 
     const hourlyWeather = [
