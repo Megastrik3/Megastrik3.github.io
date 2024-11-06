@@ -45,7 +45,7 @@ function displayMoonPhaseData(){
     document.getElementById("current-moon-phase").src = localStorage.getItem("currentMoonPhase").split("|")[1];
     const data = JSON.parse(localStorage.getItem("moonPhaseCalendar").split("|")[1]);
     for (let i = 0; i < 5; i++){
-        document.getElementById(`moon-phase-text-${i + 1}`).innerHTML = data.phasedata[i].phase + " - " + new Date(data.phasedata[i].year, data.phasedata[i].month -1).toLocaleString('default', { month: 'long' }) + " " + data.phasedata[i].day;
+        document.getElementById(`moon-phase-text-${i + 1}`).innerHTML = data.phasedata[i].phase + " - " + new Date(data.phasedata[i].year, data.phasedata[i].month -1).toLocaleString('en-US', { month: 'long', day: 'numeric' });
         if (data.phasedata[i].phase == "New Moon"){
             document.getElementById(`${i + 1}-moon-phase-image`).src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fase_1.jpg/598px-Fase_1.jpg?20161001004830";
             document.getElementById(`${i + 1}-moon-phase-image`).title = "Source Henrykus on Wikimedia Commons: https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fase_1.jpg/598px-Fase_1.jpg?20161001004830";
