@@ -12,9 +12,9 @@ async function fetchSunriseSunset(_callback) {
         const data = await response.json();
 
         // Convert sunrise and sunset from UTC to local time
-        currentWeather.sunrise = convertToLocalTime(data.results.sunrise);
-        currentWeather.sunset = convertToLocalTime(data.results.sunset);
-        localStorage.setItem("sunData", getCurrentDate() + "|" + currentWeather.sunrise + "|" + currentWeather.sunset);
+        let sunrise = convertToLocalTime(data.results.sunrise);
+        let sunset = convertToLocalTime(data.results.sunset);
+        localStorage.setItem("sunData", getCurrentDate() + "|" + sunrise + "|" + sunset);
         _callback();
     } catch (error) {
         console.error("Error fetching sunrise and sunset times:", error);
