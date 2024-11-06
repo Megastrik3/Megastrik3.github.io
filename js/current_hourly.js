@@ -58,31 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateTemperatureDisplay();
     }
 
-    // Function to fetch sunrise and sunset times
-    async function fetchSunriseSunset() {
-        const { latitude, longitude } = currentWeather;
-        const url = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
 
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-
-            // Convert sunrise and sunset from UTC to local time
-            currentWeather.sunrise = convertToLocalTime(data.results.sunrise);
-            currentWeather.sunset = convertToLocalTime(data.results.sunset);
-
-            // Update sunrise and sunset times
-            document.getElementById("sunrise-time").innerText = `Sunrise: ${currentWeather.sunrise}`;
-            document.getElementById("sunset-time").innerText = `Sunset: ${currentWeather.sunset}`;
-        } catch (error) {
-            console.error("Error fetching sunrise and sunset times:", error);
-        }
-    }
-
-    function convertToLocalTime(isoTime) {
-        const date = new Date(isoTime);
-        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }
 
     document.getElementById("current-temperature").innerText = `${currentWeather.temperature}°F`;
     document.getElementById("current-description").innerText = currentWeather.description;
@@ -93,7 +69,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listener to the toggle button
     document.getElementById("toggleButton").addEventListener('click', toggleTemperature);
 
-    // Fetch sunrise and sunset times when the page loads and update the temperature display
-    fetchSunriseSunset();
     updateTemperatureDisplay();
 });
