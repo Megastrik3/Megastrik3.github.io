@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moon Phases</title>
-
     <link rel="stylesheet" href="moon-phase.css">
 </head>
 <body>
@@ -14,40 +13,78 @@
             <a href="index.html" class="back-link">Back to Weather</a>
         </div>
 
-        <!-- Spotlight for the Current Moon Phase -->
         <div class="current-moon-phase">
             <h2>Current Moon Phase</h2>
             <div class="spotlight">
-                <img src="moon-placeholder.jpg" alt="Current Moon Phase" class="spotlight-image">
+                <img src="moon-placeholder.jpg" alt="Current Moon Phase" id="spotlight-image" class="spotlight-image">
                 <p id="current-moon-phase-text">Full Moon</p>
             </div>
         </div>
 
         <div class="moon-phases">
             <h2>Moon Phases for October</h2>
-            <ul>
+            <ul id="moon-phase-list">
+                <!-- Placeholder items for moon phases -->
                 <li>
                     <img src="moon-placeholder.jpg" alt="New Moon" class="moon-image">
-                    New Moon - October 1
+                    New Moon - Placeholder Date
                 </li>
                 <li>
                     <img src="moon-placeholder.jpg" alt="First Quarter" class="moon-image">
-                    First Quarter - October 8
+                    First Quarter - Placeholder Date
                 </li>
                 <li>
                     <img src="moon-placeholder.jpg" alt="Full Moon" class="moon-image">
-                    Full Moon - October 15
+                    Full Moon - Placeholder Date
                 </li>
                 <li>
                     <img src="moon-placeholder.jpg" alt="Last Quarter" class="moon-image">
-                    Last Quarter - October 22
+                    Last Quarter - Placeholder Date
                 </li>
                 <li>
                     <img src="moon-placeholder.jpg" alt="New Moon" class="moon-image">
-                    New Moon - October 29
+                    New Moon - Placeholder Date
                 </li>
             </ul>
+            
         </div>
     </div>
+
+    <script>
+        async function fetchMoonPhases() {
+            try {
+                const response = await fetch('https://api.astronomyapi.com/api/v2/studio/moon-phase', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer fc7a9612-46ee-4c3d-9bb2-8cb86dcbedc5'
+                    }
+                });
+                const data = await response.json();
+
+                // Update current moon phase
+                const currentPhase = data.data.phase;
+                document.getElementById('spotlight-image').src = currentPhase.image_url;
+                document.getElementById('current-moon-phase-text').textContent = currentPhase.phase_name;
+
+                // Update monthly moon phases
+                const phasesList = document.getElementById('moon-phase-list');
+                phasesList.innerHTML = ''; // Clear any existing items
+
+                data.data.monthly_phases.forEach(phase => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <img src="${phase.image_url}" alt="${phase.phase_name}" class="moon-image">
+                        ${phase.phase_name} - ${new Date(phase.date).toLocaleDateString()}
+                    `;
+                    phasesList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error fetching moon phases:', error);
+            }
+        }
+
+        // Fetch moon phases when the page loads
+        fetchMoonPhases();
+    </script>
 </body>
 </html>
