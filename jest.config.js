@@ -1,4 +1,5 @@
+// jest.config.js
 module.exports = {
-    preset: '',
-    testEnvironment: 'jsdom'
-  };
+  setupFilesAfterEnv: ['./jest.setup.js'],
+  testEnvironment: 'jsdom',
+};
