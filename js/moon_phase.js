@@ -1,5 +1,5 @@
 import { getCurrentDate, checkLocalStorage, checkAge } from "./app.js";
-const moonPhaseAPI = btoa("	809b1cfe-8b23-410b-b437-4774f5831104:832f9f8d461c99c999d0a3f9a6f91d7e3a7271cc2a0aea7547351ba64de5d5a7606f2ed9c3bc04d7d27ff151695a8a94841ff233fee9733b588fd93c527187ba08e9317940f49691a5f5d1657f089e3efa1a178f5abe7c7fc85bcc7e9ad23ac143533761cd895ae86d2018d00c885a95");
+const moonPhaseAPI = btoa("809b1cfe-8b23-410b-b437-4774f5831104:832f9f8d461c99c999d0a3f9a6f91d7e3a7271cc2a0aea7547351ba64de5d5a7606f2ed9c3bc04d7d27ff151695a8a94841ff233fee9733b588fd93c527187ba08e9317940f49691a5f5d1657f089e3efa1a178f5abe7c7fc85bcc7e9ad23ac143533761cd895ae86d2018d00c885a95");
 document.addEventListener("DOMContentLoaded", async function () {
     await localStorageDataChecks(() => displayMoonPhaseData());
 });
