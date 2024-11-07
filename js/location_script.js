@@ -49,6 +49,9 @@ async function getCityFromCoordinates(latitude, longitude) {
         } else if (data && data.address && data.address.village) {
             console.log('Village found:', data.address.village + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
             return JSON.stringify(data.address.village) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
+        } else if (data && data.address && data.address.road) {
+            console.log('Road found:', data.address.road + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
+            return JSON.stringify(data.address.road) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
         } else {
             console.log('City not found for the given location.');
         }
