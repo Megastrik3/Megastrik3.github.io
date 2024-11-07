@@ -3,15 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Mock data (replace with API fetch in production)
     const currentWeather = {
-        temperature: 75,
-        description: "Mostly sunny",
+        temperature: (JSON.parse(localStorage.getItem("currentObservations")).properties.temperature.value * 9 / 5 + 32).toFixed(0),
+        description: JSON.parse(localStorage.getItem("currentObservations")).properties.textDescription,
         icon: "☀️",
         location: localStorage.getItem("currentLocation").split(",")[2] + ", " + localStorage.getItem("currentLocation").split(",")[3],
         date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
     };
 
     const hourlyWeather = [
-        { time: "Now", temperature: 75, icon: "☀️" },
+        { time: "Now", temperature: currentWeather.temperature, icon: "☀️" },
         { time: "4:00pm", temperature: 68, icon: "🌦️" },
         { time: "5:00pm", temperature: 59, icon: "☁️" },
         { time: "6:00pm", temperature: 61, icon: "⛈️" },

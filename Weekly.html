@@ -6,88 +6,88 @@
 
 <link rel="stylesheet" href="styles.css">
 </head>
-
+<script type="module" src="./js/weekly_data.js"></script>
 <body>
 
     <h1>7-Day Forecast <p>Location: Detroit, MI</p> </h1> 
       <div class="weekly-weather">
-          <div class="day-box">
-               <span class="day-name">Sunday</span>
-               <span class="weather-icon">☀️</span>
-             <div class="thermometer-container">
-               <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
-               <div class="temperatures"> 
-                <span class="high-temp">High: 82°F</span>
-                <span class="low-temp">Low: 78°F</span> 
-              </div>
-            </div>
+        <div class="day-box" id="day-1">
+           <span class="day-name" id="day-1-name">Sunday</span>
+           <span class="weather-icon" id="day-1-icon">☀️</span>
+         <div class="thermometer-container">
+           <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
+           <div class="temperatures"> 
+          <span class="high-temp" id="day-1-temp-high">High: 82°F</span>
+          <span class="low-temp"id="day-1-temp-low">Low: 78°F</span> 
           </div>
-          <div class="day-box">
-            <span class="day-name">Monday</span>
-            <span class="weather-icon">🌤️</span>
-          <div class="thermometer-container">
-            <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
-            <div class="temperatures"> 
-             <span class="high-temp">High: 70°F</span>
-             <span class="low-temp">Low: 66°F</span> 
-           </div>
-         </div>
-       </div>
-       <div class="day-box">
-        <span class="day-name">Tuesday</span>
-        <span class="weather-icon">🌦️</span>
-      <div class="thermometer-container">
+        </div>
+        </div>
+        <div class="day-box" id="day-2">
+        <span class="day-name" id="day-2-name">Sunday</span>
+        <span class="weather-icon" id="day-2-icon">☀️</span>
+        <div class="thermometer-container">
         <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
         <div class="temperatures"> 
-         <span class="high-temp">High: 69°F</span>
-         <span class="low-temp">Low: 64°F</span> 
+         <span class="high-temp" id="day-2-temp-high">High: 82°F</span>
+         <span class="low-temp"id="day-2-temp-low">Low: 78°F</span> 
+         </div>
+       </div>
+       </div>
+       <div class="day-box" id="day-3">
+      <span class="day-name" id="day-3-name">Sunday</span>
+      <span class="weather-icon" id="day-3-icon">☀️</span>
+      <div class="thermometer-container">
+      <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
+      <div class="temperatures"> 
+       <span class="high-temp" id="day-3-temp-high">High: 82°F</span>
+       <span class="low-temp"id="day-3-temp-low">Low: 78°F</span> 
        </div>
      </div>
+     </div>
+     <div class="day-box" id="day-4">
+    <span class="day-name" id="day-4-name">Sunday</span>
+    <span class="weather-icon" id="day-4-icon">☀️</span>
+    <div class="thermometer-container">
+    <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
+    <div class="temperatures"> 
+     <span class="high-temp" id="day-4-temp-high">High: 82°F</span>
+     <span class="low-temp"id="day-4-temp-low">Low: 78°F</span> 
+     </div>
    </div>
-   <div class="day-box">
-    <span class="day-name">Wednesday</span>
-    <span class="weather-icon sun-icon">⛈️</span>
+  </div>
+  <div class="day-box" id="day-5">
+    <span class="day-name" id="day-5-name">Sunday</span>
+    <span class="weather-icon" id="day-5-icon">☀️</span>
   <div class="thermometer-container">
     <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
     <div class="temperatures"> 
-     <span class="high-temp">High: 47°F</span>
-     <span class="low-temp">Low: 33°F</span> 
+     <span class="high-temp" id="day-5-temp-high">High: 82°F</span>
+     <span class="low-temp"id="day-5-temp-low">Low: 78°F</span> 
    </div>
- </div>
-</div>
-<div class="day-box">
-  <span class="day-name">Thursday</span>
-  <span class="weather-icon">🌧️</span>
-<div class="thermometer-container">
-  <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
-  <div class="temperatures"> 
-   <span class="high-temp">High: 68°F</span>
-   <span class="low-temp">Low: 57°F</span> 
- </div>
-</div>
-</div>
-<div class="day-box">
-  <span class="day-name">Friday</span>
-  <span class="weather-icon">🌩️</span>
-<div class="thermometer-container">
-  <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
-  <div class="temperatures"> 
-   <span class="high-temp">High: 53°F</span>
-   <span class="low-temp">Low: 48°F</span> 
- </div>
-</div>
-</div>
-<div class="day-box">
-  <span class="day-name">Saturday</span>
-  <span class="weather-icon">🌨️</span>
-<div class="thermometer-container">
-  <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
-  <div class="temperatures"> 
-   <span class="high-temp">High: 20°F</span>
-   <span class="low-temp">Low: 15°F</span> 
- </div>
-</div>
-</div>
+  </div>
+  </div>
+  <div class="day-box" id="day-6">
+    <span class="day-name" id="day-6-name">Sunday</span>
+    <span class="weather-icon" id="day-6-icon">☀️</span>
+  <div class="thermometer-container">
+    <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
+    <div class="temperatures"> 
+     <span class="high-temp" id="day-6-temp-high">High: 82°F</span>
+     <span class="low-temp"id="day-6-temp-low">Low: 78°F</span> 
+   </div>
+  </div>
+  </div>
+  <div class="day-box" id="day-7">
+    <span class="day-name" id="day-7-name">Sunday</span>
+    <span class="weather-icon" id="day-7-icon">☀️</span>
+  <div class="thermometer-container">
+    <img src="https://static.wixstatic.com/media/1afe88_186c785494464791b83bbe846aad8ad6~mv2.png/v1/fill/w_560,h_1120,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/thermometer-gf1d839924_1280.png" alt="Thermometer" class="thermometer-icon"/> 
+    <div class="temperatures"> 
+     <span class="high-temp" id="day-7-temp-high">High: 82°F</span>
+     <span class="low-temp"id="day-7-temp-low">Low: 78°F</span> 
+   </div>
+  </div>
+  </div>
 
      </div>
 
