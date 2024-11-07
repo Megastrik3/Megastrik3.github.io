@@ -13,7 +13,7 @@ async function localStorageDataChecks(_callback) {
 }
 async function getCurrentMoonPhase(_callback) {
     const coordinates = localStorage.getItem("currentLocation").split(",");
-    const data = `{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#ffffff\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":${coordinates[0]},\"longitude\":${coordinates[1]},\"date\":\"2024-10-30\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}`;
+    const data = `{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#ffffff\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":${coordinates[0]},\"longitude\":${coordinates[1]},\"date\":\"${getCurrentDate(false)}\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}`;
     const xhr = new XMLHttpRequest();
 
     try {
