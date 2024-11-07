@@ -44,6 +44,8 @@ export function getCurrentDate(getTime) {
     }
     if (getTime == true) {
         currentDate = currentDate + "-" + date.getHours() + "-" + date.getMinutes();
+        console.log("time");
     }
+    console.log(currentDate);
     return currentDate;
 }

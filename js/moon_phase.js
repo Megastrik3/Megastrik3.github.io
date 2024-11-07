@@ -36,7 +36,7 @@ async function getMonthlyMoonPhases(){
     const moonCalendarURL = `https://aa.usno.navy.mil/api/moon/phases/date?date=${getCurrentDate(false)}&nump=5`;
     const moonCalendarResponse = await fetch(moonCalendarURL);
     const moonPhasesCalendarData = await moonCalendarResponse.json();
-    localStorage.setItem("moonPhaseCalendar", getCurrentDate() + "|" + JSON.stringify(moonPhasesCalendarData));
+    localStorage.setItem("moonPhaseCalendar", getCurrentDate(false) + "|" + JSON.stringify(moonPhasesCalendarData));
     } catch (error){
         console.error('Error fetching monthly moon phases:', error);
     }
