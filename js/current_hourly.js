@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tempDisplay.innerText = `${currentWeather.temperature}°F`;
             toggleButton.textContent = 'Switch to Celsius';
         } else {
-            const temperatureCelsius = ((currentWeather.temperature - 32) * 5 / 9).toFixed(2);
+            const temperatureCelsius = ((currentWeather.temperature - 32) * 5 / 9).toFixed(0);
             tempDisplay.innerText = `${temperatureCelsius}°C`;
             toggleButton.textContent = 'Switch to Fahrenheit';
         }
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const weatherBox = document.createElement("div");
             weatherBox.className = "box";
 
-            const temperature = currentUnit === 'F' ? hour.temperature : ((hour.temperature - 32) * 5 / 9).toFixed(2);
+            const temperature = currentUnit === 'F' ? hour.temperature : ((hour.temperature - 32) * 5 / 9).toFixed(0);
             const unit = currentUnit === 'F' ? '°F' : '°C';
 
             weatherBox.innerHTML = `

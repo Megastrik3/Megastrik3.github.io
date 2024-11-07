@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
+    this.getElementById("location-name").innerHTML = localStorage.getItem("currentLocation").split(",")[2];
     setWeeklyData();
 });
 let forecastData = JSON.parse(localStorage.getItem("dailyForecast"));
