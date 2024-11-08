@@ -3,9 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/fireba
 import { getVertexAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
-document.addEventListener("DOMContentLoaded", function () {
-    localStorageDataChecks();
-});
 const firebaseConfig = {
     apiKey: "AIzaSyDHudbFMugPXPvSzRBEkWfeIZw8fx2WyFg",
     authDomain: "skycast-97dbd.firebaseapp.com",
@@ -72,7 +69,7 @@ function displayData(elementName, storageName, index) {
     }
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
-export async function localStorageDataChecks() {
+export async function vertexAIStorageChecks() {
     if (!checkLocalStorage("vertexAI") || checkAge("hourly", "vertexAI")) {
         await sendVertexPrompt();
     }

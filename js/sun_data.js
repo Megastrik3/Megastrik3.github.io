@@ -32,11 +32,10 @@ function convertToLocalTime(isoTime) {
 }
 
 // Fetch sunrise and sunset times when the page loads and update the temperature display
-async function localStorageDataChecks() {
+export async function sunRiseSunSetStorageChecks() {
     if (!checkLocalStorage("sunData") || checkAge("daily", "sunData")) {
         fetchSunriseSunset(() => displaySunData());
         return;
     }
     displaySunData();
 }
-localStorageDataChecks();

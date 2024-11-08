@@ -1,4 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
+import { getWeatherStation } from "./noaa_api.js";
+import { sunRiseSunSetStorageChecks } from "./sun_data.js";
+import { vertexAIStorageChecks } from "./vertexAI.js";
+import { moonPhaseStorageChecks } from "./moon_phase.js";
+document.addEventListener("DOMContentLoaded", async function () {
+    // if there is not a current location set, force the user to select a location
+    if (localStorage.getItem("currentLocation") == null) {
+        window.location.href = "LocationSelect.html";
+    } else {
+        try {
+            await getWeatherStation();
+            await sunRiseSunSetStorageChecks();
+            await vertexAIStorageChecks();
+            moonPhaseStorageChecks(() => console.log("Moon phase data loaded"));
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+
     let currentUnit = 'F'; // Default unit is Fahrenheit
 
     // Mock data (replace with API fetch in production)
@@ -47,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             weatherBox.innerHTML = `
                 <p>${hour.time}</p>
                 <h3>${temperature}${unit}</h3>
-                <img src=\"${hour.icon}\">
+                <img class=\"hourly-weather-image\" src=\"${hour.icon}\">
             `;
             hourlyForecastContainer.appendChild(weatherBox);
         });
