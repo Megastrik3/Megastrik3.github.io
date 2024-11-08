@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         icon: JSON.parse(localStorage.getItem("currentObservations")).properties.icon,
         location: localStorage.getItem("currentLocation").split(",")[2] + ", " + localStorage.getItem("currentLocation").split(",")[3],
         date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
+        description: JSON.parse(localStorage.getItem("dailyForecast")).properties.periods[0].detailedForecast,
     };
     const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast"));
     const hourlyWeather = [
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("current-weather-icon").src = currentWeather.icon;
     document.getElementById("location").innerText = `Location: ${currentWeather.location}`;
     document.getElementById("date").innerText = currentWeather.date;
+    document.getElementById("detailedForecast").innerText = currentWeather.description;
 
     // Add event listener to the toggle button
     document.getElementById("toggleButton").addEventListener('click', toggleTemperature);
