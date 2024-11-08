@@ -20,11 +20,14 @@ document.getElementById("currentLocationBtn").addEventListener("click", function
                 const longitude = position.coords.longitude;
                 const city = await getCityFromCoordinates(latitude, longitude);
                 localStorage.setItem("currentLocation", latitude + "," + longitude + "," + city.replace("\"", "").replace("\"", ""));
+                if (latitude != localStorage.getItem("currentLocation").split(",")[0] || longitude != localStorage.getItem("currentLocation").split(",")[1]) {
                 await getWeatherStation(true);
                 await sunRiseSunSetStorageChecks(true);
                 await vertexAIStorageChecks(true);
                 moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
-                window.location.href = "index.html";
+                }
+                console.log("Location unchanged.");
+                 window.location.href = "index.html";
             },
             (error) => {
                 console.error('Error getting location:', error.message);
