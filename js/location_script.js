@@ -16,6 +16,7 @@ document.getElementById("currentLocationBtn").addEventListener("click", function
                 const longitude = position.coords.longitude;
                 city = await getCityFromCoordinates(latitude, longitude);
                 localStorage.setItem("currentLocation", latitude + "," + longitude + "," + city.replace("\"", "").replace("\"", ""));
+                window.location.href = "index.html";
                 //TODO: here send city to logic to get other data and display on UI
             },
             (error) => {

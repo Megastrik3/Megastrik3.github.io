@@ -30,14 +30,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         detailedForecast: JSON.parse(localStorage.getItem("dailyForecast")).properties.periods[0].detailedForecast,
     };
     const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast"));
-    const hourlyWeather = [
-        { time: new Date(noaaHourlyWeather.properties.periods[0].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[0].temperature, icon: noaaHourlyWeather.properties.periods[0].icon},
-        { time: new Date(noaaHourlyWeather.properties.periods[1].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[1].temperature, icon: noaaHourlyWeather.properties.periods[1].icon},
-        { time: new Date(noaaHourlyWeather.properties.periods[2].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[2].temperature, icon: noaaHourlyWeather.properties.periods[2].icon},
-        { time: new Date(noaaHourlyWeather.properties.periods[3].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[3].temperature, icon: noaaHourlyWeather.properties.periods[3].icon},
-        { time: new Date(noaaHourlyWeather.properties.periods[4].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[4].temperature, icon: noaaHourlyWeather.properties.periods[4].icon},
-        { time: new Date(noaaHourlyWeather.properties.periods[5].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[5].temperature, icon: noaaHourlyWeather.properties.periods[5].icon }
-    ];
+    const hourlyWeather = [];
+    for (let i = 0; i < 24; i++){
+        hourlyWeather.push( { time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[i].temperature, icon: noaaHourlyWeather.properties.periods[i].icon});
+    }
 
     // Function to update the display
     function updateTemperatureDisplay() {

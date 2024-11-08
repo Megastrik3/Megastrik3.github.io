@@ -77,11 +77,16 @@ body {
     color: #ff8c00;
 }
 
+::-webkit-scrollbar {
+    height: 10px;
+}
+
 .hourly-forecast {
     display: flex;
     justify-content: space-between;
-
-    gap: 10px; 
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 30px; 
 
     padding: 20px 0;
 }
