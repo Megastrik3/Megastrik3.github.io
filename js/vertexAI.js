@@ -50,8 +50,9 @@ const primaryModel = getGenerativeModel(vertexAI, {
     },
 });
 async function sendVertexPrompt() {
-    const mainPrompt = "Cloudy, 55 degrees, strong wind in " + localStorage.getItem("currentLocation").split(",")[2];
-
+    const weatherCondtions = JSON.parse(localStorage.getItem("currentObservations"));
+    const mainPrompt = `${weatherCondtions.properties.textDescription}, ${(weatherCondtions.properties.temperature.value * 9 / 5 + 32).toFixed(0)} degrees fahrenheit, ${weatherCondtions.properties.windSpeed.value} km/h wind speed in ${localStorage.getItem("currentLocation").split(",")[2]}`;
+    console.log("Prompt: " + mainPrompt);
     //waits for a response
     const mainResult = await primaryModel.generateContent(mainPrompt);
     //stores response in a variable
