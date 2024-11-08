@@ -1,6 +1,9 @@
+import { checkLocalStorage, checkAge, getCurrentDate } from "./app.js";
 let weatherStation = "";
 let gridPoints = "";
-export async function getWeatherStation() {
+let zoneID = "";
+
+export async function getWeatherStation(forceRefresh) {
     let latitude = localStorage.getItem("currentLocation").split(",")[0];
     let longitude = localStorage.getItem("currentLocation").split(",")[1];
     try {
@@ -8,13 +11,24 @@ export async function getWeatherStation() {
         const gridPointsResponse = await fetch(gridPointsURL);
         const gridPointsData = await gridPointsResponse.json();
         gridPoints = JSON.stringify(gridPointsData.properties.forecast).replace("\"", "").replace("\"", "");
+        zoneID = JSON.stringify(gridPointsData.properties.forecastZone).substring(40).replace("\"", "");
         const stationsURL = `https://api.weather.gov/gridpoints/${gridPointsData.properties.cwa}/${gridPointsData.properties.gridX},${gridPointsData.properties.gridY}/stations`;
         const stationsResponse = await fetch(stationsURL);
         const stationsData = await stationsResponse.json();
         weatherStation = JSON.stringify(stationsData.observationStations[0]).replace("\"", "").replace("\"", "");
         await getCurrentObservations();
-        await getDailyWeatherForecast();
-        await getHourlyForecast();
+        if (!forceRefresh) {
+            if (!checkLocalStorage("dailyForecast") || checkAge("daily", "dailyForecast")) {
+                await getDailyWeatherForecast();
+            }
+            if (!checkLocalStorage("hourlyForecast") || checkAge("hourly", "hourlyForecast")) {
+                await getHourlyForecast();
+            }
+        } else if (forceRefresh) {
+            await getDailyWeatherForecast();
+            await getHourlyForecast();
+        }
+        //await getZoneAlerts();
     } catch (error) {
         console.error('Error fetching weather grid points:', error);
     }
@@ -26,8 +40,8 @@ async function getCurrentObservations() {
         const currentObservationsResponse = await fetch(currentObservationsURL);
         const currentObservationsData = await currentObservationsResponse.json();
         return new Promise((resolve, reject) => {
-        localStorage.setItem("currentObservations", JSON.stringify(currentObservationsData));
-        resolve();
+            localStorage.setItem("currentObservations", JSON.stringify(currentObservationsData));
+            resolve();
         });
     } catch (error) {
         console.error('Error fetching daily forecast data:', error);
@@ -40,8 +54,8 @@ async function getDailyWeatherForecast() {
         const dailyForecastResponse = await fetch(dailyForecastURL);
         const dailyForecastData = await dailyForecastResponse.json();
         return new Promise((resolve, reject) => {
-        localStorage.setItem("dailyForecast", JSON.stringify(dailyForecastData));
-        resolve();
+            localStorage.setItem("dailyForecast", getCurrentDate(false) + "|" + JSON.stringify(dailyForecastData));
+            resolve();
         });
     } catch (error) {
         console.error('Error fetching daily forecast data:', error);
@@ -54,10 +68,25 @@ async function getHourlyForecast() {
         const hourlyForecastResponse = await fetch(hourlyForecastURL);
         const hourlyForecastData = await hourlyForecastResponse.json();
         return new Promise((resolve, reject) => {
-        localStorage.setItem("hourlyForecast", JSON.stringify(hourlyForecastData));
-        resolve();
+            localStorage.setItem("hourlyForecast", getCurrentDate(true) + "|" + JSON.stringify(hourlyForecastData));
+            resolve();
         });
     } catch (error) {
         console.error('Error fetching hourly forecast data:', error);
     }
 }
+
+/* TODO: Implement zone alerts */
+// async function getZoneAlerts() {
+//     try {
+//         const zoneAlertsURL = `https://api.weather.gov/alerts`;
+//         const zoneAlertsResponse = await fetch(zoneAlertsURL);
+//         const zoneAlertsData = await zoneAlertsResponse.json();
+//         return new Promise((resolve, reject) => {
+//         localStorage.setItem("currentZoneAlerts", JSON.stringify(zoneAlertsData));
+//         resolve();
+//         });
+//     } catch (error) {
+//         console.error('Error fetching zone alerts:', error);
+//     }
+// }

@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         window.location.href = "LocationSelect.html";
     } else {
         try {
-            await getWeatherStation();
-            await sunRiseSunSetStorageChecks();
-            await vertexAIStorageChecks();
-            moonPhaseStorageChecks(() => console.log("Moon phase data loaded"));
+            await getWeatherStation(false);
+            await sunRiseSunSetStorageChecks(false);
+            await vertexAIStorageChecks(false);
+            moonPhaseStorageChecks(false, () => console.log("Moon phase data loaded"));
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -27,9 +27,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         icon: JSON.parse(localStorage.getItem("currentObservations")).properties.icon,
         location: localStorage.getItem("currentLocation").split(",")[2] + ", " + localStorage.getItem("currentLocation").split(",")[3],
         date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
-        detailedForecast: JSON.parse(localStorage.getItem("dailyForecast")).properties.periods[0].detailedForecast,
+        detailedForecast: JSON.parse(localStorage.getItem("dailyForecast").split("|")[1]).properties.periods[0].detailedForecast,
     };
-    const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast"));
+    const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]);
     const hourlyWeather = [];
     for (let i = 0; i < 24; i++){
         hourlyWeather.push( { time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[i].temperature, icon: noaaHourlyWeather.properties.periods[i].icon});

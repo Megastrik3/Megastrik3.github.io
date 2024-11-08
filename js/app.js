@@ -8,14 +8,14 @@ export function checkLocalStorage(storageKey) {
 export function checkAge(frequency, localStorageKey) {
     const dateTime = new Date();
     const getData = localStorage.getItem(localStorageKey).split("|")[0];
-    if (getData == getCurrentDate(true)) {
-        console.log("Data is less than one hour old");
+    if (getData == getCurrentDate(true) || getData == getCurrentDate(false)) {
+        console.log(`Data is less than one hour old ${localStorageKey}`);
         return false;
     }
     const localStorageTimestamp = getData.split("-");
     if (frequency == "hourly") {
             if (parseInt(localStorageTimestamp[3], 10) + 1 <= dateTime.getHours() || parseInt(localStorageTimestamp[4], 10) >= dateTime.getMinutes() && parseInt(localStorageTimestamp[3], 10) + 1 == dateTime.getHours()) {
-                console.log("Data more than one hour old -- time check");
+                console.log(`Data more than one hour old -- time check ${localStorageKey}`);
                 return true;
             } else if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
                 console.log(`Data more than one hour old - date check ${localStorageKey}`);

@@ -69,8 +69,11 @@ function displayData(elementName, storageName, index) {
     }
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
-export async function vertexAIStorageChecks() {
-    if (!checkLocalStorage("vertexAI") || checkAge("hourly", "vertexAI")) {
+export async function vertexAIStorageChecks(forceRefresh) {
+    if (forceRefresh) {
+        await sendVertexPrompt();
+        return;
+    } else if (!checkLocalStorage("vertexAI") || checkAge("hourly", "vertexAI")) {
         await sendVertexPrompt();
     }
     displayData("advice", "vertexAI", 1);
