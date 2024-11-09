@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     let currentUnit = 'F'; // Default unit is Fahrenheit
-
+    if (localStorage.getItem("currentUnit") != null){
+        currentUnit = localStorage.getItem("currentUnit");
+    }
     // Mock data (replace with API fetch in production)
     const currentWeather = {
         temperature: (JSON.parse(localStorage.getItem("currentObservations")).properties.temperature.value * 9 / 5 + 32).toFixed(0),
@@ -31,8 +33,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     };
     const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]);
     const hourlyWeather = [];
-    for (let i = 0; i < 24; i++){
-        hourlyWeather.push( { time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }), temperature: noaaHourlyWeather.properties.periods[i].temperature, icon: noaaHourlyWeather.properties.periods[i].icon});
+    for (let i = 0; i < 24; i++) {
+        hourlyWeather.push({
+            time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }),
+            temperature: noaaHourlyWeather.properties.periods[i].temperature,
+            icon: noaaHourlyWeather.properties.periods[i].icon,
+            shortForecast: noaaHourlyWeather.properties.periods[i].shortForecast
+        });
     }
 
     // Function to update the display
@@ -63,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 <p>${hour.time}</p>
                 <h3>${temperature}${unit}</h3>
                 <img class=\"hourly-weather-image\" src=\"${hour.icon}\">
+                <p>${hour.shortForecast}</p>
             `;
             hourlyForecastContainer.appendChild(weatherBox);
         });
@@ -71,6 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Function to toggle between Fahrenheit and Celsius
     function toggleTemperature() {
         currentUnit = currentUnit === 'F' ? 'C' : 'F';
+        localStorage.setItem("currentUnit", currentUnit);
         updateTemperatureDisplay();
     }
 
