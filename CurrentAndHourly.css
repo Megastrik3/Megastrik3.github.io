@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 125vh;
 }
 
 .container {
@@ -79,6 +79,7 @@ body {
 
 ::-webkit-scrollbar {
     height: 10px;
+    width: 5px;
 }
 
 .hourly-forecast {
@@ -141,4 +142,56 @@ body {
     font-size: 1rem; 
     color: #666;
 }
+
+ 
+ .weekly-weather {
+     display: flex; 
+     justify-content: left; 
+     gap: 1.2vw;
+    overflow-x: auto;
+
+    padding: 40px 0;
+ }
+ 
+ .day-box { 
+     height: 33vw;
+     width: 20vw;
+     text-align: center;  
+     border: 1px solid #3d3b3b; 
+     border-radius: 2vw; 
+     background-color: #f9f9f9; 
+     margin-top: 2vw;
+     margin-left: 1.5vw;
+     font-size: 1.5vw;
+     font-weight: bold;
+     text-wrap: wrap;
+ 
+ }
+ 
+ .weather-icon {
+     display: block;
+     font-size: 8vw;
+    
+ }
+ 
+ .thermometer-icon {
+     height: 16vw;
+     width: 8vw;
+ }
+ 
+ .thermometer-container {
+     display: flex; 
+     align-items: flex-start;
+     justify-content: center; 
+ }
+ 
+ .temperatures {
+     display: flex; 
+     flex-direction: column; 
+     margin-right: 1vw;
+ }
+ 
+ .high-temp {
+     margin-bottom: 8vw;
+ }
 

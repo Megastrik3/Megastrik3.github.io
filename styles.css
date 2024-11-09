@@ -97,13 +97,6 @@ body{
     font-style: italic; 
 }
 
-h1 {
-   text-align: center;
-   font-size: 4vw ;
-   color: white ;
-   font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
 .weekly-weather {
     display: flex; 
     justify-content: center; 

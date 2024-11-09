@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
         window.alert("Please select a location to view the weekly forecast.");
         window.location.href = "LocationSelect.html";
     } else {
-        this.getElementById("location-name").innerHTML = localStorage.getItem("currentLocation").split(",")[2];
         setWeeklyData();
     }
 });
@@ -96,7 +95,7 @@ weeklyData.forEach((day) => {
           </div>
         </div>
         <div>
-                  <span class="short-forecast"id="day-1-short-forecast">${day.shortForecast}</span> 
+                  <span class="day-name"id="day-1-short-forecast">${day.shortForecast}</span> 
         </div>
     `;
     hourlyForecastContainer.appendChild(weatherBox);

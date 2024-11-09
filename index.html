@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="CurrentAndHourly.css">
 </head>
 <script type="module" src="js/current_hourly.js"></script>
+<script type="module" src="js/weekly_data.js"></script>
 <body>
     <div class="container">
         <div class="header">
@@ -30,6 +31,9 @@
                 <h2 id="location">Location: --</h2>
                 <p id="date">Date</p>
                 <a href="LocationSelect.html">Select Location</a>
+                <div class="header">
+                    <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
+                </div>
             </div>
             <div class="advice" id="advice">
             </div>
@@ -37,20 +41,11 @@
 
         <div class="hourly-forecast" id="hourly-forecast">
         </div>
-
-        <div class="header">
-            <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
-        </div>
-        <div class="header">
-            <a href="Weekly.html" class="weekly-link">Weekly</a>
-        </div>
-        
+        <div class="weekly-weather" id="weekly-weather-days"></div>
 
         <div class="highlights">
             <h3>Today's Weather Highlights</h3>
-            <ul>
-                <li id="detailedForecast"></li>
-            </ul>
+                <p id="detailedForecast"></p>
         </div>
     </div>
 </body>
