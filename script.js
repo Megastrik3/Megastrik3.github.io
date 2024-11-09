@@ -7,6 +7,3 @@ document.getElementById("otherBtn").addEventListener("click", function() {
     }
 }); 
 
-document.getElementById("currentLocationBtn").addEventListener("click", function() {
-    window.location.href = "index.html";
-});
