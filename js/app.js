@@ -18,17 +18,17 @@ export function checkAge(frequency, localStorageKey) {
                 console.log("Data more than one hour old -- time check");
                 return true;
             } else if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
-                console.log("Data more than one hour old - date check");
+                console.log(`Data more than one hour old - date check ${localStorageKey}`);
                 return true;
             }
     } else if (frequency == "daily") {
          if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
-                console.log("Data more than one day old - date check");
+                console.log(`Data more than one day old - date check ${localStorageKey}`);
                 return true;
             }
     } else if (frequency == "monthly") {
          if (parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
-                console.log("Data more than one month old - date check");
+                console.log(`Data more than one month old - date check ${localStorageKey}`);
                 return true;
             }
     }
@@ -37,11 +37,8 @@ export function checkAge(frequency, localStorageKey) {
 export function getCurrentDate(getTime) {
     let date = new Date();
     let currentDate = "";
-    if (parseInt(date.getMonth() + 1) < 10) {
-        currentDate = currentDate + date.getFullYear() + "-0" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
-    } else {
-        currentDate = currentDate + date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
-    }
+    currentDate = currentDate + date.getFullYear() + "-" + parseInt(date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0');
+
     if (getTime == true) {
         currentDate = currentDate + "-" + date.getHours() + "-" + date.getMinutes();
     }

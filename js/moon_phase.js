@@ -1,36 +1,53 @@
 import { getCurrentDate, checkLocalStorage, checkAge } from "./app.js";
-document.addEventListener("DOMContentLoaded", function () {
-    localStorageDataChecks(() => displayMoonPhaseData());
+const moonPhaseAPI = btoa("809b1cfe-8b23-410b-b437-4774f5831104:832f9f8d461c99c999d0a3f9a6f91d7e3a7271cc2a0aea7547351ba64de5d5a7606f2ed9c3bc04d7d27ff151695a8a94841ff233fee9733b588fd93c527187ba08e9317940f49691a5f5d1657f089e3efa1a178f5abe7c7fc85bcc7e9ad23ac143533761cd895ae86d2018d00c885a95");
+document.addEventListener("DOMContentLoaded", async function () {
+    await localStorageDataChecks(() => displayMoonPhaseData());
 });
 async function localStorageDataChecks(_callback) {
-    if (!checkLocalStorage("currentMoonPhase") || checkAge("daily", "currentMoonPhase")) {
-        await getCurrentMoonPhase();
-    }
-    if (!checkLocalStorage("moonPhaseCalendar") || checkAge("monthly", "moonPhaseCalendar")) {
-        await getMonthlyMoonPhases();
-    }
-    _callback();
+        if (!checkLocalStorage("currentMoonPhase") || checkAge("daily", "currentMoonPhase")) {
+            await getCurrentMoonPhase();
+        }
+        if (!checkLocalStorage("moonPhaseCalendar") || checkAge("monthly", "moonPhaseCalendar")) {
+            await getMonthlyMoonPhases();
+        }
+        _callback();
 }
-async function getCurrentMoonPhase(_callback) {
+async function getCurrentMoonPhase() {
     const coordinates = localStorage.getItem("currentLocation").split(",");
-    const data = `{\"style\":{\"moonStyle\":\"sketch\",\"backgroundStyle\":\"solid\",\"backgroundColor\":\"#ffffff\",\"headingColor\":\"#ffffff\",\"textColor\":\"#000000\"},\"observer\":{\"latitude\":${coordinates[0]},\"longitude\":${coordinates[1]},\"date\":\"${getCurrentDate(false)}\"},\"view\":{\"type\":\"landscape-simple\",\"parameters\":{}}}`;
-    const xhr = new XMLHttpRequest();
+    const data = JSON.stringify({
+        "style": {
+            "moonStyle": "default",
+            "backgroundStyle": "solid",
+            "backgroundColor": "#ffffff",
+            "headingColor": "#ffffff",
+            "textColor": "#000000"
+        },
+        "observer": {
+            "latitude": parseFloat(coordinates[0]),
+            "longitude": parseFloat(coordinates[1]),
+            "date": getCurrentDate(false)
+        },
+        "view": {
+            "type": "landscape-simple",
+            "parameters": {}
+        },
+    });
 
-    try {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === this.DONE) {
-              console.log(this.responseText);
-              localStorage.setItem("currentMoonPhase", getCurrentDate(false) + "|" + this.responseText.substring(21, this.responseText.indexOf(".png") + 4));
+                localStorage.setItem("currentMoonPhase", getCurrentDate(false) + "|" + this.responseText.substring(21, this.responseText.indexOf(".png") + 4));
+                resolve();
             }
-          });
-          xhr.open("POST", "https://api.astronomyapi.com/api/v2/studio/moon-phase");
-          xhr.setRequestHeader("Authorization", "Basic ODA5YjFjZmUtOGIyMy00MTBiLWI0MzctNDc3NGY1ODMxMTA0OjgzMmY5ZjhkNDYxYzk5Yzk5OWQwYTNmOWE2ZjkxZDdlM2E3MjcxY2MyYTBhZWE3NTQ3MzUxYmE2NGRlNWQ1YTc2MDZmMmVkOWMzYmMwNGQ3ZDI3ZmYxNTE2OTVhOGE5NDg0MWZmMjMzZmVlOTczM2I1ODhmZDkzYzUyNzE4N2JhNzc5ZjU2NTViMGVmYzI5NTFhYTdiNTZmNzNiZjI0N2Y5YjgxN2Y2MjJmYWZjMDM5OGJmNDFmOGIwNmQxMTRhYmVhYTE2MGRlZjA2NzhlN2VmYjRhYzNjYmJhMjM4Y2Rl");
-          xhr.send(data);
-    } catch (error) {
-        console.error('Error fetching current moon phase:', error);
-    }
-
+        });
+        xhr.onerror = () => reject(new Error('XHR request failed'));
+        xhr.open("POST", "https://api.astronomyapi.com/api/v2/studio/moon-phase");
+        xhr.setRequestHeader("Authorization", "Basic " + moonPhaseAPI);
+        xhr.send(data);
+    });
 }
+
 async function getMonthlyMoonPhases(){
     try{
     const moonCalendarURL = `https://aa.usno.navy.mil/api/moon/phases/date?date=${getCurrentDate(false)}&nump=5`;
