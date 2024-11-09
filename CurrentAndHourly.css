@@ -137,5 +137,40 @@
  #sunrise-time, #sunset-time {
     font-size: 1rem;
     color: #666;
+}
+
+#SelectLocationBtn{
+    height: 1.2vw;
+    width: 7vw;
+    border: none;
+    border-radius: 2vw;
+    color: white;
+    background-color: #00bfff; 
+    font-size: 80%;   
+    cursor: pointer;
+} 
+
+#locationLightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(.3vw);
+} 
+
+
+.lightbox-content {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    height: 60%;
+    border: 1vw;
+    border-radius: 2vw;
+    margin-top: 10vw;
+    margin-left: 20vw;
+}
  }
  

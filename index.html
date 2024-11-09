@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="CurrentAndHourly.css">
+    <script type="module" src="js/app.js"></script>
+    <script src="js/current_hourly.js"></script>
 </head>
-<script type="module" src="js/app.js"></script>
+
 <body>
     <div class="container">
         <div class="header">
@@ -27,7 +29,11 @@
             <div class="location">
                 <h2 id="location">Location: --</h2>
                 <p id="date">Date</p>
-                <a href="LocationSelect.html">Select Location</a>
+                  <button id="SelectLocationBtn">Select Location</button>
+                     <div id="locationLightbox" class="lightbox">
+                       <iframe src="LocationSelect.html" class="lightbox-content"></iframe>
+                    </div>
+    
             </div>
             <div class="advice" id="advice">
             </div>
@@ -50,6 +56,6 @@
         </div>
     </div>
 
-    <script src="js/current_hourly.js"></script>
+ 
 </body>
 </html>

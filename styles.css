@@ -46,18 +46,86 @@ body {
     padding: 0.5rem 1.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
- }
- 
- 
- #currentLocationBtn:hover, #otherBtn:hover {
-    background: linear-gradient(135deg, #00bfff, #1e90ff);
- }
- 
- 
- h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #333;
-    font-family: Arial, sans-serif;
- }
- 
+    cursor: pointer;
+   
+}
+
+#otherBtn:hover {
+    background-color: #2882a6;
+}
+
+
+#locationDD {
+    display: none;
+}
+
+#locationSelect {
+    font-size: 1vw;
+    height: 2vw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255); 
+    background-color: rgb(135, 195, 241);
+    border:  rgb(202, 174, 174);
+    border-radius: .4vw;
+    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+::placeholder {
+    color: rgb(255, 255, 255); 
+    font-style: italic; 
+}
+
+h1 {
+   text-align: center;
+   font-size: 4vw ;
+   color: white ;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.weekly-weather {
+    display: flex; 
+    justify-content: center; 
+    margin: 2vw;
+    gap: 1.2vw
+}
+
+.day-box { 
+    height: 30vw;
+    width: 20vw;
+    text-align: center;  
+    border: 1px solid #3d3b3b; 
+    border-radius: 2vw; 
+    background-color: #f9f9f9; 
+    margin-top: 2vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.weather-icon {
+    display: block;
+    font-size: 8vw;
+}
+
+.thermometer-icon {
+    height: 16vw;
+    width: 8vw;
+}
+
+.thermometer-container {
+    display: flex; 
+    align-items: flex-start;
+    justify-content: center; 
+}
+
+.temperatures {
+    display: flex; 
+    flex-direction: column; 
+    margin-right: 1vw;
+}
+
+.high-temp {
+    margin-bottom: 8vw;
+}
+
+
+

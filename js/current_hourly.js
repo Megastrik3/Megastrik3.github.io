@@ -97,5 +97,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fetch sunrise and sunset times when the page loads and update the temperature display
     fetchSunriseSunset();
-    updateTemperatureDisplay();
+    updateTemperatureDisplay(); 
+
+    // Select Location Button 
+    document.getElementById("SelectLocationBtn").addEventListener("click", function() {
+        const lightBox = document.getElementById("locationLightbox");
+        if (lightBox.style.display === "none") {
+            lightBox.style.display = "block";
+        } else {
+            lightBox.style.display = "none";
+        }
+    }); 
+    
 });
