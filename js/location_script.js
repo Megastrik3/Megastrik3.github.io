@@ -11,10 +11,11 @@ document.getElementById("otherBtn").addEventListener("click", function() {
 document.getElementById("currentLocationBtn").addEventListener("click", function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            (position) => {
+            async (position) => {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
-                city = getCityFromCoordinates(latitude, longitude);
+                city = await getCityFromCoordinates(latitude, longitude);
+                localStorage.setItem("currentLocation", latitude + "," + longitude + "," + city.replace("\"", "").replace("\"", ""));
                 //TODO: here send city to logic to get other data and display on UI
             },
             (error) => {
@@ -38,13 +39,19 @@ async function getCityFromCoordinates(latitude, longitude) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-
+        console.log('Data:', data);
         if (data && data.address && data.address.city) {
-            return data.address.city;
-        } else if (data && data.address && data.address.town) {
-            return data.address.town;
+            console.log('City found:', data.address.city + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
+            return JSON.stringify(data.address.city) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
+        } else if (data && data.address && data.address.town ) {
+            console.log('Town found:', data.address.town + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
+            return JSON.stringify(data.address.town) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
         } else if (data && data.address && data.address.village) {
-            return data.address.village;
+            console.log('Village found:', data.address.village + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
+            return JSON.stringify(data.address.village) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
+        } else if (data && data.address && data.address.road) {
+            console.log('Road found:', data.address.road + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
+            return JSON.stringify(data.address.road) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
         } else {
             console.log('City not found for the given location.');
         }
