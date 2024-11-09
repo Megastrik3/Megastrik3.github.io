@@ -1,70 +1,50 @@
-
-body{ 
-    background-color: rgb(113, 179, 236);
-}
+body {
+    background: linear-gradient(to bottom, #b0e0e6, #87ceeb);
+    font-family: Arial, sans-serif;
+    color: #333;
+ }
  
-
-.title-container  {
+ 
+ .title-container {
     display: flex;
-    margin-left: 15vw;
-    font-family: 'Brush Script Mt', cursive;
-    font-size: 4vw;
-    color: hwb(0 100% 0%) 
-    
-}
-
-.logo {
-    width: 15%;
-    height: 15%;
-    margin-top: 4vw;
-    margin-left: 1vw;
-   
-}
-
-.box {
-    width: 60vw;                           
-    height: 20vw;                          
-    padding: 1vw;                         
-    margin: 1% auto;                      
-    background-color: hsla(29, 88%, 61%, 0.837);              
-    border: 2px solid #cbcbd4;
-    border-radius: 3.5vw;                    
-    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);           
-    text-align: center;                     
-    font-size: 2.3vw;
-    font-family:  cursive;
-    color: rgb(245, 244, 244) 
-    
-}
-
-#currentLocationBtn {
-    font-size: 2vw;
-    height: 3vw ;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: rgb(255, 255, 255); 
-    background-color: rgb(135, 195, 241);
-    border:  rgb(125, 46, 46);
-    border-radius: .4vw;
-    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    align-items: center;
+    margin-left: 2vw;
+    font-family: Arial, sans-serif;
+    font-size: 2.5vw;
+    color: #333;
+ }
+ 
+ 
+ .logo {
+    width: 50px;
+    height: auto;
+    margin-left: 10px;
+ }
+ 
+ 
+ .box {
+    width: 60vw;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f4c977(255, 165, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+ }
+ 
+ 
+ #currentLocationBtn, #otherBtn {
+    font-size: 1.2rem;
+    color: #fff;
+    background: linear-gradient(135deg, #87ceeb, #00bfff);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1.5rem;
     cursor: pointer;
-   
-
-}
-
-#currentLocationBtn:hover {
-    background-color: rgb(40, 130, 166);
-}
-
-#otherBtn {
-    font-size: 1vw;
-    height: 2vw ;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: rgb(255, 255, 255); 
-    background-color: rgb(135, 195, 241);
-    border:  rgb(125, 46, 46);
-    border-radius: .4vw;
-    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
     cursor: pointer;
    
@@ -88,13 +68,18 @@ body{
     border:  rgb(202, 174, 174);
     border-radius: .4vw;
     box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
-    
-    
 }
 
 ::placeholder {
     color: rgb(255, 255, 255); 
     font-style: italic; 
+}
+
+h1 {
+   text-align: center;
+   font-size: 4vw ;
+   color: white ;
+   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .weekly-weather {
@@ -114,13 +99,11 @@ body{
     margin-top: 2vw;
     font-size: 1.5vw;
     font-weight: bold;
-
 }
 
 .weather-icon {
     display: block;
     font-size: 8vw;
-   
 }
 
 .thermometer-icon {
@@ -143,6 +126,3 @@ body{
 .high-temp {
     margin-bottom: 8vw;
 }
-
-
-
