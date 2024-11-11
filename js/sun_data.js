@@ -1,7 +1,7 @@
 import { getCurrentDate, checkLocalStorage, checkAge } from "./app.js";
 
 // Function to fetch sunrise and sunset times
-async function fetchSunriseSunset(_callback) {
+export async function fetchSunriseSunset(_callback) {
     //const { latitude, longitude } = currentWeather;
     let latitude = localStorage.getItem("currentLocation").split(",")[0];
     let longitude = localStorage.getItem("currentLocation").split(",")[1];

@@ -1,3 +1,4 @@
+import { fetchSunriseSunset } from "./sun_data.js";
 document.addEventListener("DOMContentLoaded", function () {
     let currentUnit = 'F'; // Default unit is Fahrenheit
 
