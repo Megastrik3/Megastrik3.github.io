@@ -1,4 +1,4 @@
-import { fetchSunriseSunset } from "./sun_data.js";
+import { sunDataStorageChecks } from "./sun_data.js";
 document.addEventListener("DOMContentLoaded", function () {
     let currentUnit = 'F'; // Default unit is Fahrenheit
 
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Fetch sunrise and sunset times when the page loads and update the temperature display
-    fetchSunriseSunset();
+    sunDataStorageChecks();
     updateTemperatureDisplay(); 
 
     // Select Location Button 
