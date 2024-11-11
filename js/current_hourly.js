@@ -2,6 +2,7 @@ import { getWeatherStation } from "./noaa_api.js";
 import { sunRiseSunSetStorageChecks } from "./sun_data.js";
 import { vertexAIStorageChecks } from "./vertexAI.js";
 import { moonPhaseStorageChecks } from "./moon_phase.js";
+import { setWeeklyData } from "./weekly_data.js";
 document.addEventListener("DOMContentLoaded", async function () {
     // if there is not a current location set, force the user to select a location
     if (localStorage.getItem("currentLocation") == null) {
@@ -65,22 +66,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             const temperature = currentUnit === 'F' ? hour.temperature : ((hour.temperature - 32) * 5 / 9).toFixed(0);
             const unit = currentUnit === 'F' ? '°F' : '°C';
-
+            let shortForecast = hour.shortForecast.replace(hour.temperature, temperature);
             weatherBox.innerHTML = `
                 <p>${hour.time}</p>
                 <h3>${temperature}${unit}</h3>
                 <img class=\"hourly-weather-image\" src=\"${hour.icon}\">
-                <p>${hour.shortForecast}</p>
+                <p>${shortForecast}</p>
             `;
             hourlyForecastContainer.appendChild(weatherBox);
         });
     }
-
     // Function to toggle between Fahrenheit and Celsius
     function toggleTemperature() {
         currentUnit = currentUnit === 'F' ? 'C' : 'F';
         localStorage.setItem("currentUnit", currentUnit);
         updateTemperatureDisplay();
+        setWeeklyData();
     }
 
 
@@ -91,7 +92,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("location").innerText = `Location: ${currentWeather.location}`;
     document.getElementById("date").innerText = currentWeather.date;
     document.getElementById("detailedForecast").innerText = currentWeather.detailedForecast;
-
     // Add event listener to the toggle button
     document.getElementById("toggleButton").addEventListener('click', toggleTemperature);
 

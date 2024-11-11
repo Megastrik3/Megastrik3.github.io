@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
         setWeeklyData();
     }
 });
-
-function setWeeklyData() {
-    let currentUnit = 'F';
+//document.getElementById("toggleButton").addEventListener('click', setWeeklyData);
+export function setWeeklyData(currentUnit) {
     if (localStorage.getItem("currentUnit") != null){
         currentUnit = localStorage.getItem("currentUnit");
+    } else {
+        currentUnit = 'F';
     }
 
     let forecastData = JSON.parse(localStorage.getItem("dailyForecast").split("|")[1]);
