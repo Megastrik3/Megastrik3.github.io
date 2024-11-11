@@ -8,81 +8,44 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 //document.getElementById("toggleButton").addEventListener('click', setWeeklyData);
 export function setWeeklyData(currentUnit) {
-    if (localStorage.getItem("currentUnit") != null){
+    if (localStorage.getItem("currentUnit") != null) {
         currentUnit = localStorage.getItem("currentUnit");
     } else {
         currentUnit = 'F';
     }
 
     let forecastData = JSON.parse(localStorage.getItem("dailyForecast").split("|")[1]);
-const weeklyData = [
-    {
-        day: forecastData.properties.periods[0].name,
-        icon: forecastData.properties.periods[0].icon,
-        conditions: forecastData.properties.periods[0].shortForecast,
-        high: forecastData.properties.periods[0].temperature,
-        low: forecastData.properties.periods[1].temperature,
-        shortForecast: forecastData.properties.periods[0].shortForecast
-    },
-    {
-        day: forecastData.properties.periods[2].name,
-        icon: forecastData.properties.periods[2].icon,
-        conditions: forecastData.properties.periods[2].shortForecast,
-        high: forecastData.properties.periods[2].temperature,
-        low: forecastData.properties.periods[3].temperature,
-        shortForecast: forecastData.properties.periods[2].shortForecast
-    },
-    {
-        day: forecastData.properties.periods[4].name,
-        icon: forecastData.properties.periods[4].icon,
-        conditions: forecastData.properties.periods[4].shortForecast,
-        high: forecastData.properties.periods[4].temperature,
-        low: forecastData.properties.periods[5].temperature,
-        shortForecast: forecastData.properties.periods[4].shortForecast
-    },
-    {
-        day: forecastData.properties.periods[6].name,
-        icon: forecastData.properties.periods[6].icon,
-        conditions: forecastData.properties.periods[6].shortForecast,
-        high: forecastData.properties.periods[6].temperature,
-        low: forecastData.properties.periods[7].temperature,
-        shortForecast: forecastData.properties.periods[6].shortForecast
-    },
-    {
-        day: forecastData.properties.periods[8].name,
-        icon: forecastData.properties.periods[8].icon,
-        conditions: forecastData.properties.periods[8].shortForecast,
-        high: forecastData.properties.periods[8].temperature,
-        low: forecastData.properties.periods[9].temperature,
-        shortForecast: forecastData.properties.periods[8].shortForecast
-    },
-    {
-        day: forecastData.properties.periods[10].name,
-        icon: forecastData.properties.periods[10].icon,
-        conditions: forecastData.properties.periods[10].shortForecast,
-        high: forecastData.properties.periods[10].temperature,
-        low: forecastData.properties.periods[11].temperature,
-        shortForecast: forecastData.properties.periods[10].shortForecast
-    },
-    {
-        day: forecastData.properties.periods[12].name,
-        icon: forecastData.properties.periods[12].icon,
-        conditions: forecastData.properties.periods[12].shortForecast,
-        high: forecastData.properties.periods[12].temperature,
-        low: forecastData.properties.periods[13].temperature,
-        shortForecast: forecastData.properties.periods[12].shortForecast
+    const weeklyData = [];
+    for (let i = 0; i < 12; i++) {
+        if (JSON.stringify(forecastData.properties.periods[i].name).includes("Night", 0)) {
+            weeklyData.push({
+                day: forecastData.properties.periods[i + 1].name,
+                icon: forecastData.properties.periods[i + 1].icon,
+                high: forecastData.properties.periods[i + 1].temperature,
+                low: forecastData.properties.periods[i + 2].temperature,
+                shortForecast: forecastData.properties.periods[i + 1].shortForecast,
+            });
+            i++;
+        } else {
+            weeklyData.push({
+                day: forecastData.properties.periods[i].name,
+                icon: forecastData.properties.periods[i].icon,
+                high: forecastData.properties.periods[i].temperature,
+                low: forecastData.properties.periods[i + 1].temperature,
+                shortForecast: forecastData.properties.periods[i].shortForecast,
+            });
+        }
     }
-];
-const hourlyForecastContainer = document.getElementById("weekly-weather-days");
-hourlyForecastContainer.innerHTML = ''; // Clear existing hourly forecast
-weeklyData.forEach((day) => {
-    const weatherBox = document.createElement("div");
-     weatherBox.className = "day-box";
-    weatherBox.id = "day-1";
-    day.high = currentUnit === 'F' ? day.high : ((day.high - 32) * 5 / 9).toFixed(0);
-    day.low = currentUnit === 'F' ? day.low : ((day.low - 32) * 5 / 9).toFixed(0);
-    const unit = currentUnit === 'F' ? '°F' : '°C';
-    weatherBox.innerHTML = `
+    const hourlyForecastContainer = document.getElementById("weekly-weather-days");
+    hourlyForecastContainer.innerHTML = ''; // Clear existing hourly forecast
+    weeklyData.forEach((day) => {
+        const weatherBox = document.createElement("div");
+        weatherBox.className = "day-box";
+        weatherBox.id = "day-1";
+        day.high = currentUnit === 'F' ? day.high : ((day.high - 32) * 5 / 9).toFixed(0);
+        day.low = currentUnit === 'F' ? day.low : ((day.low - 32) * 5 / 9).toFixed(0);
+        const unit = currentUnit === 'F' ? '°F' : '°C';
+        weatherBox.innerHTML = `
 <div class="day-box-1" id="day-1">
            <span class="day-name" id="day-1-name">${day.day}</span>
            <span class="weather-icon">
@@ -99,8 +62,8 @@ weeklyData.forEach((day) => {
                   <span class="day-name"id="day-1-short-forecast">${day.shortForecast}</span> 
         </div>
     `;
-    hourlyForecastContainer.appendChild(weatherBox);
-});
+        hourlyForecastContainer.appendChild(weatherBox);
+    });
 
 
     // for (let i = 1; i <= 7; i++) {
