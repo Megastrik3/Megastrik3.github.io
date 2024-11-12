@@ -95,5 +95,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Add event listener to the toggle button
     document.getElementById("toggleButton").addEventListener('click', toggleTemperature);
 
-    updateTemperatureDisplay();
+
+    // Fetch sunrise and sunset times when the page loads and update the temperature display
+    sunDataStorageChecks();
+    updateTemperatureDisplay(); 
+
+    // Select Location Button 
+    document.getElementById("SelectLocationBtn").addEventListener("click", function() {
+        const lightBox = document.getElementById("locationLightbox");
+        if (lightBox.style.display === "none") {
+            lightBox.style.display = "block";
+        } else {
+            lightBox.style.display = "none";
+        }
+    }); 
+    
+
 });
