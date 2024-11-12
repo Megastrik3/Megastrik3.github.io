@@ -1,3 +1,7 @@
+import { getWeatherStation } from "./noaa_api.js";
+import { sunRiseSunSetStorageChecks } from "./sun_data.js";
+import { vertexAIStorageChecks } from "./vertexAI.js";
+import { moonPhaseStorageChecks } from "./moon_phase.js";
 document.getElementById("otherBtn").addEventListener("click", function() {
     const inputBox = document.getElementById("locationDD");
     if (inputBox.style.display === "none") {
@@ -14,9 +18,17 @@ document.getElementById("currentLocationBtn").addEventListener("click", function
             async (position) => {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
-                city = await getCityFromCoordinates(latitude, longitude);
+                const city = await getCityFromCoordinates(latitude, longitude);
                 localStorage.setItem("currentLocation", latitude + "," + longitude + "," + city.replace("\"", "").replace("\"", ""));
-                //TODO: here send city to logic to get other data and display on UI
+                if (latitude != localStorage.getItem("currentLocation").split(",")[0] || longitude != localStorage.getItem("currentLocation").split(",")[1]) {
+                await getWeatherStation(true);
+                await sunRiseSunSetStorageChecks(true);
+                await vertexAIStorageChecks(true);
+                moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+                } else {
+                    console.log("Location unchanged.");
+                }
+                window.parent.location.reload();
             },
             (error) => {
                 console.error('Error getting location:', error.message);

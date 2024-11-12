@@ -11,10 +11,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
- }
- 
- .container {
+    height: 160vh;
+}
+
+.container {
     width: 80%;
     max-width: 1200px;
     background-color: #fff;
@@ -75,16 +75,20 @@
  .advice p {
     font-size: 1.2rem;
     color: #ff8c00;
- }
- 
- .hourly-forecast {
+}
+
+::-webkit-scrollbar {
+    height: 10px;
+    width: 5px;
+}
+
+.hourly-forecast {
     display: flex;
     justify-content: space-between;
     overflow-x: auto;
     white-space: nowrap;
-    gap: 30px;
- 
- 
+    gap: 30px; 
+
     padding: 20px 0;
  }
 
@@ -139,6 +143,58 @@
     color: #666;
 }
 
+ 
+ .weekly-weather {
+     display: flex; 
+     justify-content: left; 
+     gap: 1.2vw;
+    overflow-x: auto;
+
+    padding: 40px 0;
+ }
+ 
+ .day-box { 
+     height: 33vw;
+     width: 20vw;
+     text-align: center;  
+     border: 1px solid #3d3b3b; 
+     border-radius: 2vw; 
+     background-color: #f9f9f9; 
+     margin-top: 2vw;
+     margin-left: 1.5vw;
+     font-size: 1.5vw;
+     font-weight: bold;
+     text-wrap: wrap;
+ 
+ }
+ 
+ .weather-icon {
+     display: block;
+     font-size: 8vw;
+    
+ }
+ 
+ .thermometer-icon {
+     height: 16vw;
+     width: 8vw;
+ }
+ 
+ .thermometer-container {
+     display: flex; 
+     align-items: flex-start;
+     justify-content: center; 
+ }
+ 
+ .temperatures {
+     display: flex; 
+     flex-direction: column; 
+     margin-right: 1vw;
+ }
+ 
+ .high-temp {
+     margin-bottom: 8vw;
+ }
+
 #SelectLocationBtn{
     height: 1.2vw;
     width: 7vw;
@@ -172,5 +228,3 @@
     margin-top: 10vw;
     margin-left: 20vw;
 }
- 
- 

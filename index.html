@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="CurrentAndHourly.css">
-    <script type="module" src="js/app.js"></script>
-    <script type="module" src="./js/vertexAI.js"></script>
-    <script type="module" src="./js/sun_data.js"></script>
-    <script type="module" src="js/current_hourly.js"></script>
 </head>
+<script type="module" src="js/current_hourly.js"></script>
 <body>
     <div class="container">
         <div class="header">
-            <div class="weather-icon" id="current-weather-icon">☀️</div>
+            <div class="weather-icon">
+                <img class="current-weather-image" id="current-weather-icon" src="">
+            </div>
             <div class="current-weather">
                 <h1 id="current-temperature">--°F</h1>
-                <button id="toggleButton">Switch to Celsius</button> 
+                <button id="toggleButton">Switch to Celsius</button>
                 <p id="current-description">Weather description</p>
                 <div class="sun-times">
                     <div class="sun-time-box">
@@ -32,9 +31,11 @@
                 <p id="date">Date</p>
                   <button id="SelectLocationBtn">Select Location</button>
                      <div id="locationLightbox" class="lightbox">
-                       <iframe src="LocationSelect.html" class="lightbox-content"></iframe>
                     </div>
-    
+
+                <div class="header">
+                    <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
+                </div>
             </div>
             <div class="advice" id="advice">
             </div>
@@ -42,20 +43,12 @@
 
         <div class="hourly-forecast" id="hourly-forecast">
         </div>
-
-        <div class="header">
-            <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
-        </div>
-        
+        <div class="weekly-weather" id="weekly-weather-days"></div>
 
         <div class="highlights">
-            <h3>Weather Highlights</h3>
-            <ul>
-                <li id="activity1">Have a picnic</li>
-                <li id="activity2">Go for a walk</li>
-            </ul>
+            <h3>Today's Weather Highlights</h3>
+                <p id="detailedForecast"></p>
         </div>
     </div>
-
 </body>
 </html>

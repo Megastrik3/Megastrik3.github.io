@@ -3,9 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/fireba
 import { getVertexAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
-document.addEventListener("DOMContentLoaded", function () {
-    localStorageDataChecks();
-});
 const firebaseConfig = {
     apiKey: "AIzaSyDHudbFMugPXPvSzRBEkWfeIZw8fx2WyFg",
     authDomain: "skycast-97dbd.firebaseapp.com",
@@ -50,8 +47,9 @@ const primaryModel = getGenerativeModel(vertexAI, {
     },
 });
 async function sendVertexPrompt() {
-    const mainPrompt = "Cloudy, 55 degrees, strong wind in " + localStorage.getItem("currentLocation").split(",")[2];
-
+    const weatherCondtions = JSON.parse(localStorage.getItem("currentObservations"));
+    const mainPrompt = `${weatherCondtions.properties.textDescription}, ${(weatherCondtions.properties.temperature.value * 9 / 5 + 32).toFixed(0)} degrees fahrenheit, ${weatherCondtions.properties.windSpeed.value} km/h wind speed in ${localStorage.getItem("currentLocation").split(",")[2]}`;
+    console.log("Prompt: " + mainPrompt);
     //waits for a response
     const mainResult = await primaryModel.generateContent(mainPrompt);
     //stores response in a variable
@@ -71,8 +69,11 @@ function displayData(elementName, storageName, index) {
     }
     document.getElementById(elementName).innerHTML = localStorage.getItem(storageName).split("|")[index];
 }
-export async function localStorageDataChecks() {
-    if (!checkLocalStorage("vertexAI") || checkAge("hourly", "vertexAI")) {
+export async function vertexAIStorageChecks(forceRefresh) {
+    if (forceRefresh) {
+        await sendVertexPrompt();
+        return;
+    } else if (!checkLocalStorage("vertexAI") || checkAge("hourly", "vertexAI")) {
         await sendVertexPrompt();
     }
     displayData("advice", "vertexAI", 1);
