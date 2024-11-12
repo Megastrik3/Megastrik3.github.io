@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', function () {
-    if (localStorage.getItem("dailyForecast") == null) {
-        window.alert("Please select a location to view the weekly forecast.");
-        window.location.href = "LocationSelect.html";
-    } else {
-        setWeeklyData();
-    }
-});
-//document.getElementById("toggleButton").addEventListener('click', setWeeklyData);
+import { openLocationFrame } from "./app.js";
+// document.addEventListener('DOMContentLoaded', function () {
+//     if (localStorage.getItem("currentLocation") == null) {
+//         window.alert("Please select a location to view the weekly forecast.");
+//         openLocationFrame();
+//     } else {
+//         setWeeklyData();
+//     }
+// });
 export function setWeeklyData(currentUnit) {
     if (localStorage.getItem("currentUnit") != null) {
         currentUnit = localStorage.getItem("currentUnit");

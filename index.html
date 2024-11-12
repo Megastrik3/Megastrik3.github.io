@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="CurrentAndHourly.css">
-    <script type="module" src="js/app.js"></script>
-    <script type="module" src="./js/vertexAI.js"></script>
-    <script type="module" src="./js/sun_data.js"></script>
-    <script type="module" src="js/current_hourly.js"></script>
 </head>
 <script type="module" src="js/current_hourly.js"></script>
-<script type="module" src="js/weekly_data.js"></script>
 <body>
     <div class="container">
         <div class="header">
@@ -20,7 +15,7 @@
             </div>
             <div class="current-weather">
                 <h1 id="current-temperature">--°F</h1>
-                <button id="toggleButton">Switch to Celsius</button> 
+                <button id="toggleButton">Switch to Celsius</button>
                 <p id="current-description">Weather description</p>
                 <div class="sun-times">
                     <div class="sun-time-box">
@@ -36,9 +31,8 @@
                 <p id="date">Date</p>
                   <button id="SelectLocationBtn">Select Location</button>
                      <div id="locationLightbox" class="lightbox">
-                       <iframe src="LocationSelect.html" class="lightbox-content"></iframe>
                     </div>
-    
+
                 <div class="header">
                     <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
                 </div>

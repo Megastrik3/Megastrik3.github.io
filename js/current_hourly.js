@@ -3,24 +3,29 @@ import { sunRiseSunSetStorageChecks } from "./sun_data.js";
 import { vertexAIStorageChecks } from "./vertexAI.js";
 import { moonPhaseStorageChecks } from "./moon_phase.js";
 import { setWeeklyData } from "./weekly_data.js";
+import { openLocationFrame } from "./app.js";
 document.addEventListener("DOMContentLoaded", async function () {
     // if there is not a current location set, force the user to select a location
     if (localStorage.getItem("currentLocation") == null) {
-        window.location.href = "LocationSelect.html";
+        openLocationFrame();
+        console.log("Please select a location to view the weekly forecast.");
     } else {
         try {
             await getWeatherStation(false);
             await sunRiseSunSetStorageChecks(false);
             await vertexAIStorageChecks(false);
+            setWeeklyData();
+            displayWeatherData();
             moonPhaseStorageChecks(false, () => console.log("Moon phase data loaded"));
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
-
+});
+export async function displayWeatherData() {
     let currentUnit = 'F'; // Default unit is Fahrenheit
-    if (localStorage.getItem("currentUnit") != null){
+    if (localStorage.getItem("currentUnit") != null) {
         currentUnit = localStorage.getItem("currentUnit");
     }
     // Mock data (replace with API fetch in production)
@@ -97,18 +102,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     // Fetch sunrise and sunset times when the page loads and update the temperature display
-    sunDataStorageChecks();
-    updateTemperatureDisplay(); 
+    sunRiseSunSetStorageChecks();
+    updateTemperatureDisplay();
 
     // Select Location Button 
-    document.getElementById("SelectLocationBtn").addEventListener("click", function() {
-        const lightBox = document.getElementById("locationLightbox");
-        if (lightBox.style.display === "none") {
-            lightBox.style.display = "block";
-        } else {
-            lightBox.style.display = "none";
-        }
-    }); 
-    
-
-});
+    document.getElementById("SelectLocationBtn").addEventListener("click", function (){
+        openLocationFrame();
+    });
+}

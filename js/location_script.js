@@ -25,9 +25,10 @@ document.getElementById("currentLocationBtn").addEventListener("click", function
                 await sunRiseSunSetStorageChecks(true);
                 await vertexAIStorageChecks(true);
                 moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+                } else {
+                    console.log("Location unchanged.");
                 }
-                console.log("Location unchanged.");
-                 window.location.href = "index.html";
+                window.parent.location.reload();
             },
             (error) => {
                 console.error('Error getting location:', error.message);

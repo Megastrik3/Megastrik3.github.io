@@ -44,3 +44,15 @@ export function getCurrentDate(getTime) {
     }
     return currentDate;
 }
+
+export function openLocationFrame(){
+    console.log("Opening location frame");
+    const lightBoxContainer = document.getElementById("locationLightbox");
+    lightBoxContainer.innerHTML = ''; // Clear existing hourly forecast
+    const overlayIframe = document.createElement("iframe");
+    overlayIframe.className = "lightbox-content";
+    overlayIframe.id = "locationIframe";
+    overlayIframe.src = "LocationSelect.html";
+    lightBoxContainer.style.display = "block";
+    lightBoxContainer.appendChild(overlayIframe);
+}
