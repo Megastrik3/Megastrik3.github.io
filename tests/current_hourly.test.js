@@ -3,7 +3,7 @@
  */
 
 import { JSDOM } from "jsdom";
-import "../js/current_hourly.js";
+import { displayWeatherData} from "../js/current_hourly.js";
 const fs = require("fs");
 const path = require("path");
 let dom;
@@ -15,9 +15,9 @@ beforeAll(() => {
     dom = new JSDOM(html);
     document = dom.window.document;
     // Simulate `DOMContentLoaded` event manually since it's not automatically triggered in JSDOM
-    document.addEventListener = jest.fn((event, handler) => {
-        if (event === "DOMContentLoaded") handler();
-    });
+    // document.addEventListener = jest.fn((event, handler) => {
+    //     if (event === "DOMContentLoaded") handler();
+    // });
 
     require("../js/index.js");
 });
@@ -28,13 +28,16 @@ describe("updateTemperatureDispaly()", () => {
         return localStorage.removeItem("currentUnit");
     });
 
+    beforeEach(() => {
+        return  localStorage.setItem("currentUnit", "C");
+    });
+
     test("toggleButton should display 'Switch to Celsius' with current-temperature is 'F'", () => {
         localStorage.setItem("currentUnit", "F");
         expect(document.getElementById("toggleButton").innerHTML).toBe("Switch to Celsius");
     });
 
-    test("toggleButton should display 'Switch to Fahrenheit' with current-temperature is 'C'", () => {
-        localStorage.setItem("currentUnit", "C");
-        expect(document.getElementById("toggleButton").innerHTML).toBe("Switch to Celsius");
+    test("toggleButton should display 'Switch to Fahrenheit' with current-temperature is 'C'", async  () => {
+        expect(document.getElementById("toggleButton").innerHTML).toBe("Switch to Fahrenheit");
     });
 });

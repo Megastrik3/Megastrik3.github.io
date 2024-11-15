@@ -1,6 +1,6 @@
 import { getWeatherStation } from "./noaa_api.js";
 import { sunRiseSunSetStorageChecks } from "./sun_data.js";
-import { vertexAIStorageChecks } from "./vertexAI.js";
+import { vertexAIStorageChecks } from "../output/bundle.js";
 import { moonPhaseStorageChecks } from "./moon_phase.js";
 import { setWeeklyData } from "./weekly_data.js";
 import { openLocationFrame } from "./app.js";

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "cls && jest",
-    "dev": "live-server"
+    "dev": "rollup -c",
+    "build": "live-server"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,16 @@
   },
   "homepage": "https://github.com/Megastrik3/Megastrik3.github.io#readme",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.3.0",
     "firebase": "^11.0.1",
-    "live-server": "^1.2.2"
+    "jquery": "^3.7.1",
+    "live-server": "^1.2.2",
+    "rollup": "^4.26.0"
   },
   "dependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
+    "@testing-library/user-event": "^14.5.2",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",

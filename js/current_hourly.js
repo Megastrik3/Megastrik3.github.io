@@ -90,4 +90,5 @@ export async function displayWeatherData() {
     document.getElementById("SelectLocationBtn").addEventListener("click", function (){
         openLocationFrame();
     });
+    
 }

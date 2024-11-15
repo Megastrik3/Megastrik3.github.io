@@ -1,6 +1,6 @@
 import { getWeatherStation } from "./noaa_api.js";
 import { sunRiseSunSetStorageChecks } from "./sun_data.js";
-import { vertexAIStorageChecks } from "./vertexAI.js";
+import { vertexAIStorageChecks } from "../output/bundle.js";
 import { moonPhaseStorageChecks } from "./moon_phase.js";
 document.getElementById("otherBtn").addEventListener("click", function() {
     const inputBox = document.getElementById("locationDD");
