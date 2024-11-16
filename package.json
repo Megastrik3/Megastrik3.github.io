@@ -4,7 +4,7 @@
   "description": "SkyCast, the weather app to make cloudy days fun again!",
   "main": "app.js",
   "scripts": {
-    "test": "cls && jest",
+    "test": "cls && jest --runInBand",
     "dev": "rollup -c",
     "build": "live-server"
   },
@@ -28,7 +28,9 @@
     "firebase": "^11.0.1",
     "jquery": "^3.7.1",
     "live-server": "^1.2.2",
-    "rollup": "^4.26.0"
+    "rollup": "^4.26.0",
+    "selenium-webdriver": "^4.26.0",
+    "mocha": "10.8.2"
   },
   "dependencies": {
     "@babel/core": "^7.26.0",
