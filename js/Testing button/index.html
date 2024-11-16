@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Temperature</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            margin: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Current Temperature</h1>
+        <p id="temperatureDisplay">72°F</p>
+        <button onclick="toggleTemperature()">Toggle Fahrenheit/Celsius</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
