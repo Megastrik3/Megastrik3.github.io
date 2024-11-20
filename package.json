@@ -4,9 +4,9 @@
   "description": "SkyCast, the weather app to make cloudy days fun again!",
   "main": "app.js",
   "scripts": {
-    "test": "cls && jest --runInBand",
+    "test": "cls && live-server && jest --runInBand",
     "dev": "rollup -c",
-    "build": "live-server"
+    "run": "live-server"
   },
   "repository": {
     "type": "git",
