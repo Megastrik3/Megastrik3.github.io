@@ -2,82 +2,101 @@ body {
     background: linear-gradient(to bottom, #b0e0e6, #87ceeb);
     font-family: Arial, sans-serif;
     color: #333;
- }
- 
- 
- .title-container {
+}
+
+.title-container {
     display: flex;
     align-items: center;
     margin-left: 2vw;
     font-family: Arial, sans-serif;
     font-size: 2.5vw;
     color: #333;
- }
- 
- 
- .logo {
+}
+
+.logo {
     width: 50px;
     height: auto;
     margin-left: 10px;
- }
- 
- 
- .box {
+}
+
+.box {
     width: 60vw;
     padding: 20px;
     margin: 20px auto;
-    background-color: #f4c977(255, 165, 0, 0.2);
+    background-color: rgba(255, 165, 0, 0.2);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-size: 1.2rem;
     font-family: Arial, sans-serif;
     color: #333;
- }
- 
- 
- #currentLocationBtn, #otherBtn {
+}
+
+/* Unified Buttons */
+button {
     font-size: 1.2rem;
     color: #fff;
     background: linear-gradient(135deg, #87ceeb, #00bfff);
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 1.5rem;
+    padding: 0.7rem 2rem;
     cursor: pointer;
+    margin: 10px 0;
     transition: background-color 0.3s ease;
-    cursor: pointer;
-   
 }
 
-#otherBtn:hover {
+button:hover {
     background-color: #2882a6;
 }
 
-
-#locationDD {
+/* Dropdown Content */
+.dropdown-content {
     display: none;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 100%;
 }
 
+/* Show Dropdown When Active */
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+/* Search Input Field */
 #locationSelect {
-    font-size: 1vw;
-    height: 2vw;
+    width: 90%;
+    font-size: 1.2rem;
+    height: 2.5rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: rgb(255, 255, 255); 
     background-color: rgb(135, 195, 241);
-    border:  rgb(202, 174, 174);
-    border-radius: .4vw;
-    box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgb(202, 174, 174);
+    border-radius: 0.4vw;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 0.5rem;
 }
 
-::placeholder {
+#locationSelect::placeholder {
     color: rgb(255, 255, 255); 
-    font-style: italic; 
+    font-style: italic;
 }
 
-h1 {
-   text-align: center;
-   font-size: 4vw ;
-   color: white ;
-   font-family: Georgia, 'Times New Roman', Times, serif;
+/* Saved Locations Dropdown */
+#savedLocationsDropdown {
+    width: 90%;
+    font-size: 1.2rem;
+    height: 2.5rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 0.4vw;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 0.5rem;
 }
