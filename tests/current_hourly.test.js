@@ -5,10 +5,12 @@
 import { JSDOM } from "jsdom";
 import { displayWeatherData} from "../js/current_hourly.js";
 import { sunRiseSunSetStorageChecks } from "../js/sun_data.js";
-import * as webdriver from 'selenium-webdriver';
+import { Builder, Browser} from 'selenium-webdriver';
 import { By, } from 'selenium-webdriver';
+import * as chrome from 'selenium-webdriver/chrome';
 import exp from "constants";
 import { loadConfig } from "@babel/core/lib/config/files/index.js";
+const options = new chrome.Options();
 const fs = require("fs");
 const path = require("path");
 let dom;
@@ -30,7 +32,7 @@ beforeAll(() => {
 describe("updateTemperatureDispaly()", () => {
 
     test("toggleButton should display 'Switch to Celsius' with current-temperature is 'F", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder().forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -49,7 +51,7 @@ describe("updateTemperatureDispaly()", () => {
     }, 100000);
 
     test("toggleButton should display 'Switch to Fahrenheit' with current-temperature is 'C", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -69,7 +71,7 @@ describe("updateTemperatureDispaly()", () => {
     }, 100000);
 
     test("toggleButton should display 'Switch to Fahrenheit' with current-temperature is 'C' for all temperatures", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -94,7 +96,7 @@ describe("updateTemperatureDispaly()", () => {
 describe("sunrise and sunset tests", () => {
 
     test("sunrise and sunset times should be displayed", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -118,7 +120,7 @@ describe("sunrise and sunset tests", () => {
 describe("location should be displayed", () => {
 
     test("the location field should contain a location", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -139,7 +141,7 @@ describe("location should be displayed", () => {
 describe("current temp should be displayed", () => {
 
     test("the location field should contain a location", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -160,7 +162,7 @@ describe("current temp should be displayed", () => {
 describe("activity suggestion should be displayed", () => {
 
     test("the location field should contain a location", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
@@ -181,7 +183,7 @@ describe("activity suggestion should be displayed", () => {
 describe("check for all local storage items", () => {
 
     test("the location field should contain a location", async () => {
-        let driver = new webdriver.Builder().forBrowser("chrome").build();
+        let driver = new  Builder() .forBrowser(Browser.CHROME).setChromeOptions(options.addArguments('--headless=new')).build();
         await driver.get('http://127.0.0.1:8080/');
         await driver.executeScript( function() {
             let date = new Date();
