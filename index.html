@@ -6,7 +6,6 @@
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="CurrentAndHourly.css">
 </head>
-<script type="module" src="js/current_hourly.js"></script>
 <body>
     <div class="container">
         <div class="header">
@@ -19,20 +18,18 @@
                 <p id="current-description">Weather description</p>
                 <div class="sun-times">
                     <div class="sun-time-box">
-                        <p id="sunrise-time">Sunrise: 7:15 AM</p>
+                        <p id="sunrise-time">Sunrise: --</p>
                     </div>
                     <div class="sun-time-box">
-                        <p id="sunset-time">Sunset: 6:45 PM</p>
+                        <p id="sunset-time">Sunset: --</p>
                     </div>
                 </div>
             </div>
             <div class="location">
                 <h2 id="location">Location: --</h2>
                 <p id="date">Date</p>
-                  <button id="SelectLocationBtn">Select Location</button>
-                     <div id="locationLightbox" class="lightbox">
-                    </div>
-
+                <button id="SelectLocationBtn">Select Location</button>
+                <div id="locationLightbox" class="lightbox"></div>
                 <div class="header">
                     <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
                 </div>
@@ -47,8 +44,11 @@
 
         <div class="highlights">
             <h3>Today's Weather Highlights</h3>
-                <p id="detailedForecast"></p>
+            <p id="detailedForecast"></p>
         </div>
     </div>
+
+    <!-- Ensure correct script inclusion -->
+    <script type="module" src="js/current_hourly.js"></script>
 </body>
 </html>
