@@ -1,7 +1,8 @@
 import { getWeatherStation } from "./noaa_api.js";
 import { sunRiseSunSetStorageChecks } from "./sun_data.js";
-import { vertexAIStorageChecks } from "../output/bundle.js";
+import { vertexAIStorageChecks } from "./vertexAI.js";
 import { moonPhaseStorageChecks } from "./moon_phase.js";
+if (window.location !== window.parent.location) {
 document.getElementById("otherBtn").addEventListener("click", function() {
     const inputBox = document.getElementById("locationDD");
     if (inputBox.style.display === "none") {
@@ -70,4 +71,5 @@ async function getCityFromCoordinates(latitude, longitude) {
     } catch (error) {
         console.error('Error fetching city:', error);
     }
+}
 }

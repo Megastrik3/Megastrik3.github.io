@@ -1,7 +1,7 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { input } from '@testing-library/user-event/dist/cjs/event/input.js';
 export default {
-    input: 'js/vertexAI.js',
+    input: 'js/index.js',
     output: {
         file: './output/bundle.js',
         format: 'es'

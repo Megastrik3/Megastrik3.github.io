@@ -1,10 +1,10 @@
 import { getCurrentDate, checkLocalStorage, checkAge } from "./app.js";
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-// import { getVertexAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js";
-// import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js";
-import { initializeApp } from 'firebase/app';
-import { getVertexAI, getGenerativeModel } from "firebase/vertexai";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getVertexAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-vertexai-preview.js";
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app-check.js";
+// import { initializeApp } from 'firebase/app';
+// import { getVertexAI, getGenerativeModel } from "firebase/vertexai";
+// import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 // https://firebase.google.com/docs/web/setup#available-libraries
 const firebaseConfig = {
     apiKey: "AIzaSyDHudbFMugPXPvSzRBEkWfeIZw8fx2WyFg",
