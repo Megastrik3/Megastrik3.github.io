@@ -19,27 +19,25 @@ document.getElementById("currentLocationBtn").addEventListener("click", async fu
 
                 if (city && city !== "Unknown Location") {
                     console.log(`Current Location: ${city}`);
-                    saveLocation(city);
-
-                    localStorage.setItem(
-                        "currentLocation",
-                        `${latitude},${longitude},${city.replace('"', "").replace('"', "")}`
-                    );
-
+                    console.log(latitude, longitude)
                     // Reload associated data if location changed
-                    const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
-                    if (latitude.toString() !== savedLat || longitude.toString() !== savedLon) {
+                    if (latitude != localStorage.getItem("currentLocation").split(",")[0] || longitude != localStorage.getItem("currentLocation").split(",")[1]) {
+                        localStorage.setItem(
+                            "currentLocation",
+                            `${latitude},${longitude},${city.replace('"', "").replace('"', "")}`
+                        );
                         await getWeatherStation(true);
                         await sunRiseSunSetStorageChecks(true);
                         await vertexAIStorageChecks(true);
                         moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+                        console.log("Location changed.");
                     } else {
                         console.log("Location unchanged.");
                     }
 
                     // Close the lightbox after fetching results
-                    closeLightbox();
-                    window.parent.location.reload();
+                     closeLightbox();
+                     window.parent.location.reload();
                 } else {
                     alert("Could not determine your location. Please try again.");
                 }
@@ -64,12 +62,22 @@ document.getElementById("searchLocationBtn").addEventListener("click", async fun
     const searchQuery = document.getElementById("locationSelect").value.trim();
 
     if (searchQuery) {
-        const city = await getCityFromOpenCage(searchQuery);
-
+        const newLocation = (await getCityFromOpenCage(searchQuery));
+        const city = newLocation.split(",")[2] + ", " + newLocation.split(",")[3];
         if (city && city !== "Unknown Location") {
             console.log(`Searched Location: ${city}`);
-            saveLocation(city);
+            saveLocation(newLocation);
             alert(`Location "${city}" added to saved locations.`);
+            const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
+            if (newLocation.split(",")[0] !== savedLat || newLocation.split(",")[1] !== savedLon) {
+                localStorage.setItem("currentLocation", newLocation);
+                await getWeatherStation(true);
+                await sunRiseSunSetStorageChecks(true);
+                await vertexAIStorageChecks(true);
+                moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+            } else {
+                console.log("Location unchanged.");
+            }
 
             // Close the lightbox after fetching results
             closeLightbox();
@@ -90,9 +98,19 @@ document.getElementById("savedLocationsDropdown").addEventListener("change", asy
     if (selectedLocation) {
         console.log(`Using saved location: ${selectedLocation}`);
         alert(`Using saved location: ${selectedLocation}`);
-
+        const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
+        if (selectedLocation.split(",")[0] !== savedLat || selectedLocation.split(",")[1] !== savedLon) {
+            localStorage.setItem("currentLocation", selectedLocation);
+            await getWeatherStation(true);
+            await sunRiseSunSetStorageChecks(true);
+            await vertexAIStorageChecks(true);
+            moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+            console.log("Location changed.");
+        } else {
+            console.log("Location unchanged.");
+        }
         // Close the lightbox after selecting a saved location
-        closeLightbox();
+        //closeLightbox();
         window.parent.location.reload();
     } else {
         alert("Please select a valid saved location.");
@@ -120,7 +138,7 @@ function loadSavedLocations() {
     savedLocations.forEach((location) => {
         const option = document.createElement("option");
         option.value = location; // Use city name as value
-        option.textContent = location; // Display city name in dropdown
+        option.textContent = location.split(",")[2] + ", " + location.split(",")[3]; // Display city name in dropdown
         savedLocationsDropdown.appendChild(option);
     });
 }
@@ -160,6 +178,7 @@ async function getCityFromCoordinates(latitude, longitude) {
 async function getCityFromOpenCage(query) {
     const apiKey = "b68c30cd11a64b568dff74e8ebd5c363";
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${apiKey}&countrycode=US`;
+    console.log("OpenCage API URL:", url);
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -170,13 +189,13 @@ async function getCityFromOpenCage(query) {
                 data.results[0]?.components?.city ||
                 data.results[0]?.components?.town ||
                 data.results[0]?.components?.village ||
-                data.results[0]?.formatted; // Use formatted address as fallback
+                data.results[0]?.formatted.split(",")[0]; // Use formatted address as fallback
 
             const state = data.results[0]?.components?.state || "Unknown State";
-
+            console.log("City:", city); 
             if (city) {
                 console.log(`Location found: ${city}, ${state}`);
-                return `${city}, ${state}`;
+                return `${data.results[0].geometry.lat},${data.results[0].geometry.lng},${city},${state}`;
             } else {
                 console.error("No valid city found in OpenCage API response.");
                 return "Unknown Location";
@@ -194,7 +213,7 @@ async function getCityFromOpenCage(query) {
 // Close the lightbox
 function closeLightbox() {
     const dropdownMenu = document.getElementById("dropdownMenu");
-    const backdrop = document.getElementById("lightboxBackdrop");
+    const backdrop = document.getElementById("locationLightbox");
 
     if (dropdownMenu) {
         dropdownMenu.style.visibility = "hidden";
