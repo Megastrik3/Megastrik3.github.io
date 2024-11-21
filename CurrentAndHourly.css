@@ -191,9 +191,10 @@ body {
 /* Weekly Weather Section */
 .weekly-weather {
    display: flex;
-   justify-content: center; 
+   justify-content: left; 
    gap: 1.5vw;
    overflow-x: auto;
+   overflow-y: hidden;
    padding: 40px 0;
 }
 
