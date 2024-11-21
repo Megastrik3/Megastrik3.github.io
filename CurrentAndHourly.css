@@ -72,10 +72,22 @@
     color: #333;
  }
  
- .advice p {
-    font-size: 1.2rem;
-    color: #ff8c00;
+ #advice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffefd5;
+    border: 1px solid #ffc107;
+    border-radius: 15px;
+    padding: 15px 20px;
+    max-width: 520x;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
 }
+
 
 ::-webkit-scrollbar {
     height: 10px;
@@ -95,10 +107,13 @@
  .box {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
-    width: 100px;
+    width: auto;
+    min-width: 100px;
+    max-width: 150px;
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-wrap: wrap;
  }
  
  .highlights {
@@ -162,6 +177,7 @@
      background-color: #f9f9f9; 
      margin-top: 2vw;
      margin-left: 1.5vw;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
      font-size: 1.5vw;
      font-weight: bold;
      text-wrap: wrap;
@@ -171,9 +187,10 @@
  .weather-icon {
      display: block;
      font-size: 8vw;
-    
+
  }
- 
+
+
  .thermometer-icon {
      height: 16vw;
      width: 8vw;
@@ -227,4 +244,25 @@
     border-radius: 2vw;
     margin-top: 10vw;
     margin-left: 20vw;
+}
+
+.moon-phase-link {
+   display: inline-flex; 
+   justify-content: center; 
+   align-items: center; 
+   width: 50px; 
+   height: 50px;
+   border: 2px solid #ddd; 
+   border-radius: 50%; 
+   background-color: #f9f9f9; 
+   text-decoration: none; 
+   font-size: 24px;
+   color: #333; 
+   transition: all 0.3s ease-in-out; 
+}
+
+.moon-phase-link:hover {
+   background-color: #ffefd5; 
+   color: #fff; 
+   border-color: #ffefd5; 
 }
