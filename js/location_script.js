@@ -2,36 +2,51 @@ import { getWeatherStation } from "./noaa_api.js";
 import { sunRiseSunSetStorageChecks } from "./sun_data.js";
 import { vertexAIStorageChecks } from "./vertexAI.js";
 import { moonPhaseStorageChecks } from "./moon_phase.js";
-document.getElementById("otherBtn").addEventListener("click", function() {
-    const inputBox = document.getElementById("locationDD");
-    if (inputBox.style.display === "none") {
-        inputBox.style.display = "block";
-    } else {
-        inputBox.style.display = "none";
-    }
-});
 
-
-document.getElementById("currentLocationBtn").addEventListener("click", function() {
+// Handle "Use My Current Location" Button
+document.getElementById("currentLocationBtn").addEventListener("click", async function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
+
+                console.log("Latitude:", latitude);
+                console.log("Longitude:", longitude);
+
+                // Get city from Nominatim API
                 const city = await getCityFromCoordinates(latitude, longitude);
-                localStorage.setItem("currentLocation", latitude + "," + longitude + "," + city.replace("\"", "").replace("\"", ""));
-                if (latitude != localStorage.getItem("currentLocation").split(",")[0] || longitude != localStorage.getItem("currentLocation").split(",")[1]) {
-                await getWeatherStation(true);
-                await sunRiseSunSetStorageChecks(true);
-                await vertexAIStorageChecks(true);
-                moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+
+                if (city && city !== "Unknown Location") {
+                    console.log(`Current Location: ${city}`);
+                    saveLocation(city);
+
+                    localStorage.setItem(
+                        "currentLocation",
+                        `${latitude},${longitude},${city.replace('"', "").replace('"', "")}`
+                    );
+
+                    // Reload associated data if location changed
+                    const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
+                    if (latitude.toString() !== savedLat || longitude.toString() !== savedLon) {
+                        await getWeatherStation(true);
+                        await sunRiseSunSetStorageChecks(true);
+                        await vertexAIStorageChecks(true);
+                        moonPhaseStorageChecks(true, () => console.log("Moon phase data loaded"));
+                    } else {
+                        console.log("Location unchanged.");
+                    }
+
+                    // Close the lightbox after fetching results
+                    closeLightbox();
+                    window.parent.location.reload();
                 } else {
-                    console.log("Location unchanged.");
+                    alert("Could not determine your location. Please try again.");
                 }
-                window.parent.location.reload();
             },
             (error) => {
-                console.error('Error getting location:', error.message);
+                console.error("Error getting location:", error.message);
+                alert(`Geolocation error: ${error.message}`);
             },
             {
                 enableHighAccuracy: true,
@@ -39,35 +54,166 @@ document.getElementById("currentLocationBtn").addEventListener("click", function
             }
         );
     } else {
-        console.error('Geolocation is not supported by this browser.');
+        console.error("Geolocation is not supported by this browser.");
+        alert("Geolocation is not supported by your browser.");
+    }
+});
+
+// Handle search for other locations (OpenCage API)
+document.getElementById("searchLocationBtn").addEventListener("click", async function () {
+    const searchQuery = document.getElementById("locationSelect").value.trim();
+
+    if (searchQuery) {
+        const city = await getCityFromOpenCage(searchQuery);
+
+        if (city && city !== "Unknown Location") {
+            console.log(`Searched Location: ${city}`);
+            saveLocation(city);
+            alert(`Location "${city}" added to saved locations.`);
+
+            // Close the lightbox after fetching results
+            closeLightbox();
+            window.parent.location.reload();
+        } else {
+            alert("Could not fetch location. Please try again.");
+            document.getElementById("locationSelect").value = ""; // Clear input on failure
+        }
+    } else {
+        alert("Please enter a valid location.");
+    }
+});
+
+// Handle selecting a saved location
+document.getElementById("savedLocationsDropdown").addEventListener("change", async function () {
+    const selectedLocation = this.value;
+
+    if (selectedLocation) {
+        console.log(`Using saved location: ${selectedLocation}`);
+        alert(`Using saved location: ${selectedLocation}`);
+
+        // Close the lightbox after selecting a saved location
+        closeLightbox();
+        window.parent.location.reload();
+    } else {
+        alert("Please select a valid saved location.");
+    }
+});
+
+
+
+// Save location to localStorage
+function saveLocation(city) {
+    const savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+    if (!savedLocations.includes(city)) {
+        savedLocations.push(city); // Store city name as a string
+        localStorage.setItem("savedLocations", JSON.stringify(savedLocations));
+        loadSavedLocations(); // Update the dropdown
     }
 }
-)
 
+// Load saved locations into the dropdown
+function loadSavedLocations() {
+    const savedLocationsDropdown = document.getElementById("savedLocationsDropdown");
+    const savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+
+    savedLocationsDropdown.innerHTML = '<option value="" disabled selected>Select a saved location</option>';
+    savedLocations.forEach((location) => {
+        const option = document.createElement("option");
+        option.value = location; // Use city name as value
+        option.textContent = location; // Display city name in dropdown
+        savedLocationsDropdown.appendChild(option);
+    });
+}
+
+// Utility to get city name from coordinates (Nominatim API)
 async function getCityFromCoordinates(latitude, longitude) {
-    //New API to convert lat long to city
     const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
-
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log('Data:', data);
-        if (data && data.address && data.address.city) {
-            console.log('City found:', data.address.city + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
-            return JSON.stringify(data.address.city) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
-        } else if (data && data.address && data.address.town ) {
-            console.log('Town found:', data.address.town + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
-            return JSON.stringify(data.address.town) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
-        } else if (data && data.address && data.address.village) {
-            console.log('Village found:', data.address.village + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
-            return JSON.stringify(data.address.village) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
-        } else if (data && data.address && data.address.road) {
-            console.log('Road found:', data.address.road + " " + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6));
-            return JSON.stringify(data.address.road) + "," + JSON.stringify(data.address["ISO3166-2-lvl4"]).substring(4,6);
-        } else {
-            console.log('City not found for the given location.');
+        console.log("Nominatim Response Data:", data);
+
+        const city =
+            data?.address?.city ||
+            data?.address?.town ||
+            data?.address?.village ||
+            data?.address?.hamlet ||
+            data?.address?.suburb ||
+            "Unknown City";
+
+        const state = data?.address?.state || "Unknown State";
+
+        if (city === "Unknown City" && state === "Unknown State") {
+            console.log("City not found for the given location.");
+            return "Unknown Location";
         }
+
+        console.log(`Location found: ${city}, ${state}`);
+        return `${city}, ${state}`;
     } catch (error) {
-        console.error('Error fetching city:', error);
+        console.error("Error fetching city:", error);
+        return "Unknown Location";
     }
 }
+
+// Utility to get city name from OpenCage API
+async function getCityFromOpenCage(query) {
+    const apiKey = "b68c30cd11a64b568dff74e8ebd5c363";
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${apiKey}&countrycode=US`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("OpenCage API Data:", JSON.stringify(data, null, 2));
+
+        if (data.results && data.results.length > 0) {
+            const city =
+                data.results[0]?.components?.city ||
+                data.results[0]?.components?.town ||
+                data.results[0]?.components?.village ||
+                data.results[0]?.formatted; // Use formatted address as fallback
+
+            const state = data.results[0]?.components?.state || "Unknown State";
+
+            if (city) {
+                console.log(`Location found: ${city}, ${state}`);
+                return `${city}, ${state}`;
+            } else {
+                console.error("No valid city found in OpenCage API response.");
+                return "Unknown Location";
+            }
+        } else {
+            console.error("No results found in OpenCage API response.");
+            return "Unknown Location";
+        }
+    } catch (error) {
+        console.error("Error fetching OpenCage data:", error);
+        return "Unknown Location";
+    }
+}
+
+// Close the lightbox
+function closeLightbox() {
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const backdrop = document.getElementById("lightboxBackdrop");
+
+    if (dropdownMenu) {
+        dropdownMenu.style.visibility = "hidden";
+        dropdownMenu.style.opacity = "0";
+        dropdownMenu.style.display = "none";
+    } else {
+        console.error("Dropdown menu element not found.");
+    }
+
+    if (backdrop) {
+        backdrop.style.visibility = "hidden";
+        backdrop.style.opacity = "0";
+        backdrop.style.display = "none";
+    } else {
+        console.error("Backdrop element not found.");
+    }
+
+    console.log("Lightbox closed successfully.");
+}
+
+// Initialize saved locations on page load
+loadSavedLocations();
