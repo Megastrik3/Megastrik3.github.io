@@ -86,10 +86,20 @@ body {
 }
 
 /* Advice Section */
-.advice p {
-   font-size: 1.4rem;
-   font-style: italic;
-   color: #ff7043; /* Warmer tone for contrast */
+#advice {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background: #ffefd5;
+   border: 1px solid #ffc107;
+   border-radius: 15px;
+   padding: 15px 20px;
+   max-width: 520px;
+   margin: 20px auto;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+   font-size: 1rem;
+   color: #333;
+   text-align: center;
 }
 
 /* Scrollbar Styling */
@@ -294,4 +304,26 @@ body {
    padding: 20px;
    z-index: 1000;
    position: relative;
+}
+
+/* Moon Phase Link */
+.moon-phase-link {
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   width: 50px;
+   height: 50px;
+   border: 2px solid #ddd;
+   border-radius: 50%;
+   background-color: #f9f9f9;
+   text-decoration: none;
+   font-size: 24px;
+   color: #333;
+   transition: all 0.3s ease-in-out;
+}
+
+.moon-phase-link:hover {
+   background-color: #ffefd5;
+   color: #fff;
+   border-color: #ffefd5;
 }
