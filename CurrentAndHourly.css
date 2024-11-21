@@ -112,7 +112,7 @@ body {
 /* Hourly Forecast Section */
 .hourly-forecast {
    display: flex;
-   justify-content: center; /* Centered alignment */
+   justify-content: left; /* Centered alignment */
    overflow-x: auto;
    gap: 30px;
    padding: 20px 0;
