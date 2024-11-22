@@ -18,7 +18,7 @@ export function setWeeklyData(currentUnit) {
     const weeklyData = [];
     for (let i = 0; i < 12; i++) {
         if (JSON.stringify(forecastData.properties.periods[i].name).includes("Night", 0) ||
-        JSON.stringify(forecastData.properties.periods[i].name).includes("Tonight", 0) && new Date().getHours() < 17) {
+        JSON.stringify(forecastData.properties.periods[i].name).includes("Tonight", 0) && new Date().getHours() < 18) {
             weeklyData.push({
                 day: forecastData.properties.periods[i + 1].name,
                 icon: forecastData.properties.periods[i + 1].icon,
