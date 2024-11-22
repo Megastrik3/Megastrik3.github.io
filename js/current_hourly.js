@@ -109,4 +109,29 @@ export async function displayWeatherData() {
     document.getElementById("SelectLocationBtn").addEventListener("click", function (){
         openLocationFrame();
     });
+
+    // Show the loading screen
+function showLoadingScreen() {
+    document.getElementById('loading-screen').style.display = 'flex';
 }
+
+// Hide the loading screen
+function hideLoadingScreen() {
+    document.getElementById('loading-screen').style.display = 'none';
+}
+
+// Simulate data fetching
+function fetchData() {
+    showLoadingScreen(); // Show the loader
+    setTimeout(() => {
+        // Simulate a delay for data fetching
+        hideLoadingScreen(); // Hide the loader after fetching is done
+        alert('Data loaded!'); // Replace this with your actual data display logic
+    }, 3000); // Simulate a 3-second delay
+}
+
+// Call fetchData when a user selects their location
+document.getElementById('SelectLocationBtn').addEventListener('click', fetchData);
+
+}
+
