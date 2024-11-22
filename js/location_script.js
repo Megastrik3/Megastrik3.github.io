@@ -21,7 +21,7 @@ document.getElementById("currentLocationBtn").addEventListener("click", async fu
                     console.log(`Current Location: ${city}`);
                     console.log(latitude, longitude)
                     // Reload associated data if location changed
-                    if (latitude != localStorage.getItem("currentLocation").split(",")[0] || longitude != localStorage.getItem("currentLocation").split(",")[1]) {
+                    if (localStorage.getItem("currentLocation") == null || latitude != localStorage.getItem("currentLocation").split(",")[0] || longitude != localStorage.getItem("currentLocation").split(",")[1]) {
                         localStorage.setItem(
                             "currentLocation",
                             `${latitude},${longitude},${city.replace('"', "").replace('"', "")}`
