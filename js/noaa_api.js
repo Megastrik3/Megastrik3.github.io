@@ -39,6 +39,7 @@ async function getCurrentObservations() {
         const currentObservationsURL = weatherStation + "/observations/latest";
         const currentObservationsResponse = await fetch(currentObservationsURL);
         const currentObservationsData = await currentObservationsResponse.json();
+        checkForErrors(currentObservationsData);
             localStorage.setItem("currentObservations", JSON.stringify(currentObservationsData));
     } catch (error) {
         console.error('Error fetching daily forecast data:', error);
@@ -51,6 +52,7 @@ async function getDailyWeatherForecast() {
         console.log(dailyForecastURL);
         const dailyForecastResponse = await fetch(dailyForecastURL);
         const dailyForecastData = await dailyForecastResponse.json();
+        checkForErrors(dailyForecastData);
         localStorage.setItem("dailyForecast", getCurrentDate(false) + "|" + JSON.stringify(dailyForecastData));
     } catch (error) {
         console.error('Error fetching daily forecast data:', error);
@@ -62,9 +64,16 @@ async function getHourlyForecast() {
         const hourlyForecastURL = gridPoints + "/hourly";
         const hourlyForecastResponse = await fetch(hourlyForecastURL);
         const hourlyForecastData = await hourlyForecastResponse.json();
+        checkForErrors(hourlyForecastData);
         localStorage.setItem("hourlyForecast", getCurrentDate(true) + "|" + JSON.stringify(hourlyForecastData));
     } catch (error) {
         console.error('Error fetching hourly forecast data:', error);
+    }
+}
+
+function checkForErrors(response) {
+    if (JSON.stringify(response).includes("error")) {
+        throw new Error("Error fetching data");
     }
 }
 
