@@ -23,13 +23,8 @@ body {
    padding: 30px;
    border-radius: 15px;
    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.container:hover {
-   transform: translateY(-5px);
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
 
 /* Header Styling */
 .header {
@@ -86,10 +81,20 @@ body {
 }
 
 /* Advice Section */
-.advice p {
-   font-size: 1.4rem;
-   font-style: italic;
-   color: #ff7043; /* Warmer tone for contrast */
+#advice {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background: #ffefd5;
+   border: 1px solid #ffc107;
+   border-radius: 15px;
+   padding: 15px 20px;
+   max-width: 520px;
+   margin: 20px auto;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+   font-size: 1rem;
+   color: #333;
+   text-align: center;
 }
 
 /* Scrollbar Styling */
@@ -107,7 +112,7 @@ body {
 /* Hourly Forecast Section */
 .hourly-forecast {
    display: flex;
-   justify-content: center; /* Centered alignment */
+   justify-content: left; /* Centered alignment */
    overflow-x: auto;
    gap: 30px;
    padding: 20px 0;
@@ -186,9 +191,10 @@ body {
 /* Weekly Weather Section */
 .weekly-weather {
    display: flex;
-   justify-content: center; 
+   justify-content: left; 
    gap: 1.5vw;
    overflow-x: auto;
+   overflow-y: hidden;
    padding: 40px 0;
 }
 
@@ -271,27 +277,44 @@ body {
 /* Lightbox Styling */
 #locationLightbox {
    display: none;
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.5);
-   backdrop-filter: blur(10px);
-   z-index: 999;
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(.3vw);
+} 
 
 .lightbox-content {
    display: flex;
    justify-content: center;
+   width: 60%;
+   height: 60%;
+   border: 1vw;
+   border-radius: 2vw;
+   margin-top: 10vw;
+   margin-left: 20vw;
+}
+
+/* Moon Phase Link */
+.moon-phase-link {
+   display: inline-flex;
+   justify-content: center;
    align-items: center;
-   width: 50%;
-   height: 50%;
-   background: #fff;
-   border-radius: 15px;
-   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-   margin: auto;
-   padding: 20px;
-   z-index: 1000;
-   position: relative;
+   width: 50px;
+   height: 50px;
+   border: 2px solid #ddd;
+   border-radius: 50%;
+   background-color: #f9f9f9;
+   text-decoration: none;
+   font-size: 24px;
+   color: #333;
+   transition: all 0.3s ease-in-out;
+}
+
+.moon-phase-link:hover {
+   background-color: #ffefd5;
+   color: #fff;
+   border-color: #ffefd5;
 }
