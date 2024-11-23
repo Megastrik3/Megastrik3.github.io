@@ -35,6 +35,8 @@ export function checkAge(frequency, localStorageKey) {
                 return true;
             }
     }
+    console.log(`Data is less than one ${frequency} old ${localStorageKey}`);
+    return false;
 }
 
 export function getCurrentDate(getTime) {
