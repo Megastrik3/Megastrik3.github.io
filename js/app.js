@@ -36,6 +36,7 @@ export function checkAge(frequency, localStorageKey) {
                 return true;
             }
     }
+    return false;
 }
 
 export function getCurrentDate(getTime) {
