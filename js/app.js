@@ -20,20 +20,27 @@ export function checkAge(frequency, localStorageKey) {
     if (frequency == "hourly") {
         if ((dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 1 || (dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 0 && dateTime.getMinutes() - parseInt(localStorageTimestamp[4], 10) >= 0) {
             console.log(`Data more than one hour old -- time check ${localStorageKey}`);
-                return true;
-            } else {
-                frequency = "daily";
-            }
+            return true;
+        } else {
+            frequency = "daily";
+        }
+    } else if (frequency == "Onhour") {
+        if ((dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 0) {
+            console.log(`Data more than one hour old -- on the hour check ${localStorageKey}`);
+            return true;
+        } else {
+            frequency = "daily";
+        }
     } else if (frequency == "daily") {
-         if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
-                console.log(`Data more than one day old - date check ${localStorageKey}`);
-                return true;
-            }
+        if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
+            console.log(`Data more than one day old - date check ${localStorageKey}`);
+            return true;
+        }
     } else if (frequency == "monthly") {
-         if (parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
-                console.log(`Data more than one month old - date check ${localStorageKey}`);
-                return true;
-            }
+        if (parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
+            console.log(`Data more than one month old - date check ${localStorageKey}`);
+            return true;
+        }
     }
     console.log(`Data is less than one ${frequency} old ${localStorageKey}`);
     return false;
@@ -50,7 +57,7 @@ export function getCurrentDate(getTime) {
     return currentDate;
 }
 
-export function openLocationFrame(){
+export function openLocationFrame() {
     console.log("Opening location frame");
     const lightBoxContainer = document.getElementById("locationLightbox");
     lightBoxContainer.innerHTML = ''; // Clear existing hourly forecast
