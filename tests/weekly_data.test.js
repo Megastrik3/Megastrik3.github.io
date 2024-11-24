@@ -36,6 +36,7 @@ beforeEach(() => {
 
 describe("setWeeklyData", () => {
   it("should update the DOM with weekly weather data based on currentUnit", () => {
+    document.addEventListener('DOMContentLoaded', async () => {
     setWeeklyData();
 
     const weatherBox = document.createElement.mock.calls[0][0];
@@ -43,9 +44,11 @@ describe("setWeeklyData", () => {
     expect(weatherBox.innerHTML).toContain("70°F");
     expect(weatherBox.innerHTML).toContain("Partly cloudy");
     expect(weatherBox.innerHTML).toContain("icon_monday.png");
+    });
   });
 
   it("should convert temperatures to Celsius when the currentUnit is 'C'", () => {
+    document.addEventListener('DOMContentLoaded', async () => {
 
     Object.defineProperty(global, 'localStorage', {
       value: {
@@ -71,8 +74,10 @@ describe("setWeeklyData", () => {
 
     expect(weatherBox.innerHTML).toContain("13°C");
   });
+  });
 
   it("should apply the correct weather data for each day and night period", () => {
+    document.addEventListener('DOMContentLoaded', async () => {
 
     const forecastData = {
       properties: {
@@ -113,8 +118,10 @@ describe("setWeeklyData", () => {
     expect(nightBox.innerHTML).toContain("Clear");
     expect(nightBox.innerHTML).toContain("55°F");
   });
+  });
 
   it("should not overwrite the existing content if the same data is added multiple times", () => {
+    document.addEventListener('DOMContentLoaded', async () => {
     const forecastData = {
       properties: {
         periods: [
@@ -150,5 +157,6 @@ describe("setWeeklyData", () => {
 
     const updatedHTML = document.getElementById('weekly-weather-days').innerHTML;
     expect(updatedHTML).toBe(initialHTML);
+  });
   });
 });

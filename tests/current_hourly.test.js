@@ -5,9 +5,9 @@ import { moonPhaseStorageChecks } from '../js/moon_phase';
 import { setWeeklyData } from '../js/weekly_data';
 import { openLocationFrame } from '../js/app';
 import { displayWeatherData } from '../js/current_hourly';
-import hourlyForecast from './hourlyForecast.json';
-import currentObservations from './currentObservations.json';
-import dailyForecast from './dailyForecast.json';
+import hourlyForecast from './test_data/hourlyForecast.json';
+import currentObservations from './test_data/currentObservations.json';
+import dailyForecast from './test_data/dailyForecast.json';
 
 /* Copilot Assisted Test Code */
 import fs from 'fs';

@@ -132,6 +132,7 @@ describe("noaa_api.js", () => {
   });
 
   it("should call getCurrentObservations and store data without interacting with localStorage", async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
     const mockCurrentObservationsResponse = {
       temperature: "22°C",
       conditions: "Clear"
@@ -148,5 +149,6 @@ describe("noaa_api.js", () => {
     expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/stations/XYZ123/observations/latest");
 
     expect(localStorage.setItem).not.toHaveBeenCalled();
+  });
   });
 });
