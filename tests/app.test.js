@@ -59,9 +59,8 @@ describe("app.js", () => {
 
   describe("checkAge", () => {
     it("should return false if the data is less than one hour old", () => {
-      const mockCurrentDate = "2024-11-17-15-30";
-      const mockDataDate = "2024-11-17-14-30";
-
+      const date = new Date();
+      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + (parseInt(date.getHours())).toString() + "-" + parseInt(date.getMinutes()).toString();
       Object.defineProperty(global, 'localStorage', {
         value: {
           getItem: jest.fn().mockReturnValue(mockDataDate + "|someData"),
@@ -69,15 +68,18 @@ describe("app.js", () => {
         writable: true,
       });
 
-      jest.spyOn(app, 'getCurrentDate').mockReturnValue(mockCurrentDate);
       const result = checkAge("hourly", "someKey");
-      expect(result).toBe(true);
-      expect(console.log).toHaveBeenCalledWith("Data more than one hour old -- time check someKey");
+      expect(result).toBe(false);
+      expect(console.log).toHaveBeenCalledWith("Data is less than one hour old someKey");
     });
 
     it("should return true if the data is more than one hour old (time check)", () => {
       const date = new Date();
-      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + (parseInt(date.getHours()) - 1).toString() + "-" + parseInt(date.getMinutes()).toString();
+      let i = 0;
+      if (date.getHours() === 0) {
+        i = 24;
+      }
+      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + (parseInt(date.getHours()) - 1 + i).toString() + "-" + parseInt(date.getMinutes()).toString();
       Object.defineProperty(global, 'localStorage', {
         value: {
           getItem: jest.fn().mockReturnValue(mockDataDate + "|someData"),
@@ -93,7 +95,11 @@ describe("app.js", () => {
 
     it("should return true if the data is more than one day old (date check)", () => {
       const date = new Date();
-      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1).toString().padStart(2, '0') + "-" + parseInt(date.getDate() - 1).toString().padStart(2, '0') + "-" + (parseInt(date.getHours()) - 1).toString() + "-" + parseInt(date.getMinutes()).toString();
+      let i = 0;
+      if (date.getDate() === 0) {
+        i = 30;
+      }
+      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1).toString().padStart(2, '0') + "-" + parseInt(date.getDate() - 1 + i).toString().padStart(2, '0') + "-" + (parseInt(date.getHours())).toString() + "-" + parseInt(date.getMinutes()).toString();
 
       Object.defineProperty(global, 'localStorage', {
         value: {
@@ -111,7 +117,11 @@ describe("app.js", () => {
     it("should return true if the data is more than one month old (month check)", () => {
       // Date object is [0,11] for January to December
       const date = new Date();
-      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth()).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + (parseInt(date.getHours()) - 1).toString() + "-" + parseInt(date.getMinutes()).toString();
+      let i = 0;
+      if (date.getMonth() === 0) {
+        i = 11;
+      }
+      const mockDataDate = date.getFullYear() + "-" + parseInt(date.getMonth() + i).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0') + "-" + (parseInt(date.getHours())).toString() + "-" + parseInt(date.getMinutes()).toString();
 
       Object.defineProperty(global, 'localStorage', {
         value: {
