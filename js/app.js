@@ -18,8 +18,8 @@ export function checkAge(frequency, localStorageKey) {
         i = 24;
     }
     if (frequency == "hourly") {
-            if ((dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) < -1 || (dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) < 0 && dateTime.getMinutes() - parseInt(localStorageTimestamp[4], 10) < 0) {
-                console.log(`Data more than one hour old -- time check ${localStorageKey}`);
+        if ((dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 1 || (dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 0 && dateTime.getMinutes() - parseInt(localStorageTimestamp[4], 10) >= 0) {
+            console.log(`Data more than one hour old -- time check ${localStorageKey}`);
                 return true;
             } else {
                 frequency = "daily";
