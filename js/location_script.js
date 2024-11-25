@@ -71,3 +71,11 @@ async function getCityFromCoordinates(latitude, longitude) {
         console.error('Error fetching city:', error);
     }
 }
+
+// Utility function to show the loading screen
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+        loadingScreen.style.display = "flex";
+    }
+}
