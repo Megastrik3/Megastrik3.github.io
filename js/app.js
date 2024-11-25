@@ -18,12 +18,11 @@ export function checkAge(frequency, localStorageKey) {
         i = 24;
     }
     if (frequency == "hourly") {
-            if (parseInt(localStorageTimestamp[3], 10) + 1 < dateTime.getHours() + i || parseInt(localStorageTimestamp[4], 10) >= dateTime.getMinutes() && parseInt(localStorageTimestamp[3], 10) + 1 == dateTime.getHours() + i) {
-                console.log(`Data more than one hour old -- time check ${localStorageKey}`);
+        if ((dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 1 || (dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 0 && dateTime.getMinutes() - parseInt(localStorageTimestamp[4], 10) >= 0) {
+            console.log(`Data more than one hour old -- time check ${localStorageKey}`);
                 return true;
-            } else if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
-                console.log(`Data more than one hour old - date check ${localStorageKey}`);
-                return true;
+            } else {
+                frequency = "daily";
             }
     } else if (frequency == "daily") {
          if (parseInt(localStorageTimestamp[2], 10) != dateTime.getDate() || parseInt(localStorageTimestamp[1], 10) != parseInt(dateTime.getMonth() + 1) || parseInt(localStorageTimestamp[0], 10) != dateTime.getFullYear()) {
@@ -36,6 +35,8 @@ export function checkAge(frequency, localStorageKey) {
                 return true;
             }
     }
+    console.log(`Data is less than one ${frequency} old ${localStorageKey}`);
+    return false;
 }
 
 export function getCurrentDate(getTime) {
