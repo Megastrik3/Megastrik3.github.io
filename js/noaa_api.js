@@ -21,7 +21,7 @@ export async function getWeatherStation(forceRefresh) {
             if (!checkLocalStorage("dailyForecast") || checkAge("daily", "dailyForecast")) {
                 await getDailyWeatherForecast();
             }
-            if (!checkLocalStorage("hourlyForecast") || checkAge("hourly", "hourlyForecast")) {
+            if (!checkLocalStorage("hourlyForecast") || checkAge("Onhour", "hourlyForecast")) {
                 await getHourlyForecast();
             }
         } else if (forceRefresh) {
