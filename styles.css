@@ -50,6 +50,9 @@ button:hover {
     background-color: #2882a6;
 }
 
+#ExitBtn {
+    margin-left: 29vw;
+}
 /* Dropdown Content */
 .dropdown-content {
     display: none;
