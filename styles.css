@@ -14,33 +14,33 @@ body {
 }
 
 .logo {
-    width: 50px;
+    width: 6vw;
     height: auto;
     margin-left: 10px;
 }
 
 .box {
     width: 60vw;
-    padding: 20px;
-    margin: 20px auto;
+    padding: 2vw;
+    margin: 2vw auto;
     background-color: rgba(255, 165, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 1vw;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 2vw;
     font-family: Arial, sans-serif;
     color: #333;
 }
 
 /* Unified Buttons */
 button {
-    font-size: 1.2rem;
+    font-size: 2vw;
     color: #fff;
     background: linear-gradient(135deg, #87ceeb, #00bfff);
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 0.7rem 2rem;
+    padding: 1.2vw 3.5vw;
     cursor: pointer;
     margin: 10px 0;
     transition: background-color 0.3s ease;
@@ -72,15 +72,15 @@ button:hover {
 /* Search Input Field */
 #locationSelect {
     width: 90%;
-    font-size: 1.2rem;
-    height: 2.5rem;
+    font-size: 2vw;
+    height: 2.5vw;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: rgb(255, 255, 255); 
     background-color: rgb(135, 195, 241);
     border: 1px solid rgb(202, 174, 174);
     border-radius: 0.4vw;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 10px 0;
+    margin: 2vw 0;
     padding: 0.5rem;
 }
 
@@ -92,15 +92,15 @@ button:hover {
 /* Saved Locations Dropdown */
 #savedLocationsDropdown {
     width: 90%;
-    font-size: 1.2rem;
-    height: 2.5rem;
+    font-size: 2vw;
+    height: 3.2vw;
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 0.4vw;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 10px 0;
+    margin: 2vw 0;
     padding: 0.5rem;
 }
 #advice {
@@ -109,10 +109,10 @@ button:hover {
     align-items: center;
     background: #ffefd5;
     border: 1px solid #ffc107;
-    border-radius: 15px;
-    padding: 15px 20px;
-    max-width: 520x;
-    margin: 20px auto;
+    border-radius: 2vw;
+    padding: 2vw 2vw;
+    max-width: 40vw;
+    margin: 2vw auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
     color: #333;
@@ -122,13 +122,13 @@ button:hover {
     display: inline-flex; 
     justify-content: center; 
     align-items: center; 
-    width: 50px; 
-    height: 50px;
+    width: 2vw; 
+    height: 2vw;
     border: 2px solid #ddd; 
     border-radius: 50%; 
     background-color: #f9f9f9; 
     text-decoration: none; 
-    font-size: 24px;
+    font-size: 2vw;
     color: #333; 
     transition: all 0.3s ease-in-out; 
  }
