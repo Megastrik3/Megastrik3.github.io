@@ -31,7 +31,7 @@ body {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding-bottom: 20px;
+   padding-bottom: 2vw;
 }
 
 .weather-icon {
@@ -41,7 +41,7 @@ body {
 
 /* Current Weather */
 .current-weather h1 {
-   font-size: 3.5rem;
+   font-size: 3.5vw;
    font-weight: bold;
    color: #444;
 }
@@ -49,7 +49,7 @@ body {
 /* Toggle Button */
 #toggleButton {
    display: inline-block;
-   font-size: 1.4rem;
+   font-size: 1.4vw;
    padding: 0.8rem 2rem;
    font-family: 'Lato', Arial, sans-serif;
    color: #ffffff;
@@ -75,7 +75,7 @@ body {
 
 /* Location Section */
 .location h2 {
-   font-size: 1.8rem;
+   font-size: 2vw;
    font-weight: 600;
    color: #555;
 }
@@ -95,6 +95,7 @@ body {
    font-size: 1rem;
    color: #333;
    text-align: center;
+   width: 25vw;
 }
 
 /* Scrollbar Styling */
@@ -136,17 +137,17 @@ body {
 
 /* Highlights Section */
 .highlights {
-   padding: 25px;
+   padding: 2vw;
    background: #fff8e1;
-   border-radius: 15px;
+   border-radius: 2vw;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
    text-align: left;
 }
 
 .highlights h3 {
-   font-size: 1.6rem;
+   font-size: 1.6vw;
    font-weight: bold;
-   margin-bottom: 15px;
+   margin-bottom: 2vw;
    color: #444;
 }
 
@@ -250,8 +251,8 @@ body {
 /* Select Location Button */
 #SelectLocationBtn {
    display: inline-block;
-   font-size: 1.4rem;
-   padding: 0.8rem 2rem;
+   font-size: 1.2vw;
+   padding: 0.8rem 2vw;
    font-family: 'Lato', Arial, sans-serif;
    color: #ffffff;
    background: linear-gradient(135deg, #42a5f5, #1e88e5);
@@ -261,6 +262,7 @@ body {
    transition: transform 0.3s ease, background 0.3s ease;
    cursor: pointer;
    margin-top: 10px;
+   
 }
 
 #SelectLocationBtn:hover {
@@ -302,13 +304,13 @@ body {
    display: inline-flex;
    justify-content: center;
    align-items: center;
-   width: 50px;
-   height: 50px;
+   width: 4vw;
+   height: 4vw;
    border: 2px solid #ddd;
    border-radius: 50%;
    background-color: #f9f9f9;
    text-decoration: none;
-   font-size: 24px;
+   font-size: 2vw;
    color: #333;
    transition: all 0.3s ease-in-out;
 }
