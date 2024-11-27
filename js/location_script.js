@@ -60,7 +60,7 @@ document.getElementById("currentLocationBtn").addEventListener("click", async fu
 // Handle search for other locations (OpenCage API)
 document.getElementById("searchLocationBtn").addEventListener("click", async function () {
     const searchQuery = document.getElementById("locationSelect").value.trim();
-
+    let [savedLat, savedLon] = [0, 0];
     if (searchQuery) {
         const newLocation = (await getCityFromOpenCage(searchQuery));
         const city = newLocation.split(",")[2] + ", " + newLocation.split(",")[3];
@@ -68,7 +68,9 @@ document.getElementById("searchLocationBtn").addEventListener("click", async fun
             console.log(`Searched Location: ${city}`);
             saveLocation(newLocation);
             alert(`Location "${city}" added to saved locations.`);
-            const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
+            if (localStorage.getItem("currentLocation") !== null) {
+                [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
+            }
             if (newLocation.split(",")[0] !== savedLat || newLocation.split(",")[1] !== savedLon) {
                 localStorage.setItem("currentLocation", newLocation);
                 await getWeatherStation(true);
@@ -81,6 +83,7 @@ document.getElementById("searchLocationBtn").addEventListener("click", async fun
 
             // Close the lightbox after fetching results
             closeLightbox();
+            document.getElementById('loading-screen').style.display = 'none';
             window.parent.location.reload();
         } else {
             alert("Could not fetch location. Please try again.");
@@ -97,7 +100,7 @@ document.getElementById("savedLocationsDropdown").addEventListener("change", asy
 
     if (selectedLocation) {
         console.log(`Using saved location: ${selectedLocation}`);
-        alert(`Using saved location: ${selectedLocation}`);
+        //alert(`Using saved location: ${selectedLocation}`);
         const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
         if (selectedLocation.split(",")[0] !== savedLat || selectedLocation.split(",")[1] !== savedLon) {
             localStorage.setItem("currentLocation", selectedLocation);
