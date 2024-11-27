@@ -83,7 +83,6 @@ document.getElementById("searchLocationBtn").addEventListener("click", async fun
 
             // Close the lightbox after fetching results
             closeLightbox();
-            document.getElementById('loading-screen').style.display = 'none';
             window.parent.location.reload();
         } else {
             alert("Could not fetch location. Please try again.");
