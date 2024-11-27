@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<head>
 <html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkyCast </title>
-
-<link rel="stylesheet" href="styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
-
-
-
 <body>
+    <div class="title-container">
+        <h1>Welcome to Skycast</h1>
+            <img src="SkyCastLogo.png" alt="Logo" class="logo">
+    </div>
 
+    <!-- Lightbox Wrapper -->
+    <div id="dropdownMenu" class="box">
+        <form id="location-form">
+            <h2>Select your Location:</h2>
 
- <div class="title-container">
-   <h1>Welcome to Skycast</h1>
-      <a href="index.html">
-        <img src = "SkyCastLogo.png" alt = "Logo"  class= "logo">
-      </a>
-  </div>
- <div class = "box">
-   <form id="location-form">
-     <h2> Please Select a Location:</h2>
-       <button type = "button" id = "currentLocationBtn">Use My Current Location</button><br>
-       <button type = "button" id = "otherBtn">Other</button>
-   
-      <div id = "locationDD">
-       <input type="text" id="locationSelect" placeholder="Type your location...">
-      </div>
- </form>
-</div>
+            <!-- Use My Current Location Button -->
+            <button type="button" id="currentLocationBtn" class="dropdown-button">Use My Current Location</button>
 
-  <script type="module" src="js/location_script.js"></script>
+            <!-- Saved Locations and Search -->
+            <div class="search-container">
+                <label for="savedLocationsDropdown">Saved or Searched Locations:</label>
+                <select id="savedLocationsDropdown">
+                    <option value="" disabled selected>Select a saved location</option>
+                </select>
+                <label for="locationSelect">Search by City or ZIP Code:</label>
+                <input type="text" id="locationSelect" placeholder="Type your location or ZIP code...">
+                <button type="button" id="searchLocationBtn">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="js/location_script.js"></script>
 </body>
 </html>

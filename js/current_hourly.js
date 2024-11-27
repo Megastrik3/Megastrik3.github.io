@@ -28,6 +28,7 @@ export async function displayWeatherData() {
     if (localStorage.getItem("currentUnit") != null) {
         currentUnit = localStorage.getItem("currentUnit");
     }
+
     // Mock data (replace with API fetch in production)
     const currentWeather = {
         temperature: (JSON.parse(localStorage.getItem("currentObservations")).properties.temperature.value * 9 / 5 + 32).toFixed(0),
@@ -37,6 +38,9 @@ export async function displayWeatherData() {
         date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
         detailedForecast: JSON.parse(localStorage.getItem("dailyForecast").split("|")[1]).properties.periods[0].detailedForecast,
     };
+    if (currentWeather.icon === null){
+        currentWeather.icon = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]).properties.periods[0].icon;
+    }
     const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]);
     const hourlyWeather = [];
     for (let i = 0; i < 24; i++) {
