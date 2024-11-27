@@ -234,5 +234,12 @@ function closeLightbox() {
     console.log("Lightbox closed successfully.");
 }
 
+// Utility function to show the loading screen
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+        loadingScreen.style.display = "flex";
+    }
+}
 // Initialize saved locations on page load
 loadSavedLocations();
