@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="CurrentAndHourly.css">
 </head>
 <body>
+
+    <div id="loading-screen">
+        <img src="loading.gif" alt="Loading..." />
+    </div>
+    
     <div class="container">
         <div class="header">
             <div class="weather-icon">
@@ -28,8 +34,19 @@
             <div class="location">
                 <h2 id="location">Location: --</h2>
                 <p id="date">Date</p>
-                <button id="SelectLocationBtn">Select Location</button>
-                <div id="locationLightbox" class="lightbox"></div>
+                  <button id="SelectLocationBtn">Select Location</button>
+                  <div id="locationLightbox" class="lightbox" style="display: none;">
+                    <div class="lightbox-content">
+                        <h2>Select your location</h2>
+                        <button id="currentLocationBtn">Use My Current Location</button>
+                        <button id="otherBtn">Other</button>
+                        <div id="locationDD" style="display: none;">
+                            <input type="text" id="locationSelect" placeholder="Type your location...">
+                        </div>
+                        <button id="doneBtn">Done</button>
+                    </div>
+                </div>
+
                 <div class="header">
                     <a href="moon-phase.html" class="moon-phase-link">&#127769;</a>
                 </div>
