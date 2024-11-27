@@ -25,10 +25,11 @@ export function checkAge(frequency, localStorageKey) {
             frequency = "daily";
         }
     } else if (frequency == "Onhour") {
-        if ((dateTime.getHours() + i) - parseInt(localStorageTimestamp[3], 10) > 0) {
+        if ((dateTime.getHours()) != parseInt(localStorageTimestamp[3], 10)) {
             console.log(`Data more than one hour old -- on the hour check ${localStorageKey}`);
             return true;
         } else {
+            console.log("Hourly data checking daily");
             frequency = "daily";
         }
     } else if (frequency == "daily") {
