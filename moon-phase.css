@@ -95,8 +95,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
  }
  
- .spotlight {
- }
  
  .spotlight {
     display: flex;
@@ -105,9 +103,6 @@ body {
     align-items: center;
     justify-content: center;
     margin: 10px 0;
- }
- 
- .spotlight-image {
  }
  
  .spotlight-image {
@@ -131,9 +126,6 @@ body {
     font-weight: 600;
  }
  
- /* Moon Phases List */
- .moon-phases h2 {
- }
  
  /* Moon Phases List */
  .moon-phases h2 {
@@ -146,17 +138,12 @@ body {
     text-align: center;
  }
  
- .moon-phases ul {
- }
  
  .moon-phases ul {
     list-style: none;
     font-family: Arial, sans-serif;
     font-family: Arial, sans-serif;
     padding: 0;
- }
- 
- .moon-phases li {
  }
  
  .moon-phases li {
@@ -173,8 +160,6 @@ body {
     color: #555;
  }
  
- .moon-image {
- }
  
  .moon-image {
     width: 5vw;
