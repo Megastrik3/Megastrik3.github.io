@@ -95,8 +95,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
  }
  
- .spotlight {
- }
  
  .spotlight {
     display: flex;
@@ -107,8 +105,6 @@ body {
     margin: 10px 0;
  }
  
- .spotlight-image {
- }
  
  .spotlight-image {
     width: 250px;

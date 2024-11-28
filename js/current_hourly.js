@@ -45,6 +45,16 @@ export async function displayWeatherData() {
     }
     const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]);
     const hourlyWeather = [];
+    if (new Date(noaaHourlyWeather.properties.periods[0].startTime).toLocaleTimeString('en-us', { hour: '2-digit'}) !== new Date().toLocaleTimeString('en-us', { hour: '2-digit'})) {
+        for (let i = 1; i < 25; i++) {
+            hourlyWeather.push({
+                time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }),
+                temperature: noaaHourlyWeather.properties.periods[i].temperature,
+                icon: noaaHourlyWeather.properties.periods[i].icon,
+                shortForecast: noaaHourlyWeather.properties.periods[i].shortForecast
+            });
+        }
+    } else {
     for (let i = 0; i < 24; i++) {
         hourlyWeather.push({
             time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }),
@@ -53,7 +63,7 @@ export async function displayWeatherData() {
             shortForecast: noaaHourlyWeather.properties.periods[i].shortForecast
         });
     }
-
+    }
     // Function to update the display
     function updateTemperatureDisplay() {
         const tempDisplay = document.getElementById("current-temperature");
