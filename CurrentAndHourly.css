@@ -42,8 +42,8 @@
  
  #toggleButton {
     display: inline-block;
-    font-size: 1.2rem;
-    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
     font-family: Arial, sans-serif;
     color: #fff;
     background: linear-gradient(135deg, #87ceeb, #00bfff);
@@ -213,7 +213,7 @@
  }
 
 #SelectLocationBtn{
-    height: 1.2vw;
+    height: 1vw;
     width: 7vw;
     border: none;
     border-radius: 2vw;
