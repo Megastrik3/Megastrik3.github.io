@@ -26,6 +26,7 @@ document.getElementById("currentLocationBtn").addEventListener("click", async fu
                             "currentLocation",
                             `${latitude},${longitude},${city.replace('"', "").replace('"', "")}`
                         );
+                        showLoadingScreen();
                         await getWeatherStation(true);
                         await sunRiseSunSetStorageChecks(true);
                         await vertexAIStorageChecks(true);
@@ -67,12 +68,13 @@ document.getElementById("searchLocationBtn").addEventListener("click", async fun
         if (city && city !== "Unknown Location") {
             console.log(`Searched Location: ${city}`);
             saveLocation(newLocation);
-            alert(`Location "${city}" added to saved locations.`);
+            //alert(`Location "${city}" added to saved locations.`);
             if (localStorage.getItem("currentLocation") !== null) {
                 [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
             }
             if (newLocation.split(",")[0] !== savedLat || newLocation.split(",")[1] !== savedLon) {
                 localStorage.setItem("currentLocation", newLocation);
+                showLoadingScreen();
                 await getWeatherStation(true);
                 await sunRiseSunSetStorageChecks(true);
                 await vertexAIStorageChecks(true);
@@ -103,6 +105,7 @@ document.getElementById("savedLocationsDropdown").addEventListener("change", asy
         const [savedLat, savedLon] = localStorage.getItem("currentLocation").split(",");
         if (selectedLocation.split(",")[0] !== savedLat || selectedLocation.split(",")[1] !== savedLon) {
             localStorage.setItem("currentLocation", selectedLocation);
+            showLoadingScreen();
             await getWeatherStation(true);
             await sunRiseSunSetStorageChecks(true);
             await vertexAIStorageChecks(true);
