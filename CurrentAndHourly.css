@@ -1,39 +1,34 @@
 body {
-   font-family: 'Lato', Arial, sans-serif; /* Updated to modern font */
-   background: linear-gradient(to bottom, #e3f2fd, #bbdefb); /* Softer gradient */
+   font-family: 'Lato', Arial, sans-serif;
+   background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
    color: #333;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center; /* Align content to the top for natural scrolling */
-   min-height: 100vh; /* Allows content to grow dynamically */
-   margin: 0; /* Resets any extra margin */
-   padding: 0; /* Ensures no extra padding */
-   height: 100%;
-   overflow: auto;
+   margin: 0;
+   padding: 0;
+   min-height: 100vh; /* Ensures body can grow with content */
+   overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
 /* Container Styling */
 .container {
-   margin-top: 120px;
+   margin: 20px auto; /* Add space between the title and container */
    width: 90%;
    max-width: 1200px;
    background-color: #fff;
    padding: 30px;
    border-radius: 15px;
    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-   margin: 0 auto;
-   overflow-y: auto; /* Enables scrolling inside the container */
-   max-height: 100vh; /* Prevents it from exceeding screen height */
+   overflow: visible;
 }
 
 
 /* Header Styling */
 .header {
    display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding-bottom: 2vw;
+   flex-wrap: wrap; /* Allows elements to wrap to the next line if necessary */
+   justify-content: center; /* Centers all items horizontally */
+   align-items: center; /* Centers items vertically */
+   text-align: center; /* Centers text for wrapped elements */
+   gap: 20px 60px; /* Adds spacing between items */
 }
 
 .weather-icon {
@@ -86,6 +81,9 @@ body {
    transition: transform 0.3s ease, background 0.3s ease;
    cursor: pointer;
    margin-top: 10px;
+   position: absolute; /* Place it relative to the title section */
+   top: 20px; /* Adjust this to align vertically */
+   right: 20px; /* Adjust this to align horizontally */
 }
 
 #toggleButton:hover {
@@ -104,6 +102,22 @@ body {
    font-size: 2vw;
    font-weight: 600;
    color: #555;
+   display: flex; /* Use flexbox for layout */
+   flex-wrap: wrap; /* Allow content to wrap */
+   justify-content: center; /* Center content horizontally */
+   align-items: center; /* Align items vertically */
+   text-align: center; /* Center text inside each item */
+   gap: 10px; /* Add spacing between items */
+   max-width: 100%; /* Ensure the container doesn't exceed the page width */
+   margin-bottom: 30px; /* Add space below the location section */
+}
+
+#location {
+   font-size: 1.2rem; /* Adjust font size */
+   font-weight: 600;
+   color: #555;
+   word-wrap: break-word; /* Ensure long words break into the next line */
+   max-width: 100%; /* Prevent text from overflowing */
 }
 
 /* Advice Section */
@@ -177,6 +191,7 @@ body {
    color: #444;
 }
 
+
 .highlights ul {
    list-style: none;
    padding-left: 20px;
@@ -233,7 +248,7 @@ body {
    border-radius: 15px;
    background: linear-gradient(to bottom, #f9f9f9, #e3f2fd);
    margin-top: 2vw;
-   font-size: 1.4vw;
+   font-size: 1vw;
    font-weight: bold;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
    transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -277,18 +292,18 @@ body {
 /* Select Location Button */
 #SelectLocationBtn {
    display: inline-block;
-   font-size: 1vw;
-   padding: 0.5rem 1vw;
+   font-size: 1rem;
+   padding: 10px 20px;
    font-family: 'Lato', Arial, sans-serif;
    color: #ffffff;
    background: linear-gradient(135deg, #42a5f5, #1e88e5);
    border: none;
-   border-radius: 12px;
+   border-radius: 8px;
    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
    transition: transform 0.3s ease, background 0.3s ease;
    cursor: pointer;
    margin-top: 10px;
-   
+   white-space: nowrap; 
 }
 
 #SelectLocationBtn:hover {
@@ -305,18 +320,18 @@ body {
 /* Lightbox Styling */
 #locationLightbox {
    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    z-index: 1000; /* Ensures lightbox is on top of all other elements */
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   backdrop-filter: blur(5px);
+   z-index: 1000; /* Ensures lightbox is on top of all other elements */
 }
 
 .lightbox-content {
-   display: relative;
+   display: flex;
    justify-content: center;
    width: 60%;
    height: 60%;
@@ -324,6 +339,7 @@ body {
    border-radius: 2vw;
    margin-top: 10vw;
    margin-left: 20vw;
+   text-align: center;
 }
 
 /* Moon Phase Link */
@@ -370,22 +386,33 @@ body {
 }
 
 .current-weather-image {
+   display: flex;
    border-radius: 50%; /* Makes the image circular */
    width: 100%; /* Fills the parent container */
    height: 100%; /* Fills the parent container */
    object-fit: cover; /* Ensures the image scales proportionally */
    border: 2px solid #ddd; /* Optional border for styling */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   flex: 0 0 auto; /* Prevent these from stretching or shrinking */
+   text-align: center; /* Ensure internal text is centered */
 }
 
 .title-section {
    display: flex; /* Align logo and text horizontally */
    flex-direction: column; /* Stack logo above the text */
-   align-items: center; /* Center everything horizontally */
-   justify-content: center; /* Center everything vertically */
-   padding: 20px; /* Add space around the title */
+   align-items: center; /* Center horizontally */
+   justify-content: center; /* Center vertically */
+   padding: 20px; /* Add padding around the title */
    text-align: center; /* Center the text */
    background-color: #e3f2fd; /* Optional background to match the theme */
    border-bottom: 2px solid #bbdefb; /* Optional subtle border for separation */
+   position: relative; /* Ensures it doesn’t scroll with the page */
+   width: 100%; /* Full width to span the page */
+   box-sizing: border-box; /* Ensure padding is included in width */
+   z-index: 1; /* Ensure it's below the content for simplicity */
 }
 
 .title-logo {
@@ -401,3 +428,10 @@ body {
    margin: 0; /* Remove extra margins */
 }
 
+.advice-title {
+   font-size: 1.5rem; /* Adjust size as needed */
+   font-weight: bold;
+   color: #444; /* Matches your text color scheme */
+   margin-bottom: 10px; /* Adds space between the title and the content */
+   text-align: center; /* Centers the title */
+}

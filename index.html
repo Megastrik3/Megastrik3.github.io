@@ -17,6 +17,7 @@
     <div class="title-section">
         <img src="SkyCastLogo.png" alt="SkyCast Logo" class="title-logo">
         <h1 class="title-text">Welcome to SkyCast</h1>
+        <button id="toggleButton">Switch to Celsius</button>
     </div>
     
     <div class="container">
@@ -37,23 +38,24 @@
                         <button id="doneBtn">Done</button>
                     </div>
                 </div>
-
-                
-
             </div>
 
-            <div class="weather-icon">
-                <img class="current-weather-image" id="current-weather-icon" src="">
-                <p id="current-description"></p>            
+            <div class="weather-info">
+                <div class="weather-icon">
+                    <img class="current-weather-image" id="current-weather-icon" src="">
+                    <p id="current-description"></p>            
+                </div>
+            
+                <div class="current-weather">
+                    <h1 id="current-temperature">--°F</h1>
+                    <p id="current-description"></p>
+                </div>
             </div>
 
-            <div class="current-weather">
-                <h1 id="current-temperature">--°F</h1>
-                <button id="toggleButton">Switch to Celsius</button>
-                <p id="current-description"></p>
-            </div>
-
-            <div class="advice" id="advice">
+            <div class="advice-section">
+                <h3 class="advice-title">AI Suggested Advice</h3>
+                <div class="advice" id="advice">
+                </div>
             </div>
         </div>
 
