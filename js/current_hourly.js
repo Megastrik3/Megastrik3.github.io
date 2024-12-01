@@ -11,11 +11,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.log("Please select a location to view the weekly forecast.");
     } else {
         try {
+            showLoadingScreen();
             await getWeatherStation(false);
             await sunRiseSunSetStorageChecks(false);
             await vertexAIStorageChecks(false);
             setWeeklyData();
             displayWeatherData();
+            hideLoadingScreen();
             moonPhaseStorageChecks(false, () => console.log("Moon phase data loaded"));
             console.log("All data loaded");
         } catch (error) {
@@ -28,6 +30,7 @@ export async function displayWeatherData() {
     if (localStorage.getItem("currentUnit") != null) {
         currentUnit = localStorage.getItem("currentUnit");
     }
+
     // Mock data (replace with API fetch in production)
     const currentWeather = {
         temperature: (JSON.parse(localStorage.getItem("currentObservations")).properties.temperature.value * 9 / 5 + 32).toFixed(0),
@@ -37,8 +40,21 @@ export async function displayWeatherData() {
         date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
         detailedForecast: JSON.parse(localStorage.getItem("dailyForecast").split("|")[1]).properties.periods[0].detailedForecast,
     };
+    if (currentWeather.icon === null){
+        currentWeather.icon = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]).properties.periods[0].icon;
+    }
     const noaaHourlyWeather = JSON.parse(localStorage.getItem("hourlyForecast").split("|")[1]);
     const hourlyWeather = [];
+    if (new Date(noaaHourlyWeather.properties.periods[0].startTime).toLocaleTimeString('en-us', { hour: '2-digit'}) !== new Date().toLocaleTimeString('en-us', { hour: '2-digit'})) {
+        for (let i = 1; i < 25; i++) {
+            hourlyWeather.push({
+                time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }),
+                temperature: noaaHourlyWeather.properties.periods[i].temperature,
+                icon: noaaHourlyWeather.properties.periods[i].icon,
+                shortForecast: noaaHourlyWeather.properties.periods[i].shortForecast
+            });
+        }
+    } else {
     for (let i = 0; i < 24; i++) {
         hourlyWeather.push({
             time: new Date(noaaHourlyWeather.properties.periods[i].startTime).toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit' }),
@@ -47,7 +63,7 @@ export async function displayWeatherData() {
             shortForecast: noaaHourlyWeather.properties.periods[i].shortForecast
         });
     }
-
+    }
     // Function to update the display
     function updateTemperatureDisplay() {
         const tempDisplay = document.getElementById("current-temperature");
@@ -109,4 +125,29 @@ export async function displayWeatherData() {
     document.getElementById("SelectLocationBtn").addEventListener("click", function (){
         openLocationFrame();
     });
-}
+
+
+    }
+    // Show the loading screen
+    function showLoadingScreen() {
+        document.getElementById('loading-screen').style.display = 'flex';
+    }
+
+    // Hide the loading screen
+    function hideLoadingScreen() {
+        document.getElementById('loading-screen').style.display = 'none';
+    }
+
+    // Simulate data fetching
+    // function fetchData() {
+    //     showLoadingScreen(); // Show the loader
+    //     setTimeout(() => {
+    //         // Simulate a delay for data fetching
+    //         hideLoadingScreen(); // Hide the loader after fetching is done
+    //         alert('Data loaded!'); // Replace this with your actual data display logic
+    //     }, 3000); // Simulate a 3-second delay
+    // }
+
+    // Call fetchData when a user selects their location
+   // document.getElementById('SelectLocationBtn').addEventListener('click', fetchData);
+

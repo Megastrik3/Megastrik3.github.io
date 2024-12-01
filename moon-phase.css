@@ -13,7 +13,10 @@ body {
     width: 80%;
     max-width: 1200px;
     background-color: #d9d9da;
-body {
+    border-radius: 15px;
+ }
+
+    body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #484f50, #141515);
     color: #333;
@@ -93,8 +96,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
  }
  
- .spotlight {
- }
  
  .spotlight {
     display: flex;
@@ -105,8 +106,6 @@ body {
     margin: 10px 0;
  }
  
- .spotlight-image {
- }
  
  .spotlight-image {
     width: 250px;
@@ -175,12 +174,12 @@ body {
  }
  
  .moon-image {
-    width: 50px;
-    height: 50px;
+    width: 5vw;
+    height: 5vw;
     margin-right: 15px;
     border-radius: 50%;
     border: 1px solid #ddd;
  }
  
- }
+ 
  

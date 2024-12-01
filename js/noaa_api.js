@@ -21,7 +21,7 @@ export async function getWeatherStation(forceRefresh) {
             if (!checkLocalStorage("dailyForecast") || checkAge("daily", "dailyForecast")) {
                 await getDailyWeatherForecast();
             }
-            if (!checkLocalStorage("hourlyForecast") || checkAge("hourly", "hourlyForecast")) {
+            if (!checkLocalStorage("hourlyForecast") || checkAge("Onhour", "hourlyForecast")) {
                 await getHourlyForecast();
             }
         } else if (forceRefresh) {
@@ -35,36 +35,66 @@ export async function getWeatherStation(forceRefresh) {
 }
 
 async function getCurrentObservations() {
+    for (let i = 0; i < 5; i++) {
     try {
         const currentObservationsURL = weatherStation + "/observations/latest";
         const currentObservationsResponse = await fetch(currentObservationsURL);
         const currentObservationsData = await currentObservationsResponse.json();
+        checkForErrors(currentObservationsData);
             localStorage.setItem("currentObservations", JSON.stringify(currentObservationsData));
+            break;
     } catch (error) {
-        console.error('Error fetching daily forecast data:', error);
+        console.error('Error fetching current conditions data:', error);
+        if (i === 4) {
+            alert("Error fetching current conditions data from NOAA.gov. Please try again later. If the issue persists, please contact the developer.");
+        }
+        continue;
+    }
     }
 }
 
 async function getDailyWeatherForecast() {
+    for (let i = 0; i < 5; i++) {
     try {
         const dailyForecastURL = gridPoints;
         console.log(dailyForecastURL);
         const dailyForecastResponse = await fetch(dailyForecastURL);
         const dailyForecastData = await dailyForecastResponse.json();
+        checkForErrors(dailyForecastData);
         localStorage.setItem("dailyForecast", getCurrentDate(false) + "|" + JSON.stringify(dailyForecastData));
+        break;
     } catch (error) {
         console.error('Error fetching daily forecast data:', error);
+        if (i === 4) {
+            alert("Error fetching daily forecast data from NOAA.gov. Please try again later. If the issue persists, please contact the developer.");
+        }
+        continue;
     }
+}
 }
 
 async function getHourlyForecast() {
+    for (let i = 0; i < 5; i++) {
     try {
         const hourlyForecastURL = gridPoints + "/hourly";
         const hourlyForecastResponse = await fetch(hourlyForecastURL);
         const hourlyForecastData = await hourlyForecastResponse.json();
+        checkForErrors(hourlyForecastData);
         localStorage.setItem("hourlyForecast", getCurrentDate(true) + "|" + JSON.stringify(hourlyForecastData));
+        break;
     } catch (error) {
         console.error('Error fetching hourly forecast data:', error);
+        if (i === 4) {
+            alert("Error fetching hourly forecast data from NOAA.gov. Please try again later. If the issue persists, please contact the developer.");
+        }
+        continue;
+    }
+}
+}
+
+function checkForErrors(response) {
+    if (JSON.stringify(response).includes("Unexpected Problem")) {
+        throw new Error("Error fetching data");
     }
 }
 
