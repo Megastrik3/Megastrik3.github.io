@@ -186,25 +186,18 @@ body {
 
 /* Highlights Section */
 .highlights {
-   padding: 2vw;
+   padding: 2vh 2vw;
    background: #fff8e1;
    border-radius: 2vw;
    box-shadow: 0 0.3vw 0.75vw rgba(0, 0, 0, 0.1);
-   text-align: center;
-   font-size: 5vw;
+   text-align: left;
+   font-size: 1.1vw;
 }
 
 .highlights h3 {
-   font-size: 7vw;
+   font-size: 1.6vw;
    font-weight: bold;
-   margin-bottom: 2vw;
-   color: #444;
-}
-
-#highlights-title {
-   font-size: 6vw;
-   font-weight: bold;
-   margin-bottom: 2vw;
+   margin-bottom: 2vh;
    color: #444;
 }
 
@@ -656,31 +649,39 @@ body {
       box-shadow: 0 0.6vw 1.5vw rgba(0, 0, 0, 0.15);
    }
    
-   /* Highlights Section */
-   .highlights {
-      padding: 2vw;
-      background: #fff8e1;
-      border-radius: 2vw;
-      box-shadow: 0 0.3vw 0.75vw rgba(0, 0, 0, 0.1);
-      text-align: left;
-   }
-   
-   .highlights h3 {
-      font-size: 1.6vw;
-      font-weight: bold;
-      margin-bottom: 2vw;
-      color: #444;
-   }
-   
-   .highlights ul {
-      list-style: none;
-      padding-left: 2vw;
-   }
-   
-   .highlights li {
-      padding: 0.8vh 0;
-      font-size: 1.2rem;
-   }
+/* Highlights Section */
+.highlights {
+   padding: 2vw;
+   background: #fff8e1;
+   border-radius: 2vw;
+   box-shadow: 0 0.3vw 0.75vw rgba(0, 0, 0, 0.1);
+   text-align: center;
+   font-size: 5vw;
+}
+
+.highlights h3 {
+   font-size: 7vw;
+   font-weight: bold;
+   margin-bottom: 2vw;
+   color: #444;
+}
+
+#highlights-title {
+   font-size: 6vw;
+   font-weight: bold;
+   margin-bottom: 2vw;
+   color: #444;
+}
+
+.highlights ul {
+   list-style: none;
+   padding-left: 2vw;
+}
+
+.highlights li {
+   padding: 0.8vh 0;
+   font-size: 1.2rem;
+}
    
    /* Sun Times Section */
    .sun-times {
