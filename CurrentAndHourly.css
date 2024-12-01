@@ -102,22 +102,31 @@ body {
    font-size: 2vw;
    font-weight: 600;
    color: #555;
-   display: flex; /* Use flexbox for layout */
-   flex-wrap: wrap; /* Allow content to wrap */
-   justify-content: center; /* Center content horizontally */
-   align-items: center; /* Align items vertically */
-   text-align: center; /* Center text inside each item */
-   gap: 10px; /* Add spacing between items */
-   max-width: 100%; /* Ensure the container doesn't exceed the page width */
-   margin-bottom: 30px; /* Add space below the location section */
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   gap: 10px;
+   max-width: 100%;
+   margin-bottom: 30px;
+   overflow-wrap: break-word;
+   word-break: break-all;
+   hyphens: auto;
+   padding: 0 10px;
 }
 
 #location {
-   font-size: 1.2rem; /* Adjust font size */
+   font-size: 1.2rem;
    font-weight: 600;
    color: #555;
-   word-wrap: break-word; /* Ensure long words break into the next line */
-   max-width: 100%; /* Prevent text from overflowing */
+   word-wrap: break-word;
+   overflow-wrap: break-word;
+   word-break: break-word;
+   hyphens: auto;
+   max-width: 400px;
+   padding: 0 10px;
+   box-sizing: border-box;
 }
 
 /* Advice Section */
@@ -129,13 +138,16 @@ body {
    border: 1px solid #ffc107;
    border-radius: 15px;
    padding: 15px 20px;
-   max-width: 520px;
+   max-width: 400px;
    margin: 20px auto;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
    font-size: 1rem;
    color: #333;
    text-align: center;
    width: 25vw;
+   word-wrap: break-word;
+   overflow-wrap: break-word;
+   word-break: break-word;
 }
 
 /* Scrollbar Styling */
