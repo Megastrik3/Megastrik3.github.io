@@ -342,11 +342,12 @@ body {
    display: flex;
    justify-content: center;
    width: 60%;
-   height: 60%;
+   height: 80%;
    border: 1vw;
    border-radius: 2vw;
-   margin-top: 10vw;
-   margin-left: 20vw;
+   margin: auto;
+   margin-top: 4vh;
+   margin-bottom: 4vh;
    text-align: center;
 }
 
