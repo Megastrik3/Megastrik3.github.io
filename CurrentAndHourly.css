@@ -1,28 +1,30 @@
-/* Global Styling */
-* {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-}
-
 body {
    font-family: 'Lato', Arial, sans-serif; /* Updated to modern font */
    background: linear-gradient(to bottom, #e3f2fd, #bbdefb); /* Softer gradient */
    color: #333;
    display: flex;
+   flex-direction: column;
    justify-content: center;
-   align-items: center;
-   height: 160vh;
+   align-items: center; /* Align content to the top for natural scrolling */
+   min-height: 100vh; /* Allows content to grow dynamically */
+   margin: 0; /* Resets any extra margin */
+   padding: 0; /* Ensures no extra padding */
+   height: 100%;
+   overflow: auto;
 }
 
 /* Container Styling */
 .container {
-   width: 80%;
+   margin-top: 120px;
+   width: 90%;
    max-width: 1200px;
    background-color: #fff;
    padding: 30px;
    border-radius: 15px;
    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+   margin: 0 auto;
+   overflow-y: auto; /* Enables scrolling inside the container */
+   max-height: 100vh; /* Prevents it from exceeding screen height */
 }
 
 
@@ -35,8 +37,32 @@ body {
 }
 
 .weather-icon {
-   font-size: 60px; /* Slightly larger for emphasis */
-   color: #42a5f5;
+   position: relative; /* Enables positioning of text inside the image */
+   width: 140px; /* Adjust size as needed */
+   height: 140px; /* Ensure it's a square for the circular shape */
+   display: flex; /* Enables flexbox for centering */
+   flex-direction: column; /* Stacks elements vertically */
+   align-items: center; /* Centers horizontally */
+   justify-content: center; /* Centers vertically */
+   text-align: center; /* Ensures text is centered below the image */
+   position: relative; /* Allows absolute positioning for text within the image */
+   margin: auto; /* Centers the entire container within the parent */
+}
+
+#current-description {
+   position: absolute; /* Position text over the image */
+   top: 50%; /* Vertically center the text */
+   left: 50%; /* Horizontally center the text */
+   transform: translate(-50%, -50%); /* Ensures perfect centering */
+   color: white; /* White text for contrast */
+   font-size: 2rem; /* Adjust text size as needed */
+   font-weight: bold; /* Makes text stand out */
+   text-align: center;
+   text-align: center;
+   pointer-events: none; /* Ensures text does not block interaction */
+   line-height: 1; /* Prevents extra spacing between lines */
+   margin: 0; /* Removes any default margins */
+   padding: 0;
 }
 
 /* Current Weather */
@@ -49,8 +75,8 @@ body {
 /* Toggle Button */
 #toggleButton {
    display: inline-block;
-   font-size: 1.4vw;
-   padding: 0.8rem 2rem;
+   font-size: 1vw;
+   padding: 0.5rem 1rem;
    font-family: 'Lato', Arial, sans-serif;
    color: #ffffff;
    background: linear-gradient(135deg, #42a5f5, #1e88e5);
@@ -251,8 +277,8 @@ body {
 /* Select Location Button */
 #SelectLocationBtn {
    display: inline-block;
-   font-size: 1.2vw;
-   padding: 0.8rem 2vw;
+   font-size: 1vw;
+   padding: 0.5rem 1vw;
    font-family: 'Lato', Arial, sans-serif;
    color: #ffffff;
    background: linear-gradient(135deg, #42a5f5, #1e88e5);
@@ -285,11 +311,12 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(.3vw);
-} 
+    backdrop-filter: blur(5px);
+    z-index: 1000; /* Ensures lightbox is on top of all other elements */
+}
 
 .lightbox-content {
-   display: flex;
+   display: relative;
    justify-content: center;
    width: 60%;
    height: 60%;
@@ -341,3 +368,36 @@ body {
 #loading-screen {
    display: none; 
 }
+
+.current-weather-image {
+   border-radius: 50%; /* Makes the image circular */
+   width: 100%; /* Fills the parent container */
+   height: 100%; /* Fills the parent container */
+   object-fit: cover; /* Ensures the image scales proportionally */
+   border: 2px solid #ddd; /* Optional border for styling */
+}
+
+.title-section {
+   display: flex; /* Align logo and text horizontally */
+   flex-direction: column; /* Stack logo above the text */
+   align-items: center; /* Center everything horizontally */
+   justify-content: center; /* Center everything vertically */
+   padding: 20px; /* Add space around the title */
+   text-align: center; /* Center the text */
+   background-color: #e3f2fd; /* Optional background to match the theme */
+   border-bottom: 2px solid #bbdefb; /* Optional subtle border for separation */
+}
+
+.title-logo {
+   height: 60px; /* Adjust logo size */
+   width: auto; /* Maintain aspect ratio */
+   margin-bottom: 10px; /* Space between logo and text */
+}
+
+.title-text {
+   font-size: 2rem; /* Adjust title size */
+   color: #333; /* Neutral text color */
+   font-family: 'Lato', Arial, sans-serif; /* Match the font of the site */
+   margin: 0; /* Remove extra margins */
+}
+
