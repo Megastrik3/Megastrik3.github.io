@@ -25,37 +25,39 @@ describe("noaa_api.js", () => {
   });
 
   it("should fetch weather grid points and weather station information", async () => {
-    const mockGridPointsResponse = {
-      properties: {
-        forecast: "https://api.weather.gov/gridpoints/XYZ/1,1/forecast",
-        forecastZone: "zone-xyz",
-        cwa: "XYZ",
-        gridX: 1,
-        gridY: 1
-      }
-    };
-    const mockStationsResponse = {
-      observationStations: [
-        "https://api.weather.gov/stations/XYZ123"
-      ]
-    };
-
-    fetch.mockResolvedValueOnce({
-      json: () => Promise.resolve(mockGridPointsResponse),
-    }).mockResolvedValueOnce({
-      json: () => Promise.resolve(mockStationsResponse),
-    }).mockResolvedValueOnce({
-      json: () => Promise.resolve({}),
-    }).mockResolvedValueOnce({
-      json: () => Promise.resolve({}),
+    document.addEventListener('DOMContentLoaded', async () => {
+      const mockGridPointsResponse = {
+        properties: {
+          forecast: "https://api.weather.gov/gridpoints/XYZ/1,1/forecast",
+          forecastZone: "zone-xyz",
+          cwa: "XYZ",
+          gridX: 1,
+          gridY: 1
+        }
+      };
+      const mockStationsResponse = {
+        observationStations: [
+          "https://api.weather.gov/stations/XYZ123"
+        ]
+      };
+  
+      fetch.mockResolvedValueOnce({
+        json: () => Promise.resolve(mockGridPointsResponse),
+      }).mockResolvedValueOnce({
+        json: () => Promise.resolve(mockStationsResponse),
+      }).mockResolvedValueOnce({
+        json: () => Promise.resolve({}),
+      }).mockResolvedValueOnce({
+        json: () => Promise.resolve({}),
+      });
+  
+      await getWeatherStation(false);
+  
+      expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/points/40.7128,-74.0060");
+      expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/gridpoints/XYZ/1,1/stations");
+  
+      expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/stations/XYZ123/observations/latest");
     });
-
-    await getWeatherStation(false);
-
-    expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/points/40.7128,-74.0060");
-    expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/gridpoints/XYZ/1,1/stations");
-
-    expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/stations/XYZ123/observations/latest");
   });
 
   it("should call getDailyWeatherForecast and getHourlyForecast if forceRefresh is true", async () => {
@@ -130,6 +132,7 @@ describe("noaa_api.js", () => {
   });
 
   it("should call getCurrentObservations and store data without interacting with localStorage", async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
     const mockCurrentObservationsResponse = {
       temperature: "22°C",
       conditions: "Clear"
@@ -146,5 +149,6 @@ describe("noaa_api.js", () => {
     expect(fetch).toHaveBeenCalledWith("https://api.weather.gov/stations/XYZ123/observations/latest");
 
     expect(localStorage.setItem).not.toHaveBeenCalled();
+  });
   });
 });

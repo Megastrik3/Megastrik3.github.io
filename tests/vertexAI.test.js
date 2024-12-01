@@ -28,6 +28,7 @@ jest.mock('../js/app.js', () => ({
 
 describe('vertexAIStorageChecks', () => {
   it('should call sendVertexPrompt when localStorage does not have vertexAI or needs refresh', async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
 
     const sendVertexPromptMock = require('../js/app.js').sendVertexPrompt;
     const displayDataMock = require('../js/app.js').displayData;
@@ -41,4 +42,5 @@ describe('vertexAIStorageChecks', () => {
     expect(getVertexAI).toHaveBeenCalled();
     expect(getGenerativeModel).toHaveBeenCalled();
   });
+});
 });

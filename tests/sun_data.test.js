@@ -31,6 +31,7 @@ jest.mock("../js/app.js", () => ({
 
 describe("sun_data.js", () => {
   it("should fetch sunrise and sunset times when forceRefresh is true", async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
     const mockSunriseSunsetResponse = {
       results: {
         sunrise: "2024-11-01T11:30:00+00:00",
@@ -59,8 +60,10 @@ describe("sun_data.js", () => {
 
     expect(callback).toHaveBeenCalled();
   });
+  });
 
   it("should fetch sunrise and sunset times if sunData is missing or expired", async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
     const mockSunriseSunsetResponse = {
       results: {
         sunrise: "2024-11-01T11:30:00+00:00",
@@ -89,6 +92,7 @@ describe("sun_data.js", () => {
     );
 
     expect(callback).toHaveBeenCalled();
+  });
   });
 
   it("should display the sun data from localStorage when it's available and valid", async () => {

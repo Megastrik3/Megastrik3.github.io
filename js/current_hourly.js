@@ -19,11 +19,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             displayWeatherData();
             hideLoadingScreen();
             moonPhaseStorageChecks(false, () => console.log("Moon phase data loaded"));
+            console.log("All data loaded");
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
-
 });
 export async function displayWeatherData() {
     let currentUnit = 'F'; // Default unit is Fahrenheit
