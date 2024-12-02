@@ -1,21 +1,192 @@
 /* Overall Container */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #484f50, #141515);
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
- }
+   font-family: Arial, sans-serif;
+   background: linear-gradient(to bottom, #484f50, #141515);
+   color: #333;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+}
 
- .container {
-    width: 80%;
-    max-width: 1200px;
-    background-color: #d9d9da;
-    border-radius: 15px;
- }
+.container {
+  margin-top: auto;
+   width: 80%;
+   max-width: 1200px;
+   background-color: #d9d9da;
+   border-radius: 15px;
+}
 
+   body {
+   font-family: Arial, sans-serif;
+   background: linear-gradient(to bottom, #484f50, #141515);
+   color: #333;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+}
+
+.container {
+   width: 80%;
+   max-width: 1200px;
+   background-color: #d9d9da;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-link {
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-link {
+   display: inline-block;
+   font-size: 1.2rem;
+   font-family: Arial, sans-serif;
+   padding: 0.5rem 1.5rem;
+   color: #fff;
+   background: linear-gradient(135deg, #b1b2b2, #7f7e7e);
+   border: none;
+   border-radius: 20px;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease-in-out;
+   cursor: pointer;
+   font-size: 1.2rem;
+   font-family: Arial, sans-serif;
+   padding: 0.5rem 1.5rem;
+   color: #fff;
+   background: linear-gradient(135deg, #b1b2b2, #7f7e7e);
+   border: none;
+   border-radius: 20px;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease-in-out;
+   cursor: pointer;
+   margin-top: 10px;
+   text-decoration: none; /* Removes the underline */
+}
+
+.back-link:hover {
+   background: linear-gradient(135deg, #7f7e7e, #484f50); /* Use 'background' instead of 'background-color' */
+   transform: translateY(-3px);
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.back-link:active {
+   background: linear-gradient(135deg, #484f50, #b1b2b2);
+   transform: translateY(0px);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.back-link:active {
+   background: linear-gradient(135deg, #484f50, #b1b2b2);
+   transform: translateY(0px);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.current-moon-phase {
+   text-align: center;
+   font-family: Arial, sans-serif;
+   font-family: Arial, sans-serif;
+   padding: 15px;
+   margin-bottom: 20px;
+   background-color: #ffffff;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.spotlight {
+   display: flex;
+   font-family: Arial, sans-serif;
+   font-family: Arial, sans-serif;
+   align-items: center;
+   justify-content: center;
+   margin: 10px 0;
+}
+
+
+.spotlight-image {
+   width: 250px;
+   height: auto;
+   object-fit: contain;
+   border-radius: 0;
+   border: none;
+}
+
+#current-moon-phase-text {
+   border: 2px solid #000000;
+}
+
+#current-moon-phase-text {
+   font-size: 1.4em;
+   font-family: Arial, sans-serif;
+   color: #fff;
+   font-family: Arial, sans-serif;
+   color: #fff;
+   font-weight: 600;
+}
+
+/* Moon Phases List */
+.moon-phases h2 {
+}
+
+/* Moon Phases List */
+.moon-phases h2 {
+   font-size: 1.5em;
+   font-family: Arial, sans-serif;
+   color: #000000;
+   font-family: Arial, sans-serif;
+   color: #000000;
+   margin-bottom: 10px;
+   text-align: center;
+}
+
+.moon-phases ul {
+}
+
+.moon-phases ul {
+   list-style: none;
+   font-family: Arial, sans-serif;
+   font-family: Arial, sans-serif;
+   padding: 0;
+}
+
+.moon-phases li {
+}
+
+.moon-phases li {
+   display: flex;
+   font-family: Arial, sans-serif;
+   font-family: Arial, sans-serif;
+   align-items: center;
+   padding: 10px;
+   margin: 8px 0;
+   background-color: #ffffff;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+   font-size: 1.1em;
+   color: #555;
+}
+
+.moon-image {
+}
+
+.moon-image {
+   width: 5vw;
+   height: 5vw;
+   margin-right: 15px;
+   border-radius: 50%;
+   border: 1px solid #ddd;
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+/* Overall Container */
     body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #484f50, #141515);
@@ -28,6 +199,9 @@ body {
 
  .container {
     width: 80%;
+    height: 80%;
+    margin-top: 1vw;
+    margin-bottom: 20vw;
     max-width: 1200px;
     background-color: #d9d9da;
     padding: 20px;
@@ -180,6 +354,6 @@ body {
     border-radius: 50%;
     border: 1px solid #ddd;
  }
- 
+}
  
  
